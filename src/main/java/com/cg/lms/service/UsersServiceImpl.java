@@ -1,5 +1,8 @@
 package com.cg.lms.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,4 +70,24 @@ public class UsersServiceImpl implements IUsersService {
 		userRepo.setSubscriptionStatus(userId);
 	}
 
+	@Override
+	public double payThePenalty(int userId, double amount) {
+		Users user = userRepo.findById(userId).get();
+		if (user == null) {
+			return 0.0;
+		}
+		
+		LocalDate date = LocalDate.now();
+		LocalDate expireDate = user.getSubExpireDate().toLocalDate();
+		
+		Period period = Period.between(expireDate, date);
+		int days = period.getDays();
+		
+		if(days>=1) {
+			double penalty = days*amount;
+			return penalty;
+		}
+		return 0.0;
+	}
+	
 }
