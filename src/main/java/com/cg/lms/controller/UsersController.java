@@ -38,6 +38,15 @@ public class UsersController {
 	public List<Users> viewAllUsers() {
 		return userService.viewAllUsers();
 	}
+	
+	@GetMapping("/users/penalty/{id}")
+	public double payThePenalty(@PathVariable("id") int userId) {
+		if (userService.findById(userId) == null) {
+			throw new UserNotFoundException("User not found with given id:" + userId);
+		}
+		double amount=25.0;
+		return userService.payThePenalty(userId, amount);
+	}
 
 	//WRITE
 	@PostMapping("/user")
@@ -47,15 +56,15 @@ public class UsersController {
 	
 	//UPDATE
 	@PatchMapping("/user/{id}")
-	public Users updateUsers(@PathVariable("id") int id, @RequestBody Users user) {
-		if (userService.findById(id) == null) {
-			throw new UserNotFoundException("User not found with given id:" + id);
+	public Users updateUsers(@PathVariable("id") int userId, @RequestBody Users user) {
+		if (userService.findById(userId) == null) {
+			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
 		return userService.updateUserDetails(user);
 	}
 
 	@PutMapping("/user/{id}")
-	public Users updateUser(@PathVariable("id") int id, @RequestBody Users user) {
+	public Users updateUser(@PathVariable("id") int userId, @RequestBody Users user) {
 		return userService.updateUserDetails(user);
 	}
 

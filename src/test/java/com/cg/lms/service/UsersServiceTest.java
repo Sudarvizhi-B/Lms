@@ -111,5 +111,15 @@ class UsersServiceTest {
 		
 		assertEquals("Cancelled",user.getSubscriptionStatus());
 	}
+	
+	@Test
+	public void payThePenalty() {
+		Users user = userService.findById(40);
+		
+		double penalty = userService.payThePenalty(user.getUserId(), 25);
+		System.out.println(user);
+		
+		assertEquals(375, penalty);
+	}
 
 }

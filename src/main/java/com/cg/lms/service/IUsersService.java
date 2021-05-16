@@ -13,5 +13,6 @@ public interface IUsersService {
 	public Users register(Users user);
 	public List<Users> viewAllUsers();
 	public void cancelSubscriptionById(int userId);
+	public double payThePenalty(int userId, double amount);
 	
 }
