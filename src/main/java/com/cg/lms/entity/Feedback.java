@@ -13,30 +13,32 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Feedback {
-	
+
 	@Id
 	private int id;
 	private Date feedbackDate;
 	private String description;
 	private String rating;
 	private String comments;
-	
-	@OneToOne(cascade=CascadeType.ALL, fetch= FetchType.EAGER)
-	@JoinColumn(name="user_id")
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	private Users users;
-	
-	//Constructors
-	public Feedback() {}
-	public Feedback(int id, Date feedbackDate,String description,String rating, String comments){
-		
-		this.id=id;
-		this.feedbackDate=feedbackDate;
-		this.description=description;
-		this.rating=rating;
-		this.comments=comments;
+
+	// Constructors
+	public Feedback() {
 	}
-	
-	//Getters and Setters
+
+	public Feedback(int id, Date feedbackDate, String description, String rating, String comments) {
+
+		this.id = id;
+		this.feedbackDate = feedbackDate;
+		this.description = description;
+		this.rating = rating;
+		this.comments = comments;
+	}
+
+	// Getters and Setters
 	public int getId() {
 		return id;
 	}
@@ -84,15 +86,12 @@ public class Feedback {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
-	
-	//ToString
+
+	// ToString
 	@Override
 	public String toString() {
 		return "Feedback [id=" + id + ", feedbackDate=" + feedbackDate + ", description=" + description + ", rating="
 				+ rating + ", comments=" + comments + "]";
 	}
-	
-	
-
 
 }
