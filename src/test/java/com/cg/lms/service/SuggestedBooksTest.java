@@ -35,6 +35,9 @@ class SuggestedBooksTest {
 		sb1.setDescription("Academia");
 		sb1.setSuggested_date(d2);
 		sb1.setStatus("Available Soon");
+		Users user = new Users();
+		user.setUserId(10);
+		sb1.setUser(user);
 
 		SuggestedBooks sugbk1 = sb.updateSuggestedBookStatus(sb1);
 		

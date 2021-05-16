@@ -60,6 +60,15 @@ class BooksReturnedMockitoTest {
 	@Test
 	void testUpdateReturnedBooksDetails() {
 		BooksReturned br = new BooksReturned(11,d2,12,30.0,"Pending");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
+		List <Books> books = new ArrayList<>();
+		books.add(book);
+		br.setBooks(books);
+		Date dob1 = Date.valueOf("1998-12-17");
+		Date dob2 = Date.valueOf("1998-12-16");
+		Date dob3 = Date.valueOf("1998-12-15");
+		Users users = new Users(101,dob1,dob2,dob3,"Active");
+		br.setUsers(users);
 		Mockito.when(booksReturnedDao.findById(11)).thenReturn(Optional.of(br));
 		Mockito.when(booksReturnedDao.save(br)).thenReturn(br);
 		BooksReturned br2 = booksReturnedService.updateReturnedBookDetails(br);

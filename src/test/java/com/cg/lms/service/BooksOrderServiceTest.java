@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksOrder;
+import com.cg.lms.entity.Publishers;
 //import com.cg.lms.entity.Publishers;
 import com.cg.lms.exception.BookNotFoundException;
 
@@ -24,8 +25,8 @@ class BooksOrderServiceTest {
 	
 	public void testPlaceBooksOrder() {
 		BooksOrder booksorder = new BooksOrder();
-		//Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
-			//	"Chennai", "Tamilnadu", 641006);
+		Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
+			"Chennai", "Tamilnadu", 641006);
 		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
 				15, 200, "Shelf A");
 		
@@ -34,7 +35,7 @@ class BooksOrderServiceTest {
 		booksorder.setOrderStatus("Cancelled");
 		booksorder.setQuantity(10);
 		booksorder.setBooks(book);
-		//booksorder.setPublisher(publisher);
+		booksorder.setPublisher(publisher);
 		
 		BooksOrder orderedbooks = booksOrderService.placeBooksOrder(booksorder);
 		System.out.println(orderedbooks);
@@ -61,8 +62,8 @@ class BooksOrderServiceTest {
 	@Disabled
 	public void testUpdateOrderDetails() {
 		BooksOrder booksorder = new BooksOrder();
-		//Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
-			//	"Chennai", "Tamilnadu", 641006);
+		Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
+				"Chennai", "Tamilnadu", 641006);
 		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
 				15, 200, "Shelf A");
 		
@@ -71,7 +72,7 @@ class BooksOrderServiceTest {
 		booksorder.setOrderStatus("Delivered");
 		booksorder.setQuantity(15);
 		booksorder.setBooks(book);
-		//booksorder.setPublisher(publisher);
+		booksorder.setPublisher(publisher);
 		
 		BooksOrder orderedbooks = booksOrderService.placeBooksOrder(booksorder);
 		System.out.println(orderedbooks);

@@ -93,7 +93,9 @@ class SuggestedBooksMockitoTest {
 				"General", d2, "Not Available");
 		Mockito.when(ir.findById(500)).thenReturn(Optional.of(s1));
 		Mockito.when(ir.save(s1)).thenReturn(s1);
-		
+		Users user = new Users();
+		user.setUserId(10);
+		s1.setUser(user);
 		SuggestedBooks sugbk = si.updateSuggestedBookStatus(s1);
 		
 		assertEquals("Not Available",sugbk.getStatus());
