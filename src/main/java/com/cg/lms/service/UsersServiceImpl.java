@@ -1,6 +1,7 @@
 package com.cg.lms.service;
 
-import java.sql.Date;
+//import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -24,7 +25,7 @@ public class UsersServiceImpl implements IUsersService {
 		if (!user.isPresent()) {
 			return null;
 		}
-		
+
 		userRepo.deleteById(id);
 		return user.get();
 	}
@@ -35,13 +36,13 @@ public class UsersServiceImpl implements IUsersService {
 		if (!user1.isPresent()) {
 			return null;
 		}
-		
+
 		Users users = user1.get();
 		users.setSubscriptionDate(user.getSubscriptionDate());
 		users.setSubscriptionStatus(user.getSubscriptionStatus());
 		users.setDateOfBirth(user.getDateOfBirth());
 		users.setSubExpireDate(user.getSubExpireDate());
-		
+
 		return userRepo.save(users);
 	}
 
@@ -61,7 +62,7 @@ public class UsersServiceImpl implements IUsersService {
 		if (!user.isPresent()) {
 			return null;
 		}
-		
+
 		return user.get();
 	}
 
@@ -76,18 +77,18 @@ public class UsersServiceImpl implements IUsersService {
 		if (user == null) {
 			return 0.0;
 		}
-		
+
 		LocalDate date = LocalDate.now();
 		LocalDate expireDate = user.getSubExpireDate().toLocalDate();
-		
+
 		Period period = Period.between(expireDate, date);
 		int days = period.getDays();
-		
-		if(days>=1) {
-			double penalty = days*amount;
+
+		if (days >= 1) {
+			double penalty = days * amount;
 			return penalty;
 		}
 		return 0.0;
 	}
-	
+
 }
