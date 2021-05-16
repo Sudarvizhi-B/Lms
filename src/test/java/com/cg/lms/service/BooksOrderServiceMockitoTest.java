@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksOrder;
 import com.cg.lms.entity.Publishers;
+
 import com.cg.lms.repository.IBooksOrderDao;
 
 @ExtendWith(SpringExtension.class)
@@ -93,7 +94,7 @@ class BooksOrderServiceMockitoTest {
 		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
 				25, 150, "Shelf C");
 		Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
-				"Chennai", "Tamilnadu", 641006);
+
 		BooksOrder booksOrder = new BooksOrder(1, 15, "2021-05-01", "Ordered", book);
 		booksOrder.setPublisher(publisher);
 		

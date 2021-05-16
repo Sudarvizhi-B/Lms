@@ -50,6 +50,10 @@ public class AuthorServiceMockitoTest {
 	@Test
 	void testUpdateAuthorDetails() {
 		Author a = new Author(9,"sudheer","kumar","sdk@gmail.com","444444444");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
+		List <Books> books = new ArrayList<>();
+		books.add(book);
+		a.setBooks(books);
 		Mockito.when(authorDao.findById(9)).thenReturn(Optional.of(a));
 		Mockito.when(authorDao.save(a)).thenReturn(a);
 		Author a2 = authorService.updateAuthorDetails(a);
