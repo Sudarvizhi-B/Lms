@@ -19,11 +19,11 @@ public class BooksOrder {
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="bookId")
 	private Books books;
-	/*
+	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="publisher_id")
 	public Publishers publisher;
-	*/
+	
 	//Constructors
 	public BooksOrder() {}
 
@@ -76,7 +76,7 @@ public class BooksOrder {
 	public void setBooks(Books books) {
 		this.books = books;
 	}
-	/*
+	
 	public Publishers getPublisher() {
 		return publisher;
 	}
@@ -84,7 +84,7 @@ public class BooksOrder {
 	public void setPublisher(Publishers publisher) {
 		this.publisher = publisher;
 	}
-	*/
+	
 	@Override
 	public String toString() {
 		return "BooksOrder [orderId=" + orderId + ", quantity=" + quantity + ", orderDate=" + orderDate
