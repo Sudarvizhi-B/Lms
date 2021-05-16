@@ -46,6 +46,10 @@ import com.cg.lms.exception.AuthorNotFoundException;
 			ar.setLastName("k");
 			ar.setEmail("samk@gmail.com");
 			ar.setContactno("777777777");
+			Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
+			List <Books> books = new ArrayList<>();
+			books.add(book);
+			ar.setBooks(books);
 			
 			Author updatedAr = ias.updateAuthorDetails(ar);
 			//System.out.println(updatedAr);

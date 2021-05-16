@@ -2,9 +2,7 @@ package com.cg.lms.exception;
 
 public class ReaderNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-
-	private static final long serialVersionUID = 1L;
-
+	
 	public ReaderNotFoundException(String message, Throwable cause) {
 		super(message, cause);
 	}
