@@ -33,6 +33,7 @@ class ReaderServiceTest {
 		reader.setLastName("joy");
 		reader.setMobileNo("1234567890");
 		reader.setPassword("xyz");
+		reader.setEmail("san@gmail.com");
 		
 		Reader reader1= readerService.updateReaderDetails(reader);
 		
