@@ -26,9 +26,14 @@ public class PublisherServiceImpl implements IPublisherService {
 		if(!p1.isPresent()) {
 			return null;
 		}
-		
-		p1.get().setEmail(publisher.getEmail());
+		p1.get().setPublisherName(publisher.getPublisherName());
 		p1.get().setContactno(publisher.getContactno());
+		p1.get().setEmail(publisher.getEmail());	
+		p1.get().setAddress1(publisher.getAddress1());
+		p1.get().setAddress2(publisher.getAddress2());
+		p1.get().setCity(publisher.getCity());
+		p1.get().setState(publisher.getState());
+		p1.get().setPincode(publisher.getPincode());
 		return pRepo.save(p1.get());
 	}
 	

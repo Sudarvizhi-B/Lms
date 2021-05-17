@@ -2,9 +2,9 @@ package com.cg.lms.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,46 +18,49 @@ import com.cg.lms.service.IPublisherService;
 
 @RestController
 public class PublisherController {
-	
+
 	@Autowired
 	IPublisherService pService;
 
-	//READ
+	// READ
 	@GetMapping("/publisher/id/{id}")
-	public Publishers viewPublisherById(@PathVariable("id") int publisherId)  {
-		if (pService.viewPublisherById(publisherId)==null) {
+	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId)
+			throws PublisherNotFoundException {
+		if (pService.viewPublisherById(publisherId) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
 		}
-		return pService.viewPublisherById(publisherId);
+		return new ResponseEntity<>(pService.viewPublisherById(publisherId), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/publisher")
-	public List<Publishers> viewPublishersList() {
-		return pService.viewPublishersList();
+	public ResponseEntity<List<Publishers>> viewPublishersList() {
+		return new ResponseEntity<>(pService.viewPublishersList(), HttpStatus.OK);
 	}
 
-	//WRITE
+	// WRITE
 	@PostMapping("/publisher")
-	public Publishers addPublishers(@RequestBody Publishers p) {
-		return pService.addPublisher(p);
+	public ResponseEntity<Publishers> addPublishers(@RequestBody Publishers p) {
+		return new ResponseEntity<>(pService.addPublisher(p), HttpStatus.CREATED);
 	}
 
-	//UPDATE
+	// UPDATE
 	@PutMapping("/publisher")
-	public Publishers updatePublisherDetails(@RequestBody Publishers publisher) {
+	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher)
+			throws PublisherNotFoundException {
 		if (pService.updatePublisherDetails(publisher) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found: " + publisher);
 		}
-		return pService.updatePublisherDetails(publisher);
+		return new ResponseEntity<>(pService.updatePublisherDetails(publisher), HttpStatus.OK);
 	}
-	
-	//DELETE
+
+	// DELETE
 	@DeleteMapping("/publisher/{id}")
-	public Publishers removePublisher(@PathVariable("id") int publisherId) {
-		if (pService.removePublisher(publisherId)==null) {
+	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId)
+			throws PublisherNotFoundException {
+		if (pService.removePublisher(publisherId) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
 		}
-		return pService.removePublisher(publisherId);
+		return new ResponseEntity<>(pService.removePublisher(publisherId), HttpStatus.OK);
 
 	}
 
