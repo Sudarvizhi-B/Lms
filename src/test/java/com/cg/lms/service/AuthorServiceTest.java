@@ -1,5 +1,6 @@
 package com.cg.lms.service;
-	import static org.junit.jupiter.api.Assertions.*;
+	
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.cg.lms.exception.AuthorNotFoundException;
 
 	@SpringBootTest
 	public class AuthorServiceTest {
+		
 
 		@BeforeAll
 		static void setUpBeforeClass() throws Exception {
@@ -27,7 +29,7 @@ import com.cg.lms.exception.AuthorNotFoundException;
 		}
 		
 		@Autowired
-		AuthorService ias;
+		IAuthorService ias;
 
 		
 		@Test
@@ -35,18 +37,18 @@ import com.cg.lms.exception.AuthorNotFoundException;
 		void testShouldViewAuthorsList() {
 			List<Author> ar = ias.viewAuthorsList();             //passing
 			System.out.println(ar);
-			assertEquals(2,ar.size());                  //enter total no. of rows
+			assertEquals(3,ar.size());                  //enter total no. of rows
 		}
 			
 		@Test
 		@Disabled
 		void testShoudlUpdateAuthorDetails() throws AuthorNotFoundException{
-			Author ar = ias.viewAuthorById(1);                     //passing
+			Author ar = ias.viewAuthorById(9);                     //passing
 			ar.setFirstName("Samuel");
 			ar.setLastName("k");
 			ar.setEmail("samk@gmail.com");
 			ar.setContactno("777777777");
-			Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
+			Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
 			List <Books> books = new ArrayList<>();
 			books.add(book);
 			ar.setBooks(books);
@@ -63,26 +65,27 @@ import com.cg.lms.exception.AuthorNotFoundException;
 		
 		
 		@Test
-		@Disabled
+		//@Disabled
 		void testShouldDeleteAuthorDetails() throws AuthorNotFoundException{
-			Author ar = ias.deleteAuthorDetails(6);                   //passing
-			assertEquals(6, ar.getAuthorId());
+			Author ar = ias.deleteAuthorDetails(12);                   //passing
+			assertEquals(11, ar.getAuthorId());
 		}
 		
 		@Test
 		@Disabled
 		void testShouldViewAuthorById() throws AuthorNotFoundException{
-			Author ar = ias.viewAuthorById(1);                                   //passing
+			Author ar = ias.viewAuthorById(10);                                   //passing
 			//System.out.println(ar);
-			assertEquals("Samuel",ar.getFirstName());
+			assertEquals("Sudaaaar",ar.getFirstName());
 		}
 		
 		
 		@Test
+		@Disabled
 		void testShouldAddAuthorDetail() {
 		
-			Author a = new Author(9,"sudha","kumar","srk@gmail.com","555555555");
-			Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
+			Author a = new Author(12,"sudha","kumar","srk@gmail.com","555555556");
+			Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
 			List <Books> books = new ArrayList<>();
 			books.add(book);
 			a.setBooks(books);

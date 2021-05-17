@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cg.lms.entity.Author;
 
-public interface AuthorService {
+public interface IAuthorService {
 
 	public Author addAuthorDetails(Author author);
 	public Author updateAuthorDetails(Author author);

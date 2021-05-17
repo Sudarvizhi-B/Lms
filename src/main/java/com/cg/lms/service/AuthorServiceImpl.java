@@ -2,15 +2,13 @@ package com.cg.lms.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.lms.repository.IAuthorRepository;
 import com.cg.lms.entity.Author;
 
 @Service
-public class AuthorServiceImpl implements AuthorService{
+public class AuthorServiceImpl implements IAuthorService{
 	
 	@Autowired
 	IAuthorRepository ar;
@@ -57,7 +55,4 @@ public class AuthorServiceImpl implements AuthorService{
 		return a1.get();
 		
 	}
-	
-
-
 }

@@ -1,17 +1,14 @@
 package com.cg.lms.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
 import javax.persistence.CascadeType;
-//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-//import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
-//import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +18,10 @@ public class Author {
 	@Id
 	private int authorId;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="book_id")
-	public List<Books> books = new ArrayList<>();
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name="book_author",joinColumns= {@JoinColumn(name="author_id")},
+	inverseJoinColumns= {@JoinColumn(name="book_id")})
+	private List<Books> books;
 	
 	private String firstName;
 	private String lastName;
@@ -46,12 +44,14 @@ public class Author {
 	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
+	
 	public List<Books> getBooks() {
 		return books;
 	}
 	public void setBooks(List<Books> books) {
 		this.books = books;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

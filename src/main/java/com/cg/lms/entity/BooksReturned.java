@@ -1,15 +1,11 @@
 package com.cg.lms.entity;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,11 +20,9 @@ public class BooksReturned {
 	@JoinColumn(name = "user_id")
 	private Users users;
 	
-	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	//@JoinColumn(name = "book_id")
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="book_id")
-	private List<Books> books;
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="bookId")
+	private Books books;
 	
 	private LocalDate returnedDate;
 	private int delayedDays;
@@ -51,12 +45,14 @@ public class BooksReturned {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
-	public List<Books> getBooks() {
+	
+	public Books getBooks() {
 		return books;
 	}
-	public void setBooks(List<Books> books) {
+	public void setBooks(Books books) {
 		this.books = books;
 	}
+	
 	public int getId() {
 		return id;
 	}

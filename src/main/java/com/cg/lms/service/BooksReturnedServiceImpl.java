@@ -2,16 +2,14 @@ package com.cg.lms.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.cg.lms.repository.IBooksReturnedRepository;
 import com.cg.lms.entity.BooksReturned;
 
 @Service
-public class BooksReturnedServiceImpl implements BooksReturnedService{
+public class BooksReturnedServiceImpl implements IBooksReturnedService{
 
 	@Autowired
 	IBooksReturnedRepository brd;
@@ -27,14 +25,7 @@ public class BooksReturnedServiceImpl implements BooksReturnedService{
 		if(!b1.isPresent()) {
 			return null;
 		}
-		/*
-		BooksReturned b2 = brd.findById(booksReturned.getId()).get();
-		b2.setId(booksReturned.getId());
-		b2.setReturnedDate(booksReturned.getReturnedDate());
-		b2.setDelayedDays(booksReturned.getDelayedDays());
-		b2.setPenalty(booksReturned.getPenalty());
-		b2.setPenalty_Status(booksReturned.getPenalty_Status());
-		*/
+	
 		b1.get().setReturnedDate(booksReturned.getReturnedDate());
 		b1.get().setDelayedDays(booksReturned.getDelayedDays());
 		b1.get().setPenalty(booksReturned.getPenalty());
@@ -54,6 +45,4 @@ public class BooksReturnedServiceImpl implements BooksReturnedService{
 		List <BooksReturned> returned = (List <BooksReturned>)brd.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return returned;
 	}
-
-	
 }

@@ -19,14 +19,14 @@ class BooksServiceTest {
 	IBooksService booksService;
 	
 	@Test
-	@Disabled
+	//@Disabled
 	public void testAddBook() {
-		Books books = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
+		Books books = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
 				25, 170, "Shelf A");
 		Books book = booksService.addBook(books);
 		System.out.println(book);
 		
-		assertEquals(101, book.getBookid());
+		assertEquals(102, book.getBookid());
 		assertEquals("Harry Potter", book.getTitle());
 		assertEquals("Novel", book.getSubject());
 		assertEquals("J.K.Rowling", book.getAuthor());
