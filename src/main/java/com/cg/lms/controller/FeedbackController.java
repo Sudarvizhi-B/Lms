@@ -23,30 +23,7 @@ public class FeedbackController {
 	@Autowired
 	IFeedbackService feedbackService;
 	
-	//READ
-	@GetMapping("/feedback")
-	public List<Feedback> viewAllFeedback(Feedback feedback){
-		return feedbackService.viewFeedbackList();
-	}
-	
-	@GetMapping("/feedback/user/{userId}")
-	public Feedback viewFeedbackByUser(@PathVariable("userId") int userId){
-		if(feedbackService.viewFeedBackByUser(userId)==null){
-			throw new UserNotFoundException("user not found with id: "+userId);
-		}
-		return feedbackService.viewFeedBackByUser(userId);
-	}
-	
-	@GetMapping("/feedback/{id}")
-	public Feedback viewFeedbackById(@PathVariable("id") int id)
-	{
-		if(feedbackService.viewFeedbackById(id)==null){
-			throw new FeedbackNotFoundException("feedback not found with id: "+id);
-		}
-		return feedbackService.viewFeedbackById(id);
-	}
-	
-	//WRITE
+	//Write Feedback by user
 	@PostMapping("/feedback/{userId}")
 	public ResponseEntity<Feedback> writeFeedback(@PathVariable("userId")int userId,@RequestBody Feedback feedback){
 		if(feedbackService.writeFeedback(userId, feedback)==null)
@@ -57,13 +34,43 @@ public class FeedbackController {
 		return new ResponseEntity<>(feed, HttpStatus.OK);
 	}
 	
-	//UPDATE
+	// Update feedback
 	@PutMapping("/feedback/{id}")
-	public Feedback updateFeedback(@PathVariable("id")int id, @RequestBody Feedback feedback){
+	public ResponseEntity<Feedback> updateFeedback(@PathVariable("id")int id, @RequestBody Feedback feedback){
 		if( feedbackService.updateFeedback(feedback)==null){
 			throw new FeedbackNotFoundException("feedback not found with id: "+id);
 		}
-		return feedbackService.updateFeedback(feedback);
+		Feedback updatedFeedback=feedbackService.updateFeedback(feedback);
+		return new ResponseEntity<>(updatedFeedback, HttpStatus.OK);
 	}
+	// view all feedback
+	@GetMapping("/feedback")
+	public ResponseEntity<List<Feedback>> viewAllFeedback(Feedback feedback){
+		List<Feedback> feedbackList=feedbackService.viewFeedbackList();
+		return new ResponseEntity<>(feedbackList, HttpStatus.OK);
+	}
+	
+	// View feedback by user
+	@GetMapping("/feedback/user/{userId}")
+	public ResponseEntity<Feedback> viewFeedbackByUser(@PathVariable("userId") int userId){
+		if(feedbackService.viewFeedBackByUser(userId)==null){
+			throw new UserNotFoundException("user not found with id: "+userId);
+		}
+		Feedback feedback=feedbackService.viewFeedBackByUser(userId);
+		return new ResponseEntity<>(feedback, HttpStatus.OK);
+	}
+	
+	// view Feedback by id
+	@GetMapping("/feedback/{id}")
+	public ResponseEntity<Feedback> viewFeedbackById(@PathVariable("id") int id)
+	{
+		if(feedbackService.viewFeedbackById(id)==null){
+			throw new FeedbackNotFoundException("feedback not found with id: "+id);
+		}
+		Feedback feedback=feedbackService.viewFeedbackById(id);
+		return new ResponseEntity<>(feedback,HttpStatus.OK);
+	}
+	
+
 		
 }

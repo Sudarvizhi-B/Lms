@@ -3,6 +3,8 @@ package com.cg.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,37 +18,42 @@ import com.cg.lms.service.IDamagedBooksService;
 
 @RestController
 public class DamagedBooksController {
-	
+
 	@Autowired
 	IDamagedBooksService damagedBooksService;
-	
-	//READ
+
+	// READ
 	@GetMapping("/damagedbooks/{id}")
-	public  DamagedBooks viewDamagedBooksById(@PathVariable ("id") int id) {
-		if( damagedBooksService.viewDamagedBookById(id)==null) {
-			throw new BookNotFoundException("Damaged Book not found with Id "+id);
+	public ResponseEntity<DamagedBooks> viewDamagedBooksById(@PathVariable("id") int id) {
+		if (damagedBooksService.viewDamagedBookById(id) == null) {
+			throw new BookNotFoundException("Damaged Book not found with Id " + id);
 		}
-		return damagedBooksService.viewDamagedBookById(id);	
+		DamagedBooks viewById = damagedBooksService.viewDamagedBookById(id);
+		return new ResponseEntity<>(viewById, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/damagedbooks")
-	public List<DamagedBooks> viewDamagedBooksList(){
-		return damagedBooksService.viewDamagedBooksList();
+	public ResponseEntity<List<DamagedBooks>> viewDamagedBooksList() {
+		List<DamagedBooks> viewList = damagedBooksService.viewDamagedBooksList();
+		return new ResponseEntity<>(viewList, HttpStatus.OK);
 	}
-	
+
 	// WRITE
 	@PostMapping("/damagedbooks")
-	public DamagedBooks addDamagedBooks(@RequestBody DamagedBooks damagedbooks) {
-		return damagedBooksService.addDamagedBooks(damagedbooks);
+	public ResponseEntity<DamagedBooks> addDamagedBooks(@RequestBody DamagedBooks damagedbooks) {
+		DamagedBooks add = damagedBooksService.addDamagedBooks(damagedbooks);
+		return new ResponseEntity<>(add, HttpStatus.OK);
 	}
-	
-	//UPDATE
+
+	// UPDATE
 	@PatchMapping("/damagedbooks/{id}")
-	public DamagedBooks updateDamagedBooks(@PathVariable ("id") int id, @RequestBody DamagedBooks damagedbooks) {
-		if( damagedBooksService.viewDamagedBookById(id)==null) {
-			throw new BookNotFoundException("Damaged Book not found with Id "+id);
+	public ResponseEntity<DamagedBooks> updateDamagedBooks(@PathVariable("id") int id,
+			@RequestBody DamagedBooks damagedbooks) {
+		if (damagedBooksService.viewDamagedBookById(id) == null) {
+			throw new BookNotFoundException("Damaged Book not found with Id " + id);
 		}
-		return damagedBooksService.updateDamagedBookDetails(damagedbooks);
+		DamagedBooks update = damagedBooksService.updateDamagedBookDetails(damagedbooks);
+		return new ResponseEntity<>(update, HttpStatus.OK);
 	}
 
 }

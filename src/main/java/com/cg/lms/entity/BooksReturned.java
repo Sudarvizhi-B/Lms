@@ -24,6 +24,7 @@ public class BooksReturned {
 	@JoinColumn(name = "user_id")
 	private Users users;
 	
+
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	private List<Books> books;
