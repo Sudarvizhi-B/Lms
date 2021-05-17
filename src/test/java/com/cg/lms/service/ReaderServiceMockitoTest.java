@@ -35,7 +35,6 @@ public class ReaderServiceMockitoTest {
 	}
 	
 	@Test
-	@Disabled
 	void testRegisterReader(){
 		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
 		
