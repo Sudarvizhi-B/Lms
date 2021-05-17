@@ -24,9 +24,9 @@ public class UsersController {
 	@Autowired
 	IUsersService userService;
 
-	//READ
+	// READ
 	@GetMapping("/user/{id}")
-	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) throws UserNotFoundException{
+	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) throws UserNotFoundException {
 		Users user = (userService.findById(userId));
 		if (user == null) {
 			throw new UserNotFoundException("User not found with given id:" + userId);
@@ -35,37 +35,41 @@ public class UsersController {
 	}
 
 	@GetMapping("/user")
-	public List<Users> viewAllUsers() {
-		return userService.viewAllUsers();
+	public ResponseEntity<List<Users>> viewAllUsers() {
+		List<Users> userList = userService.viewAllUsers();
+		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/users/penalty/{id}")
 	public double payThePenalty(@PathVariable("id") int userId) {
 		if (userService.findById(userId) == null) {
 			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
-		double amount=25.0;
+		double amount = 25.0;
 		return userService.payThePenalty(userId, amount);
 	}
 
-	//WRITE
+	// WRITE
 	@PostMapping("/user")
-	public Users addUsers(@RequestBody Users user) {
-		return userService.register(user);
+	public ResponseEntity<Users> addUsers(@RequestBody Users user) {
+		Users user1 = userService.register(user);
+		return new ResponseEntity<>(user1, HttpStatus.OK);
 	}
-	
-	//UPDATE
+
+	// UPDATE
 	@PatchMapping("/user/{id}")
-	public Users updateUsers(@PathVariable("id") int userId, @RequestBody Users user) {
+	public ResponseEntity<Users> updateUsers(@PathVariable("id") int userId, @RequestBody Users user) {
 		if (userService.findById(userId) == null) {
 			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
-		return userService.updateUserDetails(user);
+		Users update = userService.updateUserDetails(user);
+		return new ResponseEntity<>(update, HttpStatus.OK);
 	}
 
 	@PutMapping("/user/{id}")
-	public Users updateUser(@PathVariable("id") int userId, @RequestBody Users user) {
-		return userService.updateUserDetails(user);
+	public ResponseEntity<Users> updateUser(@PathVariable("id") int userId, @RequestBody Users user) {
+		Users users = userService.updateUserDetails(user);
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	@PatchMapping("/user/{userId}")
@@ -73,13 +77,14 @@ public class UsersController {
 		userService.cancelSubscriptionById(userId);
 	}
 
-	//DELETE
+	// DELETE
 	@DeleteMapping("/user/{id}")
-	public Users deleteUserById(@PathVariable("id") int userId) {
+	public ResponseEntity<Users> deleteUserById(@PathVariable("id") int userId) {
 		if (userService.findById(userId) == null) {
 			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
-		return userService.deleteUser(userId);
+		Users delete = userService.deleteUser(userId);
+		return new ResponseEntity(delete, HttpStatus.OK);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.cg.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,41 +25,45 @@ public class AddressController {
 
 	// READ
 	@GetMapping("/address/{id}")
-	public Address viewAddressByUserId(int userId) {
+	public ResponseEntity<Address> viewAddressByUserId(int userId) {
 		if (addService.viewAddressByUserId(userId) == null) {
 			throw new AddressNotFoundException("Address not found with given id:" + userId);
 		}
-		return addService.viewAddressByUserId(userId);
+		Address addressById =addService.viewAddressByUserId(userId);
+		return new ResponseEntity<>(addressById, HttpStatus.OK);
 	}
 
 	@GetMapping("/address")
-	public List<Address> findAllAddresses() {
-		return addService.viewAddressList();
+	public ResponseEntity<List<Address>> findAllAddresses() {
+		List<Address> address = addService.viewAddressList();
+		return new ResponseEntity<>(address,HttpStatus.OK);
 	}
 
 	// WRITE
 	@PostMapping("/address")
-	public Address save(@RequestBody Address address) {
-		return addService.addAddress(address);
+	public ResponseEntity<Address> save(@RequestBody Address address) {
+		Address add = addService.addAddress(address);
+		return new ResponseEntity<>(add,HttpStatus.OK);
 	}
 
 	// UPDATE
 	@PutMapping("/address")
-	public Address update(@RequestBody Address address) {
+	public ResponseEntity<Address> update(@RequestBody Address address) {
 		if (addService.updateAddressDetails(address) == null) {
 			throw new AddressNotFoundException("Address not found with given id:" + address);
 		}
-
-		return addService.updateAddressDetails(address);
+		Address update = addService.updateAddressDetails(address);
+        return new ResponseEntity<>(update,HttpStatus.OK);
 	}
 
 	// DELETE
 	@DeleteMapping("/address/{id}")
-	public Address deleteById(@PathVariable("id") int addressId) {
+	public ResponseEntity<Address> deleteById(@PathVariable("id") int addressId) {
 		if (addService.deleteAddressById(addressId) == null) {
 			throw new AddressNotFoundException("Address not found with given id:" + addressId);
 		}
-		return addService.deleteAddressById(addressId);
+		Address delete = addService.deleteAddressById(addressId);
+		return new ResponseEntity<>(delete,HttpStatus.OK);
 	}
 	
 }
