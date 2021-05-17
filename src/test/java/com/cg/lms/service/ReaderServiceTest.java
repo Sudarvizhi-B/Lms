@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +33,7 @@ class ReaderServiceTest {
 		reader.setLastName("joy");
 		reader.setMobileNo("1234567890");
 		reader.setPassword("xyz");
+		reader.setEmail("san@gmail.com");
 		
 		Reader reader1= readerService.updateReaderDetails(reader);
 		

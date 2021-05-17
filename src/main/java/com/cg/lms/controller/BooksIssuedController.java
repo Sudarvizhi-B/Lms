@@ -3,6 +3,8 @@ package com.cg.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,31 +24,36 @@ public class BooksIssuedController {
 
 	//READ
 	@GetMapping("/issued/{id}")
-	public BooksIssued findUserById(@PathVariable("id") int issueId) {
-		return issueService.findById(issueId);
+	public ResponseEntity<BooksIssued> findUserById(@PathVariable("id") int issueId) {
+		BooksIssued order = issueService.findById(issueId);
+		return new ResponseEntity<>(order,HttpStatus.OK);
 	}
 
 	@GetMapping("/issued")
-	public List<BooksIssued> findAll() {
-		return issueService.findAll();
+	public ResponseEntity<List<BooksIssued>> findAll() {
+		List<BooksIssued> issued = issueService.findAll();
+		return new ResponseEntity<>(issued,HttpStatus.OK);
 	}
 
 	//WRITE
 	@PostMapping("/issued")
-	public BooksIssued addBooks(@RequestBody BooksIssued issued) {
-		return issueService.save(issued);
+	public ResponseEntity<BooksIssued> addBooks(@RequestBody BooksIssued issued) {
+		BooksIssued set = issueService.addBook(issued);
+		return new ResponseEntity<>(set,HttpStatus.OK);
 	}
 	
 	//UPDATE
 	@PatchMapping("/issued/{id}")
-	public BooksIssued updateBook(@PathVariable("id") int issueId, @RequestBody BooksIssued issued) {
-		return issueService.update(issued);
+	public ResponseEntity<BooksIssued> updateBook(@PathVariable("id") int issueId, @RequestBody BooksIssued issued) {
+		BooksIssued update = issueService.update(issued);
+		return new ResponseEntity<>(update, HttpStatus.OK);
 	}
 	
 	//DELETE
 	@DeleteMapping("/issued/{id}")
-	public BooksIssued deleteBookById(@PathVariable("id") int issueId) {
-		return issueService.deleteById(issueId);
+	public ResponseEntity<BooksIssued> deleteBookById(@PathVariable("id") int issueId) {
+		BooksIssued delete = issueService.deleteById(issueId);
+		return new ResponseEntity<>(delete,HttpStatus.OK);
 	}
 	
 }

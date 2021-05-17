@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,15 +23,14 @@ class BooksOrderServiceTest {
 	IBooksOrderService booksOrderService;
 
 	@Test
-	
 	public void testPlaceBooksOrder() {
 		BooksOrder booksorder = new BooksOrder();
-		Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
+		Publishers publisher = new Publishers(304, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 			"Chennai", "Tamilnadu", 641006);
-		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
-				15, 200, "Shelf A");
+		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
+				25, 170, "Shelf A");
 		
-		booksorder.setOrderId(4);
+		booksorder.setOrderId(2);
 		booksorder.setOrderDate("2021-05-12");
 		booksorder.setOrderStatus("Cancelled");
 		booksorder.setQuantity(10);
@@ -46,7 +46,6 @@ class BooksOrderServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testCancelOrder() {
 		BooksOrder cancelorder = booksOrderService.cancelOrder(2);
 		
@@ -59,15 +58,14 @@ class BooksOrderServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testUpdateOrderDetails() {
 		BooksOrder booksorder = new BooksOrder();
-		Publishers publisher = new Publishers(301, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
+		Publishers publisher = new Publishers(304, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 				"Chennai", "Tamilnadu", 641006);
-		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
-				15, 200, "Shelf A");
+		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
+				25, 170, "Shelf A");
 		
-		booksorder.setOrderId(3);
+		booksorder.setOrderId(2);
 		booksorder.setOrderDate("2021-04-01");
 		booksorder.setOrderStatus("Delivered");
 		booksorder.setQuantity(15);
@@ -83,16 +81,14 @@ class BooksOrderServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testViewOrderList() {
 		List<BooksOrder> booksOrderList = booksOrderService.viewOrdersList();
 		System.out.println(booksOrderList);
 		
-		assertEquals(3,booksOrderList.size());
+		assertEquals(4,booksOrderList.size());
 	}
 	
 	@Test
-	@Disabled
 	public void testViewOrderById() {
 		BooksOrder orderById = booksOrderService.viewOrderById(2);
 		
@@ -101,8 +97,8 @@ class BooksOrderServiceTest {
 		}
 		System.out.println(orderById);
 		
-		assertEquals("2021-04-31",orderById.getOrderDate());
-		assertEquals("Ordered", orderById.getOrderStatus());
+		assertEquals("2021-04-01",orderById.getOrderDate());
+		assertEquals("Delivered", orderById.getOrderStatus());
 		assertEquals(15,orderById.getQuantity());
 	}
 	
