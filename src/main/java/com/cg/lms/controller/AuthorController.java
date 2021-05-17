@@ -3,6 +3,8 @@ package com.cg.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,46 +15,46 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.lms.entity.Author;
 import com.cg.lms.exception.AuthorNotFoundException;
-import com.cg.lms.service.AuthorService;
+import com.cg.lms.service.IAuthorService;
 
 @RestController
 public class AuthorController {
 	
 	@Autowired
-	AuthorService ar;
-	
-	
+	IAuthorService ar;
 	
 	@PostMapping("/author")
-	public Author addAuthorDetails(@RequestBody Author author) {
-		return ar.addAuthorDetails(author);
+	public ResponseEntity<Author> addAuthorDetails(@RequestBody Author author) {
+		return new ResponseEntity <> (ar.addAuthorDetails(author), HttpStatus.CREATED);
 	}
 	@GetMapping("/author")
-	public List<Author> viewAuthorList() {
-		return ar.viewAuthorsList();
+	public ResponseEntity <List <Author>> viewAuthorList() {
+		return new ResponseEntity <>(ar.viewAuthorsList(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/author/{id}")
-	public Author deleteAuthorDetails(@PathVariable("id") int authorId) {
+	public ResponseEntity<Author> deleteAuthorDetails(@PathVariable("id") int authorId) throws AuthorNotFoundException {
 		if (ar.deleteAuthorDetails(authorId)==null) {
 			throw new AuthorNotFoundException("Author Not Found with id : " + authorId);
 		}
-		return ar.deleteAuthorDetails(authorId);
+		return new ResponseEntity <>(ar.deleteAuthorDetails(authorId), HttpStatus.OK);
 	}
 	
 	@GetMapping("/author/id/{id}")
-	public Author viewauthorById(@PathVariable("id") int id) {
+	public ResponseEntity<Author> viewauthorById(@PathVariable("id") int id) throws AuthorNotFoundException{
 		if (ar.viewAuthorById(id)==null) {
 			throw new AuthorNotFoundException("Author Not Found with id : " + id);
 		}
-		return ar.viewAuthorById(id);
+		return new ResponseEntity<>(ar.viewAuthorById(id), HttpStatus.OK);
 	}
 	
 	@PutMapping("/author")
-	public Author updateAuthorDetails( @RequestBody Author author) {
+	public ResponseEntity<Author> updateAuthorDetails( @RequestBody Author author) throws AuthorNotFoundException{
 		if (ar.updateAuthorDetails(author)==null) {
 			throw new AuthorNotFoundException("Author Not Found : " + author);
 		}
-		return ar.updateAuthorDetails(author);
+		return new ResponseEntity<>(ar.updateAuthorDetails(author), HttpStatus.OK);
 	}
 }
+
+

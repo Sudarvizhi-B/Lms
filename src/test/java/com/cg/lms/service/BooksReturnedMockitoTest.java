@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import com.cg.lms.repository.IBooksReturnedRepository;
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksReturned;
@@ -43,9 +41,7 @@ class BooksReturnedMockitoTest {
 	void testReturnedBooks() {
 		BooksReturned br = new BooksReturned(10,d1,22,30.0,"Paid");
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
-		List <Books> books = new ArrayList<>();
-		books.add(book);
-		br.setBooks(books);
+		br.setBooks(book);
 		
 		Date dob1 = Date.valueOf("1998-12-17");
 		Date dob2 = Date.valueOf("1998-12-16");
@@ -61,9 +57,7 @@ class BooksReturnedMockitoTest {
 	void testUpdateReturnedBooksDetails() {
 		BooksReturned br = new BooksReturned(11,d2,12,30.0,"Pending");
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",25, 170, "Shelf A");
-		List <Books> books = new ArrayList<>();
-		books.add(book);
-		br.setBooks(books);
+		br.setBooks(book);
 		Date dob1 = Date.valueOf("1998-12-17");
 		Date dob2 = Date.valueOf("1998-12-16");
 		Date dob3 = Date.valueOf("1998-12-15");
@@ -107,7 +101,6 @@ class BooksReturnedMockitoTest {
 		
 		Mockito.when(booksReturnedDao.findAll()).thenReturn(brList);
 		List <BooksReturned> bList = (List <BooksReturned>)booksReturnedService.findByDelayedDaysGreaterThanEqual(8);
-		//List <BooksReturned> bList = booksReturnedService.findByDelayedDaysGreaterThanEqual(8);
 		for(BooksReturned b : bList) {
 			System.out.println(b);
 		}
@@ -115,10 +108,5 @@ class BooksReturnedMockitoTest {
 		
 		
 	}
-	
-	
-	
-	
-	
 	
 }
