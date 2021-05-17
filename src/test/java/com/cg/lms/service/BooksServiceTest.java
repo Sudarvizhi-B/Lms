@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,79 +18,74 @@ class BooksServiceTest {
 	IBooksService booksService;
 	
 	@Test
-	@Disabled
 	public void testAddBook() {
-		Books books = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
-		Books book = booksService.addBook(books);
-		System.out.println(book);
+		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
+				25, 150, "Shelf C");
+		Books books = booksService.addBook(book);
+		System.out.println(books);
 		
-		assertEquals(101, book.getBookid());
-		assertEquals("Harry Potter", book.getTitle());
-		assertEquals("Novel", book.getSubject());
-		assertEquals("J.K.Rowling", book.getAuthor());
+		assertEquals(105, book.getBookid());
+		assertEquals("Wings of Fire", book.getTitle());
+		assertEquals("India's journey to self-reliance in technology", book.getSubject());
+		assertEquals("A.P.J.Abdul Kalam", book.getAuthor());
 		assertEquals(1999, book.getPublishedYear());
 		assertEquals(25, book.getQuantity());
-		assertEquals(170, book.getBookCost());
-		assertEquals("Shelf A", book.getShelfDetails());
+		assertEquals(150, book.getBookCost());
+		assertEquals("Shelf C", book.getShelfDetails());
 	}
 	
 	@Test
-	@Disabled
 	public void testUpdateBookDetails() {
 		Books books = new Books();
 		
-		books.setBookid(101);
-		books.setAuthor("J.K.Rowling");
+		books.setBookid(105);
+		books.setAuthor("A.P.J.Abdul Kalam");
 		books.setBookCost(170);
 		books.setIsbnCode("986-7-180715-7");
 		books.setQuantity(12);
 		books.setPublishedYear(1999);
-		books.setShelfDetails("Shelf A");
-		books.setSubject("Novel");
-		books.setTitle("Harry Potter");
+		books.setShelfDetails("Shelf C");
+		books.setSubject("India's journey to self-reliance in technology");
+		books.setTitle("Wings of Fire");
 		
 		Books book = booksService.updateBookDetails(books);
 		System.out.println(book);
 		
-		assertEquals(101, book.getBookid());
-		assertEquals("Harry Potter", book.getTitle());
-		assertEquals("Novel", book.getSubject());
-		assertEquals("J.K.Rowling", book.getAuthor());
+		assertEquals(105, book.getBookid());
+		assertEquals("Wings of Fire", book.getTitle());
+		assertEquals("India's journey to self-reliance in technology", book.getSubject());
+		assertEquals("A.P.J.Abdul Kalam", book.getAuthor());
 		assertEquals(1999, book.getPublishedYear());
 		assertEquals(12, book.getQuantity());
 		assertEquals(170, book.getBookCost());
-		assertEquals("Shelf A", book.getShelfDetails());
+		assertEquals("Shelf C", book.getShelfDetails());
 	}
 	
 	@Test
-	@Disabled
 	public void testRemoveBook() throws BookNotFoundException{
-		Books book = booksService.removeBook(109);
+		Books book = booksService.removeBook(105);
 		
 		if(book==null) {
 			throw new BookNotFoundException("Book Not Found with the given Id");
 		}
 		System.out.println(book);
 		
-		assertEquals(10,book.getQuantity());
+		assertEquals(25,book.getQuantity());
 	}
 	
 	@Test
-	@Disabled
 	public void testViewById() throws BookNotFoundException{
-		Books book = booksService.viewBookById(102);
+		Books book = booksService.viewBookById(105);
 		
 		if(book==null) {
 			throw new BookNotFoundException("Book Not Found with the given Id");
 		}
 		System.out.println(book);
 		
-		assertEquals("Harry Potter",book.getTitle());
+		assertEquals("Wings of Fire",book.getTitle());
 	}
 	
 	@Test
-	@Disabled
 	public void testViewAllBooks() {
 		List<Books> books = booksService.viewAllBooks();
 		System.out.println(books);
@@ -100,7 +94,6 @@ class BooksServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testFindAllByTitle() throws BookNotFoundException{
 		List<Books> books = booksService.findAllByTitle("Harry Potter");
 		System.out.println(books);
@@ -109,7 +102,6 @@ class BooksServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testFindAllBySubject() throws BookNotFoundException{
 		List<Books> books = booksService.findAllBySubject("Novel");
 		System.out.println(books);

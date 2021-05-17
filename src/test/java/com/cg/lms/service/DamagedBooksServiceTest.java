@@ -20,13 +20,12 @@ class DamagedBooksServiceTest {
 	IDamagedBooksService damagedBooksService;
 
 	@Test
-	
 	public void testAddDamagedBooks() {
 		DamagedBooks damagedbook = new DamagedBooks();
-		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
-				15, 200, "Shelf A");
+		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
+				25, 150, "Shelf C");
 		
-		damagedbook.setId(2);
+		damagedbook.setId(3);
 		damagedbook.setQuantity(2);
 		damagedbook.setDescription("Pages Missing");
 		damagedbook.setBooks(book);
@@ -38,11 +37,10 @@ class DamagedBooksServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testUpdateDamagedBookDetail() {
 		DamagedBooks damagedbook = new DamagedBooks();
-		Books book = new Books(103, "The Kite Runner", "Novel", "Khaled Hosseini", 2005, "986-8-181502-8",
-				15, 200, "Shelf A");
+		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
+				25, 150, "Shelf C");
 		
 		damagedbook.setId(2);
 		damagedbook.setQuantity(4);
@@ -56,16 +54,14 @@ class DamagedBooksServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	public void testViewDamagedBookList() {
 		List<DamagedBooks> booksList = damagedBooksService.viewDamagedBooksList();
 		System.out.println(booksList);
 		
-		assertEquals(2,booksList.size());
+		assertEquals(3,booksList.size());
 	}
 	
 	@Test
-	@Disabled
 	public void testViewDamagedBookById() {
 		DamagedBooks getDamagedBookById = damagedBooksService.viewDamagedBookById(1);
 		
