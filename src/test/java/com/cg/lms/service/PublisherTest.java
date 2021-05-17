@@ -1,6 +1,8 @@
 package com.cg.lms.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,6 +20,7 @@ class PublisherTest {
 	IPublisherService pService;
 
 	@Test
+	@Disabled
 	void testAddPublisher() {
 		Publishers p = new Publishers(1005, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 				"Chennai", "Tamilnadu", 641006);
@@ -28,6 +31,7 @@ class PublisherTest {
 	}
 
 	@Test
+	@Disabled
 	void testViewPublishers() {
 		List<Publishers> publishers = pService.viewPublishersList();
 		
@@ -35,6 +39,7 @@ class PublisherTest {
 	}
 
 	@Test
+	@Disabled
 	void testDeletePublisherById() throws PublisherNotFoundException {
 		Publishers p = pService.removePublisher(1004);
 		
@@ -42,6 +47,7 @@ class PublisherTest {
 	}
 
 	@Test
+	@Disabled
 	void testUpdatePublisherDetails() throws PublisherNotFoundException {
 		Publishers p = pService.viewPublisherById(1005);
 		
@@ -54,6 +60,7 @@ class PublisherTest {
 	}
 
 	@Test
+	@Disabled
 	void testViewPublisherById() throws PublisherNotFoundException {
 		Publishers ps = pService.viewPublisherById(1005);
 		
