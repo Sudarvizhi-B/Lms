@@ -26,7 +26,7 @@ public class BooksReturned {
 	
 	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	//@JoinColumn(name = "book_id")
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	private List<Books> books;
 	

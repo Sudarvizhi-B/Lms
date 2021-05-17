@@ -18,7 +18,6 @@ class ReaderServiceTest {
 	IReaderService readerService;
 
 	@Test
-	@Disabled
 	void testRegisterReader() {
 		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
 		Reader reader1=readerService.register(reader);
@@ -42,7 +41,6 @@ class ReaderServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	void testViewReaderList() {
 		List<Reader> reader= readerService.viewReadersList();
 		
@@ -50,7 +48,6 @@ class ReaderServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	void testViewReaderById() {
 		Reader reader=readerService.viewReaderById(101);
 		
@@ -58,7 +55,6 @@ class ReaderServiceTest {
 	}
 
 	@Test
-	@Disabled
 	void testDeleteReaderById() {
 		Reader reader= readerService.deleteReader(101);
 		

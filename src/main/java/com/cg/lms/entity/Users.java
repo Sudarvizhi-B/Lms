@@ -20,6 +20,7 @@ public class Users {
 
 	@OneToOne(mappedBy = "users")
 	private Address address;
+	
 
 	// Constructors
 	public Users() {}
