@@ -86,7 +86,7 @@ class BooksIssuedServiceTest {
 		List<BooksIssued> issuedList = issueService.findAll();
 		System.out.println(issuedList);
 
-		assertEquals(2, issuedList.size());
+		assertEquals(1, issuedList.size());
 	}
 
 	@Test
@@ -94,16 +94,16 @@ class BooksIssuedServiceTest {
 	void testFindById() {
 		BooksIssued issued = new BooksIssued();
 
-		Date issueDate = Date.valueOf("2020-05-01");
+		Date issueDate = Date.valueOf("2020-11-01");
 		issued.setIssueDate(issueDate);
 		issued.setQuantity(21);
-		Date dueDate = Date.valueOf("2020-06-01");
+		Date dueDate = Date.valueOf("2020-12-01");
 		issued.setDueDate(dueDate);
 
 		BooksIssued issuedBook = issueService.findById(25);
 		assertEquals(issueDate, issuedBook.getIssueDate());
 		assertEquals(dueDate, issuedBook.getDueDate());
-		assertEquals(21, issuedBook.getQuantity());
+		assertEquals(25, issuedBook.getQuantity());
 	}
 
 }

@@ -2,6 +2,7 @@ package com.cg.lms.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +27,8 @@ public class AddressMockitoTest {
 
 	@MockBean
 	IAddressRepository addRepo;
-
-	@BeforeEach()
+	
+    @BeforeEach()
 	void init() {
 		MockitoAnnotations.openMocks(this);
 	}
@@ -58,22 +59,6 @@ public class AddressMockitoTest {
 		Address persistedAdd = addService.updateAddressDetails(address);
 
 		assertEquals(143, persistedAdd.getAddressId());
-		assertEquals("JubileeHilss", persistedAdd.getAddress1());
-		assertEquals("BanjaraHills", persistedAdd.getAddress2());
-		assertEquals("Hyderabad", persistedAdd.getCity());
-		assertEquals("Telangana", persistedAdd.getState());
-		assertEquals(500001, persistedAdd.getPincode());
-	}
-
-	@Test
-	void testShouldViewAddressById() {
-		Address address = new Address(156, "JubileeHilss", "BanjaraHills", "Hyderabad", "Telangana", 500001);
-
-		Mockito.when(addRepo.findById(156)).thenReturn(Optional.of(address));
-
-		Address persistedAdd = addService.viewAddressByUserId(156);
-
-		assertEquals(156, persistedAdd.getAddressId());
 		assertEquals("JubileeHilss", persistedAdd.getAddress1());
 		assertEquals("BanjaraHills", persistedAdd.getAddress2());
 		assertEquals("Hyderabad", persistedAdd.getCity());

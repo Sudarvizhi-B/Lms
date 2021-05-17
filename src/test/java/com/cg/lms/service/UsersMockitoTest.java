@@ -74,10 +74,10 @@ public class UsersMockitoTest {
 
 		Users user1 = userService.updateUserDetails(user);
 
-		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user1));
-		Mockito.when(userRepo.save(user1)).thenReturn(user1);
+		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
+		Mockito.when(userRepo.save(user)).thenReturn(user);
 		
-		assertEquals("Accepted", user1.getSubscriptionStatus());
+		assertEquals("Accepted", user.getSubscriptionStatus());
 	}
 
 	@Test
