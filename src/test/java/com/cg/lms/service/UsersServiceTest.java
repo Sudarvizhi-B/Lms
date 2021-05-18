@@ -46,7 +46,7 @@ class UsersServiceTest {
 	}
 
 	@Test
-    @Disabled
+    
 	void testUpdateUserDetails() {
 		Users user = new Users();
 		
@@ -66,7 +66,7 @@ class UsersServiceTest {
 	}
 
 	@Test
-	@Disabled
+    @Disabled
 	void deleteUser() throws UserNotFoundException{
 		Users user = userService.deleteUser(60);
 		
@@ -79,7 +79,7 @@ class UsersServiceTest {
 	}
 
 	@Test
-	@Disabled
+	
 	void viewAllUsers() {
 		List<Users> users = userService.viewAllUsers();
 		System.out.println(users);
@@ -88,7 +88,7 @@ class UsersServiceTest {
 	}
 	
 	@Test
-	@Disabled
+	
 	public void viewUserById() {
 		Users user = userService.findById(102);
 		System.out.println(user);

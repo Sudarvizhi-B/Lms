@@ -53,8 +53,7 @@ class BooksIssuedServiceTest {
 	}
 
 	@Test
-	@Disabled
-	void testUpdateIssueBookDetails() {
+	 void testUpdateIssueBookDetails() {
 		BooksIssued issued = new BooksIssued();
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
 				25, 170, "Shelf A");
@@ -81,7 +80,7 @@ class BooksIssuedServiceTest {
 	}
 
 	@Test
-	@Disabled
+    
 	void testViewAllBooksIssued() {
 		List<BooksIssued> issuedList = issueService.findAll();
 		System.out.println(issuedList);
@@ -90,7 +89,7 @@ class BooksIssuedServiceTest {
 	}
 
 	@Test
-	@Disabled
+    @Disabled
 	void testFindById() {
 		BooksIssued issued = new BooksIssued();
 

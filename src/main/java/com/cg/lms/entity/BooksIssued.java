@@ -13,7 +13,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class BooksIssued {
 	
 	@Id
@@ -32,9 +41,7 @@ public class BooksIssued {
 			   inverseJoinColumns= {@JoinColumn(name="book_id")})
 	public List<Books> books = new ArrayList<>();
 
-	public BooksIssued() {}
-
-	public BooksIssued(int issueId, Date issueDate, int quantity, Date dueDate, Users users) {
+    public BooksIssued(int issueId, Date issueDate, int quantity, Date dueDate, Users users) {
 		super();
 		this.issueId = issueId;
 		this.issueDate = issueDate;
@@ -42,59 +49,4 @@ public class BooksIssued {
 		this.dueDate = dueDate;
 		this.users = users;
 	}
-
-	public int getIssueId() {
-		return issueId;
-	}
-
-	public void setIssueId(int issueId) {
-		this.issueId = issueId;
-	}
-
-	public Date getIssueDate() {
-		return issueDate;
-	}
-
-	public void setIssueDate(Date issueDate) {
-		this.issueDate = issueDate;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public Date getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}
-
-	public List<Books> getBooks() {
-		return books;
-	}
-
-	public void setBooks(List<Books> books) {
-		this.books = books;
-	}
-
-	@Override
-	public String toString() {
-		return "BooksIssued [issueId=" + issueId + ", issueDate=" + issueDate + ", quantity=" + quantity + ", dueDate="
-				+ dueDate + "]";
-	}
-
 }

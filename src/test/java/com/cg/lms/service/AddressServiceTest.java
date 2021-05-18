@@ -54,7 +54,7 @@ class AddressServiceTest {
 	}
 
 	@Test
-    @Disabled
+   
 	void testUpdateAddress() {
 		Address addr = new Address();
 		
@@ -79,7 +79,7 @@ class AddressServiceTest {
 	}
 
 	@Test
-	@Disabled
+	
 	void testShouldViewAddressByUserId() {
 		Address add = addService.viewAddressByUserId(40);
 		System.out.println(add);
@@ -88,7 +88,7 @@ class AddressServiceTest {
 	}
 
 	@Test
-	@Disabled
+    
 	void testShouldViewAddressList() {
 		List<Address> address = addService.viewAddressList();
 		System.out.println(address);
