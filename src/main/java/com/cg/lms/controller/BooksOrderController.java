@@ -23,11 +23,13 @@ public class BooksOrderController {
 	@Autowired
 	IBooksOrderService booksOrderService;
 
+	private static final String EXCEPTION = "Order not found with Book id ";
+	
 	// READ
 	@GetMapping("/booksorder/{id}")
 	public ResponseEntity<BooksOrder> viewOrderById(@PathVariable("id") int orderId) {
 		if (booksOrderService.viewOrderById(orderId) == null) {
-			throw new BookNotFoundException("Order not found with Id " + orderId);
+			throw new BookNotFoundException(EXCEPTION + orderId);
 		}
 		BooksOrder orderById = booksOrderService.viewOrderById(orderId);
 		return new ResponseEntity<>(orderById, HttpStatus.OK);
@@ -56,7 +58,7 @@ public class BooksOrderController {
 	@PatchMapping("/booksorder/{id}")
 	public ResponseEntity<BooksOrder> updateOrder(@PathVariable("id") int orderId, @RequestBody BooksOrder booksorder) {
 		if (booksOrderService.viewOrderById(orderId) == null) {
-			throw new BookNotFoundException("Order not found with Id " + orderId);
+			throw new BookNotFoundException(EXCEPTION + orderId);
 		}
 		BooksOrder update = booksOrderService.updateOrder(booksorder);
 		return new ResponseEntity<>(update, HttpStatus.OK);
@@ -66,7 +68,7 @@ public class BooksOrderController {
 	@DeleteMapping("/booksorder/{id}")
 	public ResponseEntity<BooksOrder> removeOrder(@PathVariable("id") int orderId) {
 		if (booksOrderService.viewOrderById(orderId) == null) {
-			throw new BookNotFoundException("Order not found with Id " + orderId);
+			throw new BookNotFoundException(EXCEPTION + orderId);
 		}
 		BooksOrder remove = booksOrderService.cancelOrder(orderId);
 		return new ResponseEntity<>(remove, HttpStatus.OK);

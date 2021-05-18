@@ -21,12 +21,14 @@ public class DamagedBooksController {
 
 	@Autowired
 	IDamagedBooksService damagedBooksService;
+	
+	private static final String EXCEPTION = "Damaged Book not found with Book id ";
 
 	// READ
 	@GetMapping("/damagedbooks/{id}")
 	public ResponseEntity<DamagedBooks> viewDamagedBooksById(@PathVariable("id") int id) {
 		if (damagedBooksService.viewDamagedBookById(id) == null) {
-			throw new BookNotFoundException("Damaged Book not found with Id " + id);
+			throw new BookNotFoundException(EXCEPTION + id);
 		}
 		DamagedBooks viewById = damagedBooksService.viewDamagedBookById(id);
 		return new ResponseEntity<>(viewById, HttpStatus.OK);
@@ -50,7 +52,7 @@ public class DamagedBooksController {
 	public ResponseEntity<DamagedBooks> updateDamagedBooks(@PathVariable("id") int id,
 			@RequestBody DamagedBooks damagedbooks) {
 		if (damagedBooksService.viewDamagedBookById(id) == null) {
-			throw new BookNotFoundException("Damaged Book not found with Id " + id);
+			throw new BookNotFoundException(EXCEPTION + id);
 		}
 		DamagedBooks update = damagedBooksService.updateDamagedBookDetails(damagedbooks);
 		return new ResponseEntity<>(update, HttpStatus.OK);
