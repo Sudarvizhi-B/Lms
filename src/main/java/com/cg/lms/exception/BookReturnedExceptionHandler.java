@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.cg.lms.controller.ErrorResponse;
 
-
-
 @ControllerAdvice
 public class BookReturnedExceptionHandler {
-	
+
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(BookNotFoundException exception) {
 		ErrorResponse be = new ErrorResponse();
@@ -21,7 +19,7 @@ public class BookReturnedExceptionHandler {
 
 		return new ResponseEntity<>(be, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(Exception exception) {
 
@@ -33,3 +31,4 @@ public class BookReturnedExceptionHandler {
 		return new ResponseEntity<>(be, HttpStatus.BAD_REQUEST);
 	}
 }
+

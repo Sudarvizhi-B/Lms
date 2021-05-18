@@ -84,7 +84,7 @@ public class UsersController {
 			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
 		Users delete = userService.deleteUser(userId);
-		return new ResponseEntity(delete, HttpStatus.OK);
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 	}
 
 }

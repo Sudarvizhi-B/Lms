@@ -9,40 +9,45 @@ import com.cg.lms.repository.IBooksReturnedRepository;
 import com.cg.lms.entity.BooksReturned;
 
 @Service
-public class BooksReturnedServiceImpl implements IBooksReturnedService{
+public class BooksReturnedServiceImpl implements IBooksReturnedService {
 
 	@Autowired
-	IBooksReturnedRepository brd;
-	
+	IBooksReturnedRepository booksReturnedRepo;
+
+	// Add Returned Books
 	@Override
 	public BooksReturned returnBooks(BooksReturned returned) {
-		return brd.save(returned);
-	} 
+		return booksReturnedRepo.save(returned);
+	}
 
+	// Update Details of ReturnedBooks
 	@Override
 	public BooksReturned updateReturnedBookDetails(BooksReturned booksReturned) {
-		Optional <BooksReturned> b1 = brd.findById(booksReturned.getId());
-		if(!b1.isPresent()) {
+		Optional<BooksReturned> b1 = booksReturnedRepo.findById(booksReturned.getId());
+		if (!b1.isPresent()) {
 			return null;
 		}
-	
+
 		b1.get().setReturnedDate(booksReturned.getReturnedDate());
 		b1.get().setDelayedDays(booksReturned.getDelayedDays());
 		b1.get().setPenalty(booksReturned.getPenalty());
 		b1.get().setPenalty_Status(booksReturned.getPenalty_Status());
-		
-		return brd.save(b1.get());
+
+		return booksReturnedRepo.save(b1.get());
 	}
 
+	// View ReturnedBooks List
 	@Override
 	public List<BooksReturned> viewReturnedBooksList() {
-		
-		return brd.findAll();
+
+		return booksReturnedRepo.findAll();
 	}
-	
+
+	// Find by Delayed Days
 	@Transactional
 	public List<BooksReturned> findByDelayedDaysGreaterThanEqual(int delayedDays) {
-		List <BooksReturned> returned = (List <BooksReturned>)brd.findByDelayedDaysGreaterThanEqual(delayedDays);
+		List<BooksReturned> returned = (List<BooksReturned>) booksReturnedRepo
+				.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return returned;
 	}
 }
