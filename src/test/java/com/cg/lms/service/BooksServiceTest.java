@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -75,14 +76,14 @@ class BooksServiceTest {
 	
 	@Test
 	public void testViewById() throws BookNotFoundException{
-		Books book = booksService.viewBookById(105);
+		Books book = booksService.viewBookById(101);
 		
 		if(book==null) {
 			throw new BookNotFoundException("Book Not Found with the given Id");
 		}
 		System.out.println(book);
 		
-		assertEquals("Wings of Fire",book.getTitle());
+		assertEquals("Harry Potter",book.getTitle());
 	}
 	
 	@Test
