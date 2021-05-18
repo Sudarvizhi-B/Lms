@@ -27,7 +27,7 @@ public class BooksServiceImpl implements IBooksService {
 			return null;
 		}
 		
-		Books books = booksDao.findById(book.getBookid()).get();
+		Books books = opt.get();
 		books.setAuthor(books.getAuthor());
 		books.setBookCost(book.getBookCost());
 		books.setIsbnCode(book.getIsbnCode());
