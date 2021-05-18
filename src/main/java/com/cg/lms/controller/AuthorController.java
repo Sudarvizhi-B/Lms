@@ -33,7 +33,7 @@ public class AuthorController {
 	}
 	
 	@DeleteMapping("/author/{id}")
-	public ResponseEntity<Author> deleteAuthorDetails(@PathVariable("id") int authorId) throws AuthorNotFoundException {
+	public ResponseEntity<Author> deleteAuthorDetails(@PathVariable("id") int authorId){
 		if (ar.deleteAuthorDetails(authorId)==null) {
 			throw new AuthorNotFoundException("Author Not Found with id : " + authorId);
 		}
@@ -41,7 +41,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/author/id/{id}")
-	public ResponseEntity<Author> viewauthorById(@PathVariable("id") int id) throws AuthorNotFoundException{
+	public ResponseEntity<Author> viewauthorById(@PathVariable("id") int id){
 		if (ar.viewAuthorById(id)==null) {
 			throw new AuthorNotFoundException("Author Not Found with id : " + id);
 		}
@@ -49,7 +49,7 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/author")
-	public ResponseEntity<Author> updateAuthorDetails( @RequestBody Author author) throws AuthorNotFoundException{
+	public ResponseEntity<Author> updateAuthorDetails( @RequestBody Author author){
 		if (ar.updateAuthorDetails(author)==null) {
 			throw new AuthorNotFoundException("Author Not Found : " + author);
 		}

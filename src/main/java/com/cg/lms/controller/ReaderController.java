@@ -23,6 +23,7 @@ public class ReaderController {
 	@Autowired
 	IReaderService readerService;
 	
+	private static final String EXCEPTION = "Reader not found with id";
 	// Register reader
 	@PostMapping("/reader")
 	public ResponseEntity<Reader> registerReader(@RequestBody Reader reader) {
@@ -34,7 +35,7 @@ public class ReaderController {
 	@PutMapping("/reader/{id}")
 	public ResponseEntity<Reader> updateReaderdetail(@PathVariable("id") int id, @RequestBody Reader reader) {
 		if (readerService.updateReaderDetails(reader) == null) {
-			throw new ReaderNotFoundException("reader not found with id: " + id);
+			throw new ReaderNotFoundException( EXCEPTION + id);
 		}
 		 Reader updatedReader=readerService.updateReaderDetails(reader);
 		return new ResponseEntity<>(updatedReader, HttpStatus.OK);
@@ -51,7 +52,7 @@ public class ReaderController {
 	@GetMapping("/reader/{id}")
 	public ResponseEntity<Reader> viewReaderById(@PathVariable("id") int id) {
 		if (readerService.viewReaderById(id) == null) {
-			throw new ReaderNotFoundException("reader not found with id: " + id);
+			throw new ReaderNotFoundException(EXCEPTION + id);
 		}
 		 Reader reader=readerService.viewReaderById(id);
 		return new ResponseEntity<>(reader, HttpStatus.OK);
@@ -61,7 +62,7 @@ public class ReaderController {
 	@DeleteMapping("/reader/{id}")
 	public ResponseEntity<Reader> deleteReader(@PathVariable("id") int id) {
 		if (readerService.deleteReader(id) == null) {
-			throw new ReaderNotFoundException("reader not found with id: " + id);
+			throw new ReaderNotFoundException(EXCEPTION + id);
 		}
 		Reader reader=readerService.deleteReader(id);
 		return new ResponseEntity<>(reader, HttpStatus.OK);

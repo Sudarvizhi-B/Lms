@@ -65,7 +65,7 @@ import com.cg.lms.exception.AuthorNotFoundException;
 		
 		
 		@Test
-		//@Disabled
+		@Disabled
 		void testShouldDeleteAuthorDetails() throws AuthorNotFoundException{
 			Author ar = ias.deleteAuthorDetails(12);                   //passing
 			assertEquals(11, ar.getAuthorId());

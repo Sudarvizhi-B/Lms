@@ -20,7 +20,7 @@ class UsersServiceTest {
 	IUsersService userService;
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testRegisterUsers() {
 		Users u = new Users();
 
@@ -46,7 +46,7 @@ class UsersServiceTest {
 	}
 
 	@Test
-    @Disabled
+    //@Disabled
 	void testUpdateUserDetails() {
 		Users user = new Users();
 		
@@ -68,7 +68,7 @@ class UsersServiceTest {
 	@Test
 	@Disabled
 	void deleteUser() throws UserNotFoundException{
-		Users user = userService.deleteUser(60);
+		Users user = userService.deleteUser(101);
 		
 		if(user==null) {
 			throw new UserNotFoundException("User not found found with given user Id");
@@ -79,16 +79,16 @@ class UsersServiceTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void viewAllUsers() {
 		List<Users> users = userService.viewAllUsers();
 		System.out.println(users);
 		
-		assertEquals(7, users.size());
+		assertEquals(4, users.size());
 	}
 	
 	@Test
-	@Disabled
+	//@Disabled
 	public void viewUserById() {
 		Users user = userService.findById(102);
 		System.out.println(user);
@@ -101,9 +101,10 @@ class UsersServiceTest {
 	}
 	
 	@Test
+	@Disabled
 	public void cancelSubscription() {
-		Users user = userService.findById(60);
-		userService.cancelSubscriptionById(60);
+		Users user = userService.findById(102);
+		userService.cancelSubscriptionById(102);
 		
 		if(user==null) {
 			throw new UserNotFoundException("User not found found with given user Id");
@@ -113,13 +114,14 @@ class UsersServiceTest {
 	}
 	
 	@Test
+	//@Disabled
 	public void payThePenalty() {
-		Users user = userService.findById(40);
+		Users user = userService.findById(102);
 		
 		double penalty = userService.payThePenalty(user.getUserId(), 25);
 		System.out.println(user);
 		
-		assertEquals(400, penalty);
+		assertEquals(00, penalty);
 	}
 
 }

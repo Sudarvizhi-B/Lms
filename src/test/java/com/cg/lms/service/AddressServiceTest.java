@@ -20,7 +20,7 @@ class AddressServiceTest {
 	IAddressService addService;
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldAddAddress() {
 		Address userAdd = new Address();
 		Users user = new Users();
@@ -54,7 +54,7 @@ class AddressServiceTest {
 	}
 
 	@Test
-    @Disabled
+    //@Disabled
 	void testUpdateAddress() {
 		Address addr = new Address();
 		
@@ -70,7 +70,7 @@ class AddressServiceTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testDeleteAddressById() {
 		Address p = addService.deleteAddressById(2);
 		System.out.println(p);
@@ -81,18 +81,18 @@ class AddressServiceTest {
 	@Test
 	@Disabled
 	void testShouldViewAddressByUserId() {
-		Address add = addService.viewAddressByUserId(40);
+		Address add = addService.viewAddressByUserId(102);
 		System.out.println(add);
 		
 		assertEquals(501510, add.getPincode());
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldViewAddressList() {
 		List<Address> address = addService.viewAddressList();
 		System.out.println(address);
 		
-		assertEquals(3, address.size());
+		assertEquals(0, address.size());
 	}
 }

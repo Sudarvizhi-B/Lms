@@ -26,7 +26,7 @@ public class UsersController {
 
 	// READ
 	@GetMapping("/user/{id}")
-	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) throws UserNotFoundException {
+	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) {
 		Users user = (userService.findById(userId));
 		if (user == null) {
 			throw new UserNotFoundException("User not found with given id:" + userId);
@@ -84,7 +84,7 @@ public class UsersController {
 			throw new UserNotFoundException("User not found with given id:" + userId);
 		}
 		Users delete = userService.deleteUser(userId);
-		return new ResponseEntity(delete, HttpStatus.OK);
+		return new ResponseEntity<>(delete, HttpStatus.OK);
 	}
 
 }

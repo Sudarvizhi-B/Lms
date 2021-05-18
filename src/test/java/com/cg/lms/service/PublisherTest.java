@@ -20,7 +20,7 @@ class PublisherTest {
 	IPublisherService pService;
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testAddPublisher() {
 		Publishers p = new Publishers(1005, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 				"Chennai", "Tamilnadu", 641006);
@@ -31,11 +31,11 @@ class PublisherTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testViewPublishers() {
 		List<Publishers> publishers = pService.viewPublishersList();
 		
-		assertEquals(2, publishers.size());
+		assertEquals(3, publishers.size());
 	}
 
 	@Test
@@ -47,7 +47,7 @@ class PublisherTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testUpdatePublisherDetails() throws PublisherNotFoundException {
 		Publishers p = pService.viewPublisherById(1005);
 		
@@ -60,7 +60,7 @@ class PublisherTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testViewPublisherById() throws PublisherNotFoundException {
 		Publishers ps = pService.viewPublisherById(1005);
 		

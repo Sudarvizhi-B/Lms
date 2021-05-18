@@ -54,6 +54,7 @@ class DamagedBooksServiceTest {
 	}
 	
 	@Test
+	@Disabled
 	public void testViewDamagedBookList() {
 		List<DamagedBooks> booksList = damagedBooksService.viewDamagedBooksList();
 		System.out.println(booksList);
@@ -62,6 +63,7 @@ class DamagedBooksServiceTest {
 	}
 	
 	@Test
+	@Disabled
 	public void testViewDamagedBookById() {
 		DamagedBooks getDamagedBookById = damagedBooksService.viewDamagedBookById(1);
 		

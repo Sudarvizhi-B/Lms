@@ -23,12 +23,14 @@ public class FeedbackController {
 	@Autowired
 	IFeedbackService feedbackService;
 	
+	private static final String EXCEPTION= "user not found with id"; 
+	private static final String FEEDBACK_EXCEPTION= "Feedback not found with id"; 
 	//Write Feedback by user
 	@PostMapping("/feedback/{userId}")
 	public ResponseEntity<Feedback> writeFeedback(@PathVariable("userId")int userId,@RequestBody Feedback feedback){
 		if(feedbackService.writeFeedback(userId, feedback)==null)
 		{
-			throw new UserNotFoundException("user not found with the id: "+userId);
+			throw new UserNotFoundException(EXCEPTION +userId);
 		}
 		Feedback feed= feedbackService.writeFeedback(userId, feedback);
 		return new ResponseEntity<>(feed, HttpStatus.OK);
@@ -38,7 +40,7 @@ public class FeedbackController {
 	@PutMapping("/feedback/{id}")
 	public ResponseEntity<Feedback> updateFeedback(@PathVariable("id")int id, @RequestBody Feedback feedback){
 		if( feedbackService.updateFeedback(feedback)==null){
-			throw new FeedbackNotFoundException("feedback not found with id: "+id);
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +id);
 		}
 		Feedback updatedFeedback=feedbackService.updateFeedback(feedback);
 		return new ResponseEntity<>(updatedFeedback, HttpStatus.OK);
@@ -54,7 +56,7 @@ public class FeedbackController {
 	@GetMapping("/feedback/user/{userId}")
 	public ResponseEntity<Feedback> viewFeedbackByUser(@PathVariable("userId") int userId){
 		if(feedbackService.viewFeedBackByUser(userId)==null){
-			throw new UserNotFoundException("user not found with id: "+userId);
+			throw new UserNotFoundException(EXCEPTION +userId);
 		}
 		Feedback feedback=feedbackService.viewFeedBackByUser(userId);
 		return new ResponseEntity<>(feedback, HttpStatus.OK);
@@ -65,7 +67,7 @@ public class FeedbackController {
 	public ResponseEntity<Feedback> viewFeedbackById(@PathVariable("id") int id)
 	{
 		if(feedbackService.viewFeedbackById(id)==null){
-			throw new FeedbackNotFoundException("feedback not found with id: "+id);
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +id);
 		}
 		Feedback feedback=feedbackService.viewFeedbackById(id);
 		return new ResponseEntity<>(feedback,HttpStatus.OK);

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,12 +20,14 @@ class SuggestedBooksTest {
 	ISuggestedBooksService sb;
 
 	@Test
+	@Disabled
 	void testViewSuggestedBooks() {
 		List<SuggestedBooks> sugbk = sb.viewSuggestedBooksList();
 		assertEquals(4, sugbk.size());
 	}
 
 	@Test
+	@Disabled
 	void testUpdateSuggestedBooksDetails() throws BookNotFoundException {
 		LocalDate d2 = LocalDate.of(2001, 10, 10);
 		SuggestedBooks sb1 = sb.viewSuggestedBookDetails(200);
@@ -45,6 +49,7 @@ class SuggestedBooksTest {
 	}
 
 	@Test
+	@Disabled
 	void testsDeleteBookById() throws BookNotFoundException {
 		SuggestedBooks s1 = sb.deleteSuggestedBooks(300);
 		
@@ -52,6 +57,7 @@ class SuggestedBooksTest {
 	}
 
 	@Test
+	@Disabled
 	void testViewBookById() throws BookNotFoundException {
 		SuggestedBooks s = sb.viewSuggestedBookDetails(200);
 		

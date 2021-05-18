@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -86,26 +87,29 @@ class BooksServiceTest {
 	}
 	
 	@Test
+	
 	public void testViewAllBooks() {
 		List<Books> books = booksService.viewAllBooks();
 		System.out.println(books);
 		
-		assertEquals(4,books.size());
+		assertEquals(3,books.size());
 	}
 	
 	@Test
+	
 	public void testFindAllByTitle() throws BookNotFoundException{
 		List<Books> books = booksService.findAllByTitle("Harry Potter");
 		System.out.println(books);
 		
-		assertEquals(2,books.size());
+		assertEquals(1,books.size());
 	}
 	
 	@Test
+
 	public void testFindAllBySubject() throws BookNotFoundException{
 		List<Books> books = booksService.findAllBySubject("Novel");
 		System.out.println(books);
 		
-		assertEquals(3,books.size());
+		assertEquals(2,books.size());
 	}
 }

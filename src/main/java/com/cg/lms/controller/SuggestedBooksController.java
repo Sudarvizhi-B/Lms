@@ -25,8 +25,7 @@ public class SuggestedBooksController {
 
 	// READ
 	@GetMapping("/viewbook/id/{id}")
-	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id)
-			throws BookNotFoundException {
+	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id){
 		if (sbService.viewSuggestedBookDetails(id) == null) {
 			throw new BookNotFoundException("Book Not Found with id:" + id);
 		}
@@ -52,8 +51,7 @@ public class SuggestedBooksController {
 
 	// DELETE
 	@DeleteMapping("/delbook/{id}")
-	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id)
-			throws BookNotFoundException {
+	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id) {
 		if (sbService.deleteSuggestedBooks(id) == null) {
 			throw new BookNotFoundException("Book Not Found with id:" + id);
 		}

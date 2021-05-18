@@ -24,8 +24,7 @@ public class PublisherController {
 
 	// READ
 	@GetMapping("/publisher/id/{id}")
-	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId){
 		if (pService.viewPublisherById(publisherId) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
 		}
@@ -45,8 +44,7 @@ public class PublisherController {
 
 	// UPDATE
 	@PutMapping("/publisher")
-	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher){
 		if (pService.updatePublisherDetails(publisher) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found: " + publisher);
 		}
@@ -55,8 +53,7 @@ public class PublisherController {
 
 	// DELETE
 	@DeleteMapping("/publisher/{id}")
-	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId){
 		if (pService.removePublisher(publisherId) == null) {
 			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
 		}

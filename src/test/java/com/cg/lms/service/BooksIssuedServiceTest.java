@@ -53,7 +53,7 @@ class BooksIssuedServiceTest {
 	}
 
 	@Test
-	@Disabled
+	//@Disabled
 	void testUpdateIssueBookDetails() {
 		BooksIssued issued = new BooksIssued();
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
