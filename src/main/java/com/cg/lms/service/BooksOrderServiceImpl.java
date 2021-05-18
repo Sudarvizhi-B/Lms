@@ -38,7 +38,7 @@ public class BooksOrderServiceImpl implements IBooksOrderService {
 			return null;
 		}
 		
-		BooksOrder updatebook = booksOrderDao.findById(order.getOrderId()).get();
+		BooksOrder updatebook = opt.get();
 		updatebook.setOrderDate(order.getOrderDate());
 		updatebook.setOrderStatus(order.getOrderStatus());
 		updatebook.setQuantity(order.getQuantity());

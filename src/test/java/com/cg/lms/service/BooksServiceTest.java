@@ -39,27 +39,27 @@ class BooksServiceTest {
 	public void testUpdateBookDetails() {
 		Books books = new Books();
 		
-		books.setBookid(105);
-		books.setAuthor("A.P.J.Abdul Kalam");
+		books.setBookid(106);
+		books.setAuthor("Hoseok");
 		books.setBookCost(170);
 		books.setIsbnCode("986-7-180715-7");
 		books.setQuantity(12);
-		books.setPublishedYear(1999);
-		books.setShelfDetails("Shelf C");
-		books.setSubject("India's journey to self-reliance in technology");
-		books.setTitle("Wings of Fire");
+		books.setPublishedYear(2013);
+		books.setShelfDetails("Shelf B");
+		books.setSubject("Love Yourself");
+		books.setTitle("Just Dance");
 		
 		Books book = booksService.updateBookDetails(books);
 		System.out.println(book);
 		
-		assertEquals(105, book.getBookid());
-		assertEquals("Wings of Fire", book.getTitle());
-		assertEquals("India's journey to self-reliance in technology", book.getSubject());
-		assertEquals("A.P.J.Abdul Kalam", book.getAuthor());
-		assertEquals(1999, book.getPublishedYear());
+		assertEquals(106, book.getBookid());
+		assertEquals("Just Dance", book.getTitle());
+		assertEquals("Love Yourself", book.getSubject());
+		assertEquals("Hoseok", book.getAuthor());
+		assertEquals(2013, book.getPublishedYear());
 		assertEquals(12, book.getQuantity());
 		assertEquals(170, book.getBookCost());
-		assertEquals("Shelf C", book.getShelfDetails());
+		assertEquals("Shelf B", book.getShelfDetails());
 	}
 	
 	@Test

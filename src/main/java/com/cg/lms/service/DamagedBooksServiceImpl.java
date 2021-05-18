@@ -27,7 +27,7 @@ public class DamagedBooksServiceImpl implements IDamagedBooksService {
 			return null;
 		}
 		
-		DamagedBooks booksDamaged = damagedBooksDao.findById(damagedbooks.getId()).get();
+		DamagedBooks booksDamaged = opt.get();
 		booksDamaged.setId(damagedbooks.getId());
 		booksDamaged.setQuantity(damagedbooks.getQuantity());
 		booksDamaged.setDescription(damagedbooks.getDescription());
