@@ -37,6 +37,7 @@ public class FeedbackServiceMockitoTest {
 		MockitoAnnotations.openMocks(this);
 	}
 	
+	// To write Feedback
 	@Test
 	void testWriteFeedback(){
 		Date date=Date.valueOf("2021-02-24");
@@ -57,6 +58,8 @@ public class FeedbackServiceMockitoTest {
 		assertEquals("9",writtenFeedback.getRating());
 		assertEquals("good",writtenFeedback.getComments());
 	}
+	
+	// To update Feedback
 	@Test
 	void testUpdateFeedback(){
 		Date date=Date.valueOf("2021-02-24");
@@ -71,6 +74,7 @@ public class FeedbackServiceMockitoTest {
 		assertEquals("Interesting",updatedFeedback.getComments());
 	}
 	
+	// To view feedback by id
 	@Test
 	void testViewFeedbackById(){
 		Date date=Date.valueOf("2021-02-24");
@@ -82,6 +86,8 @@ public class FeedbackServiceMockitoTest {
 		
 		assertEquals("10", feedbackById.getRating());
 	}
+	
+	// To view all feedbacks
 	@Test
 	void testViewFeedbackList(){
 		Date date=Date.valueOf("2021-02-24");
@@ -98,6 +104,8 @@ public class FeedbackServiceMockitoTest {
 		
 		assertEquals(2,feedback.size());
 	}
+	
+	// To view feedback by user
 	@Test
 	void testViewFeedbackByUser(){
 		Date date=Date.valueOf("2021-02-24");

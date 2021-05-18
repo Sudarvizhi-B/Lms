@@ -34,6 +34,7 @@ public class ReaderServiceMockitoTest {
 		MockitoAnnotations.openMocks(this);
 	}
 	
+	// To register reader
 	@Test
 	void testRegisterReader(){
 		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
@@ -46,6 +47,7 @@ public class ReaderServiceMockitoTest {
 		assertEquals("Sandhyana", registeredReader.getFirstName());
 	}
 	
+	// To update reader
 	@Test
 	void testUpdateReaderDetails(){
 		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
@@ -60,6 +62,7 @@ public class ReaderServiceMockitoTest {
 		assertEquals("N",updatedReader.getLastName());
 	}
 	
+	// To Delete reader
 	@Test
 	void testDeleteReader(){
 		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
@@ -75,6 +78,7 @@ public class ReaderServiceMockitoTest {
 		assertEquals("9739450567", read.getMobileNo());
 	}
 	
+	// To View all the readers
 	@Test
 	void testViewReaderList(){
 		Reader reader1= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
@@ -91,6 +95,7 @@ public class ReaderServiceMockitoTest {
 		assertEquals(2,reader.size());
 	}
 	
+	//To view reader by id
 	@Test
 	void testViewReaderById(){
 		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");

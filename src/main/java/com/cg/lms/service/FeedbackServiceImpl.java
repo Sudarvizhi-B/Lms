@@ -20,6 +20,7 @@ public class FeedbackServiceImpl implements IFeedbackService{
 	@Autowired
 	IUsersRepository usersRepo;
 
+	// Write Feedback
 	@Override
 	public Feedback writeFeedback(int userId,Feedback feedback) {
 		Optional<Users> users=usersRepo.findById(userId);
@@ -32,6 +33,7 @@ public class FeedbackServiceImpl implements IFeedbackService{
 		return feedbackRepo.save(feedback);
 	}
 
+	// Update Feedback
 	@Override
 	public Feedback updateFeedback(Feedback feedback) {
 		Optional<Feedback> fb1=feedbackRepo.findById(feedback.getId());
@@ -48,11 +50,13 @@ public class FeedbackServiceImpl implements IFeedbackService{
 		return feedbackRepo.save(feedbackUpdate);
 	}
 
+	// View Feedback list
 	@Override
 	public List<Feedback> viewFeedbackList() {
 		return feedbackRepo.findAll();
 	}
 
+	// View Feedback by userId
 	@Override
 	public Feedback viewFeedBackByUser(int userId) {
 		Feedback feedback=feedbackRepo.viewFeedBackByUser(userId);
@@ -63,6 +67,7 @@ public class FeedbackServiceImpl implements IFeedbackService{
 		return feedbackRepo.viewFeedBackByUser(userId);
 	}
 
+	// View feedback by Id
 	@Override
 	public Feedback viewFeedbackById(int id) {
 		Optional<Feedback> feedback=feedbackRepo.findById(id);

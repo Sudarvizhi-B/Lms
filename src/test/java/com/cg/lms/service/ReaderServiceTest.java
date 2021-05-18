@@ -16,6 +16,7 @@ class ReaderServiceTest {
 	@Autowired
 	IReaderService readerService;
 
+	//To register Reader
 	@Test
 	void testRegisterReader() {
 		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
@@ -24,6 +25,7 @@ class ReaderServiceTest {
 		assertEquals("Sandhyana",reader1.getFirstName());
 	}
 	
+	// To update reader
 	@Test
 	void testUpdateReaderDetails() {
 		Reader reader= new Reader();
@@ -40,6 +42,7 @@ class ReaderServiceTest {
 		assertEquals("San", reader1.getFirstName());
 	}
 	
+	// To view all Readers
 	@Test
 	void testViewReaderList() {
 		List<Reader> reader= readerService.viewReadersList();
@@ -47,6 +50,7 @@ class ReaderServiceTest {
 		assertEquals(2, reader.size());
 	}
 	
+	// To view reader by id
 	@Test
 	void testViewReaderById() {
 		Reader reader=readerService.viewReaderById(101);
@@ -54,6 +58,7 @@ class ReaderServiceTest {
 		assertEquals("San", reader.getFirstName());
 	}
 
+	// To delete reader by id
 	@Test
 	void testDeleteReaderById() {
 		Reader reader= readerService.deleteReader(101);
