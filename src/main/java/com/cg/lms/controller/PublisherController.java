@@ -1,7 +1,6 @@
 package com.cg.lms.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +21,13 @@ public class PublisherController {
 	@Autowired
 	IPublisherService pService;
 
+	private static final String EXCEPTION = "Publisher not found with Book id ";
+
 	// READ
 	@GetMapping("/publisher/id/{id}")
-	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId) {
 		if (pService.viewPublisherById(publisherId) == null) {
-			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
+			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
 		return new ResponseEntity<>(pService.viewPublisherById(publisherId), HttpStatus.OK);
 	}
@@ -45,20 +45,18 @@ public class PublisherController {
 
 	// UPDATE
 	@PutMapping("/publisher")
-	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher) {
 		if (pService.updatePublisherDetails(publisher) == null) {
-			throw new PublisherNotFoundException("Publisher Not Found: " + publisher);
+			throw new PublisherNotFoundException(EXCEPTION + publisher);
 		}
 		return new ResponseEntity<>(pService.updatePublisherDetails(publisher), HttpStatus.OK);
 	}
 
 	// DELETE
 	@DeleteMapping("/publisher/{id}")
-	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId)
-			throws PublisherNotFoundException {
+	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId) {
 		if (pService.removePublisher(publisherId) == null) {
-			throw new PublisherNotFoundException("Publisher Not Found with id: " + publisherId);
+			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
 		return new ResponseEntity<>(pService.removePublisher(publisherId), HttpStatus.OK);
 

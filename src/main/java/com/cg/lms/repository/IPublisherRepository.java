@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.cg.lms.entity.Publishers;
 
 @Repository
-public interface IPublisherRepository extends JpaRepository<Publishers, Integer > {
-	 
+public interface IPublisherRepository extends JpaRepository<Publishers, Integer> {
+
 }

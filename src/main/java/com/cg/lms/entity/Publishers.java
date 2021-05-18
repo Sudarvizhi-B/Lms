@@ -2,7 +2,6 @@ package com.cg.lms.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
