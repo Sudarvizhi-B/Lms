@@ -1,7 +1,6 @@
 package com.cg.lms.service;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,90 +19,95 @@ import com.cg.lms.repository.IPublisherRepository;
 
 @ExtendWith(SpringExtension.class)
 class PublisherServiceMockitoTest {
-	
+
 	@InjectMocks
-	PublisherServiceImpl ps;
+	PublisherServiceImpl publisherService;
 
 	@MockBean
-	IPublisherRepository pr;
+	IPublisherRepository publisherRepository;
 
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
 	}
 
+	// to view publisher by id
 	@Test
 	void testPublisherById() {
-		Publishers p = new Publishers(1005, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
-				"Chennai", "Tamilnadu", 641006);
-		
-		Mockito.when(pr.findById(1005)).thenReturn(Optional.of(p));
-		
-		Publishers p1 = ps.viewPublisherById(1005);
-		
-		assertEquals(1005, p1.getPublisherId());
-		assertEquals("XY Publications",p1.getPublisherName());
-		assertEquals("7777788777",p1.getContactno());
-		assertEquals("xy@gmail.com",p1.getEmail());
+		Publishers publisher= new Publishers(1005, "Kamala Publications", "9999958585", "Kamala@gmail.com", "1 st Street", "Lal Road",
+				"Chennai", "Tamilnadu",  641011);
+
+		Mockito.when(publisherRepository.findById(1005)).thenReturn(Optional.of(publisher));
+
+		Publishers publisher1 = publisherService.viewPublisherById(1005);
+
+		assertEquals(1005, publisher1.getPublisherId());
+		assertEquals("Kamala Publications", publisher1.getPublisherName());
+		assertEquals("9999958585", publisher1.getContactno());
+		assertEquals("Kamala@gmail.com", publisher1.getEmail());
 	}
 
+	// to add publishers
 	@Test
 	void testAddPublishers() {
-		Publishers p = new Publishers(1006, "ABC Publications", "7777788888", "abc@gmail.com", "2nd street", "a layout",
+		Publishers publisher1 = new Publishers(1006, "ABC Publications", "7777788888", "abc@gmail.com", "2nd street", "a layout",
 				"Coimbatore", "Tamilnadu", 641004);
-		
-		Mockito.when(pr.save(p)).thenReturn(p);
-		
-		Publishers p2 = ps.addPublisher(p);
-		
-		assertEquals(1006, p2.getPublisherId());
-		assertEquals("ABC Publications", p2.getPublisherName());
+
+		Mockito.when(publisherRepository.save(publisher1)).thenReturn(publisher1);
+
+		Publishers publisher2 = publisherService.addPublisher(publisher1);
+
+		assertEquals(1006,  publisher2.getPublisherId());
+		assertEquals("ABC Publications",  publisher2.getPublisherName());
 	}
 
+	// To view all publisher
 	@Test
 	void testAllPublishers() {
-		Publishers p = new Publishers(1005, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
-				"Chennai", "Tamilnadu", 641006);
-		Publishers p2 = new Publishers(1006, "ABC Publications", "7777788888", "abc@gmail.com", "2nd street",
+		Publishers publisher1= new Publishers(1005, "Kamala Publications", "9999958585", "Kamala@gmail.com", "1 st Street", "Lal Road",
+				"Chennai", "Tamilnadu",  641011);
+		Publishers  publisher2 = new Publishers(1006, "ABC Publications", "7777788888", "abc@gmail.com", "2nd street",
 				"a layout", "Coimbatore", "Tamilnadu", 641004);
-		
+
 		List<Publishers> pList = new ArrayList<>();
-		pList.add(p);
-		pList.add(p2);
-		
-		Mockito.when(pr.findAll()).thenReturn(pList);
-		
-		List<Publishers> pub = ps.viewPublishersList();
-		
-		assertEquals(2, pub.size());
+		pList.add(publisher1);
+		pList.add( publisher2);
+
+		Mockito.when(publisherRepository.findAll()).thenReturn(pList);
+
+		List<Publishers> publisherList =publisherService.viewPublishersList();
+
+		assertEquals(2, publisherList.size());
 	}
 
+	// To update publisher
 	@Test
 	void testUpdatePublishers() {
-		Publishers p = new Publishers(1005, "XY Publications", "8888888777", "xy@gmail.com", "3rd street", "k layout",
+		Publishers publisher1 = new Publishers(1005, "XY Publications", "8888888777", "xy@gmail.com", "3rd street", "k layout",
 				"Chennai", "Tamilnadu", 641006);
-		
-		Mockito.when(pr.findById(1005)).thenReturn(Optional.of(p));
-		Mockito.when(pr.save(p)).thenReturn(p);
-		
-		Publishers pp = ps.updatePublisherDetails(p);
-		
-		assertEquals(1005, pp.getPublisherId());
-		assertEquals("XY Publications",pp.getPublisherName());
-		assertEquals("8888888777", pp.getContactno());
+
+		Mockito.when(publisherRepository.findById(1005)).thenReturn(Optional.of(publisher1));
+		Mockito.when(publisherRepository.save(publisher1)).thenReturn(publisher1);
+
+		Publishers publisher2 = publisherService.updatePublisherDetails(publisher1);
+
+		assertEquals(1005, publisher2.getPublisherId());
+		assertEquals("XY Publications", publisher2.getPublisherName());
+		assertEquals("8888888777", publisher2.getContactno());
 	}
-	
+
+	// To delete publishers
 	@Test
 	void testDeletePublisher() {
-		Publishers p = new Publishers(1005, "XY Publications", "8888888777", "xy@gmail.com", "3rd street", "k layout",
-				"Chennai", "Tamilnadu", 641006);
-		
-		Mockito.when(pr.findById(1005)).thenReturn(Optional.of(p));
-		
-		pr.deleteById(1005);
-		Publishers persistedP = ps.removePublisher(1005);
-		
-		assertEquals(1005, persistedP.getPublisherId());	
+		Publishers publisher1= new Publishers(1005, "Kamala Publications", "9999958585", "Kamala@gmail.com", "1 st Street", "Lal Road",
+				"Chennai", "Tamilnadu",  641011);
+
+		Mockito.when(publisherRepository.findById(1005)).thenReturn(Optional.of( publisher1));
+
+		publisherRepository.deleteById(1005);
+		Publishers persistedP = publisherService.removePublisher(1005);
+
+		assertEquals(1005, persistedP.getPublisherId());
 	}
 
 }
