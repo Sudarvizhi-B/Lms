@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.cg.lms.entity.SuggestedBooks;
 
 @Repository
-public interface ISuggestedBooksRepository extends JpaRepository<SuggestedBooks, Integer >{
+public interface ISuggestedBooksRepository extends JpaRepository<SuggestedBooks, Integer> {
 
 }

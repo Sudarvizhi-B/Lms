@@ -1,7 +1,6 @@
 package com.cg.lms.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +22,13 @@ public class SuggestedBooksController {
 	@Autowired
 	ISuggestedBooksService sbService;
 
+	private static final String EXCEPTION = "Book not found with Book id ";
+
 	// READ
 	@GetMapping("/viewbook/id/{id}")
-	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id)
-			throws BookNotFoundException {
+	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id) {
 		if (sbService.viewSuggestedBookDetails(id) == null) {
-			throw new BookNotFoundException("Book Not Found with id:" + id);
+			throw new BookNotFoundException(EXCEPTION + id);
 		}
 		return new ResponseEntity<>(sbService.viewSuggestedBookDetails(id), HttpStatus.OK);
 	}
@@ -51,11 +51,10 @@ public class SuggestedBooksController {
 	}
 
 	// DELETE
-	@DeleteMapping("/delbook/{id}")
-	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id)
-			throws BookNotFoundException {
+	@DeleteMapping("/deletebook/{id}")
+	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id) {
 		if (sbService.deleteSuggestedBooks(id) == null) {
-			throw new BookNotFoundException("Book Not Found with id:" + id);
+			throw new BookNotFoundException(EXCEPTION + id);
 		}
 		return new ResponseEntity<>(sbService.deleteSuggestedBooks(id), HttpStatus.OK);
 	}
