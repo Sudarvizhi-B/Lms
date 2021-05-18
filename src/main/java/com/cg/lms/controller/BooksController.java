@@ -23,12 +23,14 @@ public class BooksController {
 
 	@Autowired
 	IBooksService booksService;
+	
+	private static final String EXCEPTION = "Book not found with Book id ";
 
 	// READ
 	@GetMapping("/books/{id}")
 	public ResponseEntity<Books> viewBookById(@PathVariable("id") int bookid) {
 		if (booksService.viewBookById(bookid) == null) {
-			throw new BookNotFoundException("Book not found with Book id " + bookid);
+			throw new BookNotFoundException(EXCEPTION + bookid);
 		}
 		Books bookById = booksService.viewBookById(bookid);
 		return new ResponseEntity<>(bookById, HttpStatus.OK);
@@ -69,7 +71,7 @@ public class BooksController {
 	@DeleteMapping("/books/{id}")
 	public ResponseEntity<Books> deleteBook(@PathVariable("id") int bookid) {
 		if (booksService.viewBookById(bookid) == null) {
-			throw new BookNotFoundException("Book not found with Book id " + bookid);
+			throw new BookNotFoundException(EXCEPTION + bookid);
 		}
 		Books delete = booksService.removeBook(bookid);
 		return new ResponseEntity<>(delete, HttpStatus.OK);
@@ -79,7 +81,7 @@ public class BooksController {
 	@PatchMapping("/books/{id}")
 	public ResponseEntity<Books> updateBook(@PathVariable("id") int bookid, @RequestBody Books book) {
 		if (booksService.viewBookById(bookid) == null) {
-			throw new BookNotFoundException("Book not found with Book id " + bookid);
+			throw new BookNotFoundException(EXCEPTION + bookid);
 		}
 		Books update = booksService.updateBookDetails(book);
 		return new ResponseEntity<>(update, HttpStatus.OK);
@@ -88,7 +90,7 @@ public class BooksController {
 	@PutMapping("/books/{id}")
 	public ResponseEntity<Books> updateBookDetails(@PathVariable("id") int bookid, @RequestBody Books book) {
 		if (booksService.viewBookById(bookid) == null) {
-			throw new BookNotFoundException("Book not found with Book id " + bookid);
+			throw new BookNotFoundException(EXCEPTION + bookid);
 		}
 		Books delete = booksService.updateBookDetails(book);
 		return new ResponseEntity<>(delete, HttpStatus.OK);
