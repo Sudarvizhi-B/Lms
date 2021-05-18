@@ -18,32 +18,37 @@ import com.cg.lms.service.IBooksReturnedService;
 
 @RestController
 public class BooksReturnedController {
-	
+
 	@Autowired
 	IBooksReturnedService brs;
-	
+
+	private static final String EXCEPTION = "Book not found with Book id ";
+
+	// WRITE
 	@PostMapping("/booksReturned")
-	public ResponseEntity<BooksReturned> returnBooks(@RequestBody BooksReturned returned){
+	public ResponseEntity<BooksReturned> returnBooks(@RequestBody BooksReturned returned) {
 		return new ResponseEntity<>(brs.returnBooks(returned), HttpStatus.CREATED);
 	}
-	
+
+	// UPDATE
 	@PutMapping("/booksReturned")
-	public ResponseEntity<BooksReturned> updateReturnedBookDetails( @RequestBody BooksReturned returned) {
-		if (brs.updateReturnedBookDetails(returned)==null) {
-			throw new BookNotFoundException("Book Not Found : " +  returned);
+	public ResponseEntity<BooksReturned> updateReturnedBookDetails(@RequestBody BooksReturned returned) {
+		if (brs.updateReturnedBookDetails(returned) == null) {
+			throw new BookNotFoundException(EXCEPTION + returned);
 		}
 		return new ResponseEntity<>(brs.updateReturnedBookDetails(returned), HttpStatus.OK);
 	}
-	
+
+	// READ
 	@GetMapping("/booksReturned")
-	public ResponseEntity<List<BooksReturned>> viewReturnedBooksList(){
+	public ResponseEntity<List<BooksReturned>> viewReturnedBooksList() {
 		return new ResponseEntity<>(brs.viewReturnedBooksList(), HttpStatus.OK);
 	}
-	
+
+	// READ
 	@GetMapping("/booksDelayed/{delayedDays}")
-	public ResponseEntity<List<BooksReturned>> findByDelayedDaysGreaterThanEqual(@PathVariable int delayedDays){
-		List <BooksReturned> returned = (List<BooksReturned>)brs.findByDelayedDaysGreaterThanEqual(delayedDays);
+	public ResponseEntity<List<BooksReturned>> findByDelayedDaysGreaterThanEqual(@PathVariable int delayedDays) {
+		List<BooksReturned> returned = (List<BooksReturned>) brs.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return new ResponseEntity<>(returned, HttpStatus.OK);
 	}
 }
-

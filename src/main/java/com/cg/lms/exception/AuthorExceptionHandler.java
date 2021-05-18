@@ -8,7 +8,7 @@ import com.cg.lms.controller.ErrorResponse;
 
 @ControllerAdvice
 public class AuthorExceptionHandler {
-	
+
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(AuthorNotFoundException exception) {
 
@@ -19,7 +19,7 @@ public class AuthorExceptionHandler {
 
 		return new ResponseEntity<>(ae, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleException(Exception exception) {
 
