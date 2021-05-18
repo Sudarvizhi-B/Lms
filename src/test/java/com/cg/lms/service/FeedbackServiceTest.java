@@ -16,7 +16,8 @@ class FeedbackServiceTest {
 
 	@Autowired
 	IFeedbackService feedbackService;
-
+	
+	//test to write feedback
 	@Test
 	void testWriteFeedback() {
 		Date date = Date.valueOf("2021-02-23");
@@ -35,6 +36,8 @@ class FeedbackServiceTest {
 		assertEquals("9", fb.getRating());
 
 	}
+	
+	// update feedback
 	@Test
 	void testUpdateFeedback(){
 		Feedback feedback = new Feedback();
@@ -53,6 +56,7 @@ class FeedbackServiceTest {
 		assertEquals("interesting", fb.getComments());
 	}
 	
+	// To view all the feedbacks
 	@Test
 	void testViewFeedbackList(){
 		List<Feedback> feedback=feedbackService.viewFeedbackList();
@@ -60,6 +64,7 @@ class FeedbackServiceTest {
 		assertEquals(1,feedback.size());
 	}
 	
+	// To view feedback by userId
 	@Test
 	void testViewFeedbackByUser(){
 		Feedback feedback=feedbackService.viewFeedBackByUser(100);
@@ -69,6 +74,7 @@ class FeedbackServiceTest {
 		assertEquals("9",feedback.getRating());
 	}
 	
+	// To view feedback by id
 	@Test
 	void testViewFeedbackById(){
 		Feedback feedback=feedbackService.viewFeedbackById(101);

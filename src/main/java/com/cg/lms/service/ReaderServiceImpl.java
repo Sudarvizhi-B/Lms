@@ -16,11 +16,13 @@ public class ReaderServiceImpl implements IReaderService {
 	@Autowired
 	IReaderRepository readerRepo;
 	
+	// Register reader
 	@Override
 	public Reader register(Reader reader) {
 		return readerRepo.save(reader);
 	}
 
+	// Update reader details
 	@Override
 	public Reader updateReaderDetails(Reader reader) {
 		Optional<Reader> rd1=readerRepo.findById(reader.getId());
@@ -39,6 +41,7 @@ public class ReaderServiceImpl implements IReaderService {
 		return readerRepo.save(readerUpdate);
 	}
 
+	// Delete reader by id
 	@Override
 	public Reader deleteReader(int id) {
 		Optional<Reader> reader=readerRepo.findById(id);
@@ -50,11 +53,13 @@ public class ReaderServiceImpl implements IReaderService {
 		return reader.get();
 	}
 
+	// View reader list
 	@Override
 	public List<Reader> viewReadersList() {
 		return readerRepo.findAll();
 	}
 
+	// View reader by id
 	@Override
 	public Reader viewReaderById(int id) {
 		Optional<Reader> reader=readerRepo.findById(id);
