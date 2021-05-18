@@ -5,15 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksOrder;
 import com.cg.lms.entity.Publishers;
-//import com.cg.lms.entity.Publishers;
 import com.cg.lms.exception.BookNotFoundException;
 
 @SpringBootTest
@@ -27,8 +26,8 @@ class BooksOrderServiceTest {
 		BooksOrder booksorder = new BooksOrder();
 		Publishers publisher = new Publishers(304, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 			"Chennai", "Tamilnadu", 641006);
-		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(104, "Winter Bear", "Love Yourself", "Taehyung", 2013, "985-2-151245-7",
+				20, 200, "Shelf B");
 		
 		booksorder.setOrderId(2);
 		booksorder.setOrderDate("2021-05-12");
@@ -62,8 +61,8 @@ class BooksOrderServiceTest {
 		BooksOrder booksorder = new BooksOrder();
 		Publishers publisher = new Publishers(304, "XY Publications", "7777788777", "xy@gmail.com", "3rd street", "k layout",
 				"Chennai", "Tamilnadu", 641006);
-		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(104, "Winter Bear", "Love Yourself", "Taehyung", 2013, "985-2-151245-7",
+				20, 200, "Shelf B");
 		
 		booksorder.setOrderId(2);
 		booksorder.setOrderDate("2021-04-01");
@@ -85,7 +84,7 @@ class BooksOrderServiceTest {
 		List<BooksOrder> booksOrderList = booksOrderService.viewOrdersList();
 		System.out.println(booksOrderList);
 		
-		assertEquals(4,booksOrderList.size());
+		assertEquals(3,booksOrderList.size());
 	}
 	
 	@Test

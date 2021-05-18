@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,8 +21,8 @@ class DamagedBooksServiceTest {
 	@Test
 	public void testAddDamagedBooks() {
 		DamagedBooks damagedbook = new DamagedBooks();
-		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
-				25, 150, "Shelf C");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
+				25, 170, "Shelf A");
 		
 		damagedbook.setId(3);
 		damagedbook.setQuantity(2);
@@ -39,8 +38,8 @@ class DamagedBooksServiceTest {
 	@Test
 	public void testUpdateDamagedBookDetail() {
 		DamagedBooks damagedbook = new DamagedBooks();
-		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
-				25, 150, "Shelf C");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
+				25, 170, "Shelf A");
 		
 		damagedbook.setId(2);
 		damagedbook.setQuantity(4);
@@ -58,19 +57,19 @@ class DamagedBooksServiceTest {
 		List<DamagedBooks> booksList = damagedBooksService.viewDamagedBooksList();
 		System.out.println(booksList);
 		
-		assertEquals(3,booksList.size());
+		assertEquals(2,booksList.size());
 	}
 	
 	@Test
 	public void testViewDamagedBookById() {
-		DamagedBooks getDamagedBookById = damagedBooksService.viewDamagedBookById(1);
+		DamagedBooks getDamagedBookById = damagedBooksService.viewDamagedBookById(2);
 		
 		if(getDamagedBookById==null) {
 			throw new BookNotFoundException("Book Not Found with the given Id");
 		}
 		System.out.println(getDamagedBookById);
 		
-		assertEquals(3,getDamagedBookById.getQuantity());
+		assertEquals(2,getDamagedBookById.getQuantity());
 	}
 
 }
