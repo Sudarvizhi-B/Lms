@@ -29,10 +29,9 @@ public class Reader {
 	@NonNull
 	private String lastName;
 	@NonNull
-	@Size(min=10,message="contact number should have 10 numberics")
+	@Size(min=10, message="contact number should have 10 numberics")
 	private String mobileNo;
 	@NonNull
-	@Email
 	private String email;
 	
 }

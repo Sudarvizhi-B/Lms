@@ -44,7 +44,7 @@ class ReaderServiceTest {
 	void testViewReaderList() {
 		List<Reader> reader= readerService.viewReadersList();
 		
-		assertEquals(1, reader.size());
+		assertEquals(2, reader.size());
 	}
 	
 	@Test

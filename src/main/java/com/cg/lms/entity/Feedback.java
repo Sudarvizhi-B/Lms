@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
@@ -21,6 +22,7 @@ import lombok.NonNull;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Feedback {
 
 	@Id
