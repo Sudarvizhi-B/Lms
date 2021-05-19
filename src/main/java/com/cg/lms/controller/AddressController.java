@@ -22,12 +22,14 @@ public class AddressController {
 
 	@Autowired
 	IAddressService addService;
+ 
+	private static final String EXCEPTION ="Address not found with given id:";
 
 	// READ
 	@GetMapping("/address/{id}")
 	public ResponseEntity<Address> viewAddressByUserId(int userId) {
 		if (addService.viewAddressByUserId(userId) == null) {
-			throw new AddressNotFoundException("Address not found with given id:" + userId);
+			throw new AddressNotFoundException(EXCEPTION + userId);
 		}
 		Address addressById =addService.viewAddressByUserId(userId);
 		return new ResponseEntity<>(addressById, HttpStatus.OK);
@@ -50,7 +52,7 @@ public class AddressController {
 	@PutMapping("/address")
 	public ResponseEntity<Address> update(@RequestBody Address address) {
 		if (addService.updateAddressDetails(address) == null) {
-			throw new AddressNotFoundException("Address not found with given id:" + address);
+			throw new AddressNotFoundException(EXCEPTION + address);
 		}
 		Address update = addService.updateAddressDetails(address);
         return new ResponseEntity<>(update,HttpStatus.OK);
@@ -60,7 +62,7 @@ public class AddressController {
 	@DeleteMapping("/address/{id}")
 	public ResponseEntity<Address> deleteById(@PathVariable("id") int addressId) {
 		if (addService.deleteAddressById(addressId) == null) {
-			throw new AddressNotFoundException("Address not found with given id:" + addressId);
+			throw new AddressNotFoundException(EXCEPTION + addressId);
 		}
 		Address delete = addService.deleteAddressById(addressId);
 		return new ResponseEntity<>(delete,HttpStatus.OK);
