@@ -24,12 +24,14 @@ public class UsersController {
 	@Autowired
 	IUsersService userService;
 
+	private static final String EXCEPTION ="User not found with given id:";
+	
 	// READ
 	@GetMapping("/user/{id}")
-	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) throws UserNotFoundException {
+	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) {
 		Users user = (userService.findById(userId));
 		if (user == null) {
-			throw new UserNotFoundException("User not found with given id:" + userId);
+			throw new UserNotFoundException(EXCEPTION + userId);
 		}
 		return new ResponseEntity<Users>(user, HttpStatus.OK);
 	}
@@ -43,7 +45,7 @@ public class UsersController {
 	@GetMapping("/users/penalty/{id}")
 	public double payThePenalty(@PathVariable("id") int userId) {
 		if (userService.findById(userId) == null) {
-			throw new UserNotFoundException("User not found with given id:" + userId);
+			throw new UserNotFoundException(EXCEPTION + userId);
 		}
 		double amount = 25.0;
 		return userService.payThePenalty(userId, amount);
@@ -54,16 +56,6 @@ public class UsersController {
 	public ResponseEntity<Users> addUsers(@RequestBody Users user) {
 		Users user1 = userService.register(user);
 		return new ResponseEntity<>(user1, HttpStatus.OK);
-	}
-
-	// UPDATE
-	@PatchMapping("/user/{id}")
-	public ResponseEntity<Users> updateUsers(@PathVariable("id") int userId, @RequestBody Users user) {
-		if (userService.findById(userId) == null) {
-			throw new UserNotFoundException("User not found with given id:" + userId);
-		}
-		Users update = userService.updateUserDetails(user);
-		return new ResponseEntity<>(update, HttpStatus.OK);
 	}
 
 	@PutMapping("/user/{id}")
@@ -81,7 +73,7 @@ public class UsersController {
 	@DeleteMapping("/user/{id}")
 	public ResponseEntity<Users> deleteUserById(@PathVariable("id") int userId) {
 		if (userService.findById(userId) == null) {
-			throw new UserNotFoundException("User not found with given id:" + userId);
+			throw new UserNotFoundException(EXCEPTION + userId);
 		}
 		Users delete = userService.deleteUser(userId);
 		return new ResponseEntity<>(delete, HttpStatus.OK);
