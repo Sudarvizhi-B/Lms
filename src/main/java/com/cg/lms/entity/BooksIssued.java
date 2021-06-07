@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,13 @@ import lombok.ToString;
 public class BooksIssued {
 	
 	@Id
+	@NotBlank
 	private int issueId;
+	@NotBlank
 	private Date issueDate;
+	@NotBlank
 	private int quantity;
+	@NotBlank
 	private Date dueDate;
 
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
