@@ -4,9 +4,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +24,15 @@ import lombok.ToString;
 public class BooksOrder {
 	
 	@Id
+	@NotBlank
 	private int orderId;
+	@NotBlank
 	private int quantity;
 	@NonNull
+	@NotBlank
 	private String orderDate;
 	@NonNull
+	@NotBlank
 	private String orderStatus;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

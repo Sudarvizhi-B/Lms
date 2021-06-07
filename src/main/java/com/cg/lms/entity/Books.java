@@ -2,7 +2,7 @@ package com.cg.lms.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,19 +20,28 @@ import lombok.ToString;
 public class Books {
 	
 	@Id
-	private int bookid;
+	@NotBlank
+	private int bookId;
 	@NonNull
+	@NotBlank
 	private String title;
 	@NonNull
+	@NotBlank
 	private String subject;
 	@NonNull
+	@NotBlank
 	private String author;
+	@NotBlank
 	private int publishedYear;
 	@NonNull
+	@NotBlank
 	private String isbnCode;
+	@NotBlank
 	private int quantity;
+	@NotBlank
 	private double bookCost;
 	@NonNull
+	@NotBlank
 	private String shelfDetails;
 	
 }
