@@ -17,7 +17,6 @@ import com.cg.lms.entity.Publishers;
 import com.cg.lms.exception.PublisherNotFoundException;
 import com.cg.lms.service.IPublisherService;
 
-
 @CrossOrigin
 @RestController
 public class PublisherController {
@@ -32,6 +31,7 @@ public class PublisherController {
 	@GetMapping("/publisher/id/{id}")
 	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId) {
 		logger.info("Viewing Publisher By Id");
+		// Throw an exception if publisher id is not present
 		if (pService.viewPublisherById(publisherId) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
@@ -55,6 +55,7 @@ public class PublisherController {
 	@PutMapping("/publisher")
 	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher) {
 		logger.info("Updating Publisher Details");
+		// Throw an exception if publisher id is not present
 		if (pService.updatePublisherDetails(publisher) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisher);
 		}
@@ -65,6 +66,7 @@ public class PublisherController {
 	@DeleteMapping("/publisher/{id}")
 	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId) {
 		logger.info("Deleting Publisher Details");
+		// Throw an exception if publisher id is not present
 		if (pService.removePublisher(publisherId) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
