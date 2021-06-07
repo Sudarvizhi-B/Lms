@@ -2,9 +2,10 @@ package com.cg.lms.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.persistence.GeneratedValue;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,6 @@ import lombok.NonNull;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Inheritance
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,13 +25,17 @@ public class Reader {
 	@NonNull
 	private String password;
 	@NonNull
+	@NotBlank
 	private String firstName;
 	@NonNull
+	@NotBlank
 	private String lastName;
 	@NonNull
-	@Size(min=10, message="contact number should have 10 numberics")
+	@Size(min=10, max=10, message="contact number should have 10 numberic values")
 	private String mobileNo;
+	@Email
 	@NonNull
+	@NotBlank
 	private String email;
 	
 }
