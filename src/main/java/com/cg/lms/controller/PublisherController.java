@@ -1,9 +1,11 @@
 package com.cg.lms.controller;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +17,11 @@ import com.cg.lms.entity.Publishers;
 import com.cg.lms.exception.PublisherNotFoundException;
 import com.cg.lms.service.IPublisherService;
 
+
+@CrossOrigin
 @RestController
 public class PublisherController {
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(PublisherController.class);
 
 	@Autowired
 	IPublisherService pService;
@@ -26,6 +31,7 @@ public class PublisherController {
 	// READ
 	@GetMapping("/publisher/id/{id}")
 	public ResponseEntity<Publishers> viewPublisherById(@PathVariable("id") int publisherId) {
+		logger.info("Viewing Publisher By Id");
 		if (pService.viewPublisherById(publisherId) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
@@ -34,18 +40,21 @@ public class PublisherController {
 
 	@GetMapping("/publisher")
 	public ResponseEntity<List<Publishers>> viewPublishersList() {
+		logger.info("Viewing All Publishers");
 		return new ResponseEntity<>(pService.viewPublishersList(), HttpStatus.OK);
 	}
 
 	// WRITE
 	@PostMapping("/publisher")
 	public ResponseEntity<Publishers> addPublishers(@RequestBody Publishers p) {
+		logger.info("Adding Publisher Details");
 		return new ResponseEntity<>(pService.addPublisher(p), HttpStatus.CREATED);
 	}
 
 	// UPDATE
 	@PutMapping("/publisher")
 	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher) {
+		logger.info("Updating Publisher Details");
 		if (pService.updatePublisherDetails(publisher) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisher);
 		}
@@ -55,6 +64,7 @@ public class PublisherController {
 	// DELETE
 	@DeleteMapping("/publisher/{id}")
 	public ResponseEntity<Publishers> removePublisher(@PathVariable("id") int publisherId) {
+		logger.info("Deleting Publisher Details");
 		if (pService.removePublisher(publisherId) == null) {
 			throw new PublisherNotFoundException(EXCEPTION + publisherId);
 		}
