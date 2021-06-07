@@ -40,15 +40,14 @@ class BooksIssuedMockitoTest {
 	@Test
 	void testAddIssuedBook() {
 		BooksIssued issued = new BooksIssued();
-		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
 		Users user = new Users(40, dateOfBirth, subscriptionDate, subExpireDate, "Accepted");
-		
+
 		issued.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");
 		issued.setIssueDate(issueDate);
@@ -56,7 +55,7 @@ class BooksIssuedMockitoTest {
 		Date dueDate = Date.valueOf("2021-06-01");
 		issued.setDueDate(dueDate);
 		issued.setUsers(user);
-		
+
 		Mockito.when(issueRepo.save(issued)).thenReturn(issued);
 
 		BooksIssued booksIssued = issueService.addBook(issued);
@@ -70,15 +69,14 @@ class BooksIssuedMockitoTest {
 	@Test
 	void testFindById() {
 		BooksIssued issued = new BooksIssued();
-		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
 		Users user = new Users(40, dateOfBirth, subscriptionDate, subExpireDate, "Accepted");
-		
+
 		issued.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");
 		issued.setIssueDate(issueDate);
@@ -91,7 +89,7 @@ class BooksIssuedMockitoTest {
 		Mockito.when(issueRepo.findById(16)).thenReturn(Optional.of(issued));
 
 		BooksIssued issuedBook = issueService.findById(16);
-		
+
 		assertEquals(11, issuedBook.getQuantity());
 		assertEquals(issueDate, issuedBook.getIssueDate());
 		assertEquals(dueDate, issuedBook.getDueDate());
@@ -101,15 +99,14 @@ class BooksIssuedMockitoTest {
 	@Test
 	void testUpdateIssueBookDetails() {
 		BooksIssued issued = new BooksIssued();
-		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
 		Users user = new Users(40, dateOfBirth, subscriptionDate, subExpireDate, "Accepted");
-		
+
 		issued.setIssueId(25);
 		Date issueDate = Date.valueOf("2020-10-02");
 		issued.setIssueDate(issueDate);
@@ -118,10 +115,10 @@ class BooksIssuedMockitoTest {
 		issued.setDueDate(dueDate);
 		issued.setBooks(books);
 		issued.setUsers(user);
-		
+
 		Mockito.when(issueRepo.findById(25)).thenReturn(Optional.of(issued));
 		Mockito.when(issueRepo.save(issued)).thenReturn(issued);
-		
+
 		BooksIssued booksIssued = issueService.update(issued);
 
 		assertEquals(25, booksIssued.getQuantity());
@@ -131,15 +128,14 @@ class BooksIssuedMockitoTest {
 	void testViewBooksIssued() {
 		BooksIssued issued1 = new BooksIssued();
 		BooksIssued issued2 = new BooksIssued();
-		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7",
-				25, 170, "Shelf A");
+		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
 		Users user = new Users(40, dateOfBirth, subscriptionDate, subExpireDate, "Accepted");
-		
+
 		issued1.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");
 		issued1.setIssueDate(issueDate);
@@ -148,7 +144,7 @@ class BooksIssuedMockitoTest {
 		issued1.setDueDate(dueDate);
 		issued1.setUsers(user);
 		issued1.setBooks(books);
-		
+
 		issued2.setIssueId(17);
 		Date issueDate1 = Date.valueOf("2021-05-01");
 		issued1.setIssueDate(issueDate1);
@@ -157,7 +153,7 @@ class BooksIssuedMockitoTest {
 		issued1.setDueDate(dueDate1);
 		issued1.setUsers(user);
 		issued1.setBooks(books);
-		
+
 		List<BooksIssued> issuedList = new ArrayList<>();
 		issuedList.add(issued1);
 		issuedList.add(issued2);
@@ -168,5 +164,5 @@ class BooksIssuedMockitoTest {
 
 		assertEquals(2, issued.size());
 	}
-	
+
 }

@@ -38,7 +38,7 @@ public class UsersMockitoTest {
 	@Test
 	void testRegisterUser() {
 		Users user = new Users();
-		
+
 		user.setUserId(123);
 		Date dateOfBirth = Date.valueOf("1998-02-01");
 		user.setDateOfBirth(dateOfBirth);
@@ -62,7 +62,7 @@ public class UsersMockitoTest {
 	@Test
 	void testUpdateUserDetails() {
 		Users user = new Users();
-		
+
 		user.setUserId(40);
 		user.setSubscriptionStatus("Accepted");
 		Date dateOfBirth = Date.valueOf("1999-12-08");
@@ -76,14 +76,14 @@ public class UsersMockitoTest {
 
 		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
 		Mockito.when(userRepo.save(user)).thenReturn(user);
-		
+
 		assertEquals("Accepted", user.getSubscriptionStatus());
 	}
 
 	@Test
 	void deleteUser() {
 		Users user = new Users();
-		
+
 		user.setUserId(40);
 		user.setSubscriptionStatus("Accepted");
 		Date dateOfBirth = Date.valueOf("1999-12-08");
@@ -97,7 +97,7 @@ public class UsersMockitoTest {
 
 		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
 		Mockito.when(userRepo.save(user)).thenReturn(user);
-		
+
 		userRepo.deleteById(40);
 
 		assertEquals(40, user.getUserId());
@@ -107,7 +107,7 @@ public class UsersMockitoTest {
 	void viewAllUsers() {
 		Users user1 = new Users();
 		List<Users> userList = new ArrayList<>();
-		
+
 		user1.setUserId(40);
 		user1.setSubscriptionStatus("Accepted");
 		Date dateOfBirth = Date.valueOf("1999-12-08");

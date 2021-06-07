@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,18 @@ import com.cg.lms.entity.Users;
 @SpringBootTest
 class AddressServiceTest {
 
+	Logger logger = LogManager.getLogger(UsersServiceTest.class);
+
 	@Autowired
 	IAddressService addService;
 
+	// Testing whether address gets added into database or not
 	@Test
 	@Disabled
 	void testShouldAddAddress() {
 		Address userAdd = new Address();
 		Users user = new Users();
-		
+
 		user.setUserId(101);
 		Date dateOfBirth = Date.valueOf("1998-10-16");
 		user.setDateOfBirth(dateOfBirth);
@@ -41,8 +46,9 @@ class AddressServiceTest {
 		userAdd.setPincode(500001);
 		userAdd.setState("Telangana");
 		userAdd.setUsers(user);
-		
+
 		Address persistedUser = addService.addAddress(userAdd);
+		logger.info("Added Successfully");
 
 		assertAll(
 
@@ -53,46 +59,54 @@ class AddressServiceTest {
 				() -> assertEquals("Telangana", persistedUser.getState()));
 	}
 
+	// Testing whether address gets updated or not
 	@Test
-   
+	@Disabled
 	void testUpdateAddress() {
 		Address addr = new Address();
-		
+
 		addr.setAddressId(123);
 		addr.setAddress1("Nacharam");
 		addr.setAddress2("SecBad");
 		addr.setCity("Dilsuknagar");
 		addr.setState("Telangana");
 		addr.setPincode(500001);
-		
+
 		Address updateadd = addService.updateAddressDetails(addr);
+		logger.info("Updated Successfully");
 		assertEquals("Nacharam", addr.getAddress1());
 	}
 
+	// Testing whether address gets deleted from database or not
 	@Test
 	@Disabled
 	void testDeleteAddressById() {
-		Address p = addService.deleteAddressById(2);
-		System.out.println(p);
-		
-		assertEquals(2, p.getAddressId());
+		Address p = addService.deleteAddressById(159);
+		logger.info(p);
+		logger.info("Deleted successfully");
+
+		assertEquals("Hyderabad", p.getCity());
 	}
 
+	// Testing whether address is fetched by the given id
 	@Test
-	
+	@Disabled
 	void testShouldViewAddressByUserId() {
-		Address add = addService.viewAddressByUserId(40);
-		System.out.println(add);
-		
-		assertEquals(501510, add.getPincode());
+		Address add = addService.viewAddressByUserId(101);
+		logger.info(add);
+		logger.info("Fetched address successfully");
+
+		assertEquals(500001, add.getPincode());
 	}
 
+	// Testing whether address list is present in database or not
 	@Test
-    
+	@Disabled
 	void testShouldViewAddressList() {
 		List<Address> address = addService.viewAddressList();
-		System.out.println(address);
-		
-		assertEquals(3, address.size());
+		logger.info(address);
+		logger.info("Fetched address successfully");
+
+		assertEquals(4, address.size());
 	}
 }
