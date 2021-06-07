@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,16 @@ public class BooksReturnedController {
 		logger.info("Viewing ReturnedBooks list with delayed days greater than the parameter passed");
 		List<BooksReturned> returned = (List<BooksReturned>) brs.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return new ResponseEntity<>(returned, HttpStatus.OK);
+	}
+	
+	// DELETE
+	@DeleteMapping("/returned/{id}")
+	public ResponseEntity<BooksReturned> deleteReturnedBooks(@PathVariable("id") int id) {
+		logger.info("deleting Author details");
+		// Throw an exception if id is not present
+		if (brs.deleteReturnedBooks(id) == null) {
+			throw new BookNotFoundException(EXCEPTION + id);
+		}
+		return new ResponseEntity<>(brs.deleteReturnedBooks(id), HttpStatus.OK);
 	}
 }

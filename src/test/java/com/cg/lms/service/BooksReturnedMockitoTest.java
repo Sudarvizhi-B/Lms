@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -20,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.cg.lms.repository.IBooksReturnedRepository;
+import com.cg.lms.entity.Author;
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksReturned;
 import com.cg.lms.entity.Users;
@@ -44,6 +46,7 @@ class BooksReturnedMockitoTest {
 
 	// To Return Books
 	@Test
+	//@Disabled
 	void testReturnedBooks() {
 		BooksReturned booksReturned = new BooksReturned(10, localDate1, 22, 30.0, "Paid");
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
@@ -61,6 +64,7 @@ class BooksReturnedMockitoTest {
 
 	// To Update ReturnedBooks
 	@Test
+	//@Disabled
 	void testUpdateReturnedBooksDetails() {
 		BooksReturned booksReturned = new BooksReturned(11, localDate2, 12, 30.0, "Pending");
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
@@ -76,9 +80,21 @@ class BooksReturnedMockitoTest {
 		assertEquals("Pending", br2.getPenalty_Status());
 		assertEquals(11, br2.getId());
 	}
+	
+	// To Delete Author Details
+	@Test
+	//@Disabled
+	void testDeleteAuthorDetails() {
+		BooksReturned booksReturned4 = new BooksReturned(24, localDate3, 21, 15.0, "Paid");
+		Mockito.when(booksReturnedRepo.findById(24)).thenReturn(Optional.of(booksReturned4));
+		booksReturnedRepo.deleteById(24);
+		BooksReturned br4 = booksReturnedService.deleteReturnedBooks(24);
+		assertEquals(24, br4.getId());
+	}
 
 	// View ReturnedBooks List
 	@Test
+	//@Disabled
 	void testviewReturnedBooksList() {
 		BooksReturned booksReturned1 = new BooksReturned(11, localDate1, 12, 30.0, "Pending");
 		BooksReturned booksReturned2 = new BooksReturned(5, localDate2, 15, 33.0, "Paid");
@@ -98,6 +114,7 @@ class BooksReturnedMockitoTest {
 
 	// View Delayed BookList
 	@Test
+	//@Disabled
 	void testViewDelayedBookList() {
 
 		BooksReturned booksReturned1 = new BooksReturned(11, localDate1, 12, 30.0, "Pending");
