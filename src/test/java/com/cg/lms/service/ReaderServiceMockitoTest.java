@@ -1,5 +1,6 @@
 package com.cg.lms.service;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import com.cg.lms.entity.Reader;
 
 @ExtendWith(SpringExtension.class)
 public class ReaderServiceMockitoTest {
+	org.apache.logging.log4j.Logger logger= LogManager.getLogger(ReaderServiceMockitoTest.class);
 	
 	//Inject dependencies
 	@InjectMocks
@@ -42,7 +44,7 @@ public class ReaderServiceMockitoTest {
 		Mockito.when(readerRepo.save(reader)).thenReturn(reader);
 		
 		Reader registeredReader=readerService.register(reader);
-		System.out.println(registeredReader);
+		logger.info(registeredReader);
 		
 		assertEquals("Sandhyana", registeredReader.getFirstName());
 	}
@@ -56,7 +58,7 @@ public class ReaderServiceMockitoTest {
 		Mockito.when(readerRepo.save(reader)).thenReturn(reader);
 		
 		Reader updatedReader=readerService.updateReaderDetails(reader);
-		System.out.println(updatedReader);
+		logger.info(updatedReader);
 		
 		assertEquals("Sandhya", updatedReader.getFirstName());
 		assertEquals("N",updatedReader.getLastName());
@@ -72,7 +74,7 @@ public class ReaderServiceMockitoTest {
 		readerRepo.deleteById(101);
 		
 		Reader read=readerService.deleteReader(101);
-		
+		logger.info(read);
 		assertEquals("Sandhya", read.getFirstName());
 		assertEquals("N",read.getLastName());
 		assertEquals("9739450567", read.getMobileNo());
@@ -91,7 +93,7 @@ public class ReaderServiceMockitoTest {
 		Mockito.when(readerRepo.findAll()).thenReturn(readerList);
 		
 		List<Reader> reader= readerService.viewReadersList();
-		
+		logger.info(reader);
 		assertEquals(2,reader.size());
 	}
 	
@@ -103,7 +105,7 @@ public class ReaderServiceMockitoTest {
 		Mockito.when(readerRepo.findById(101)).thenReturn(Optional.of(reader));
 		
 		Reader readerById=readerService.viewReaderById(101);
-		System.out.println(readerById);
+		logger.info(readerById);
 		
 		assertEquals("Sandhya", readerById.getFirstName());
 	}

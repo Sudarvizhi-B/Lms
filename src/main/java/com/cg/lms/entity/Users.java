@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -17,7 +19,6 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 
 public class Users {
@@ -27,6 +28,8 @@ public class Users {
 	private Date dateOfBirth;
 	private Date subscriptionDate;
 	private Date subExpireDate;
+	@NotEmpty
+	@Size(min = 2, message = "subscriptionStatus should have atleast 2 char")
 	private String subscriptionStatus;
 
 	@OneToOne(mappedBy = "users")
@@ -54,4 +57,11 @@ public class Users {
 		this.subscriptionStatus = subscriptionStatus;
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", dateOfBirth=" + dateOfBirth + ", subscriptionDate=" + subscriptionDate
+				+ ", subExpireDate=" + subExpireDate + ", subscriptionStatus=" + subscriptionStatus + "]";
+	}
+	
 }

@@ -15,11 +15,13 @@ public class AddressServiceImpl implements IAddressService {
 	@Autowired
 	IAddressRepository addRepo;
 	
+	//Used to add the address
     @Override
 	public Address addAddress(Address address) {
 		return addRepo.save(address);
 	}
-
+    
+    //Used to update the address details
 	@Override
 	public Address updateAddressDetails(Address address) {
 		Optional<Address> addr = addRepo.findById(address.getAddressId());
@@ -35,12 +37,14 @@ public class AddressServiceImpl implements IAddressService {
 		addr.get().setPincode(address.getPincode());
 		return addRepo.save(addr.get());
 	}
-
+    
+	//Used to get all the address list from database
 	@Override
 	public List<Address> viewAddressList() {
 		return addRepo.findAll();
 	}
-
+    
+	//Used to delete the address based on id
 	@Override
 	public Address deleteAddressById(int userId) {
 		Optional<Address> address = addRepo.findById(userId);
@@ -50,7 +54,8 @@ public class AddressServiceImpl implements IAddressService {
 		addRepo.delete(address.get());
 		return address.get();
 	}
-
+    
+	//Used to view address by id
 	@Override
 	public Address viewAddressByUserId(int userId) {
 		Optional<Address> address = Optional.of(addRepo.findAddressByUserId(userId));

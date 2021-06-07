@@ -27,8 +27,8 @@ public class AddressMockitoTest {
 
 	@MockBean
 	IAddressRepository addRepo;
-	
-    @BeforeEach()
+
+	@BeforeEach()
 	void init() {
 		MockitoAnnotations.openMocks(this);
 	}

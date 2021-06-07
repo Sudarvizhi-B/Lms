@@ -1,6 +1,5 @@
 package com.cg.lms.service;
 
-//import java.sql.Date;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,7 +17,8 @@ public class UsersServiceImpl implements IUsersService {
 
 	@Autowired
 	IUsersRepository userRepo;
-
+    
+	//Used to delete the user
 	@Override
 	public Users deleteUser(int id) {
 		Optional<Users> user = userRepo.findById(id);
@@ -29,7 +29,7 @@ public class UsersServiceImpl implements IUsersService {
 		userRepo.deleteById(id);
 		return user.get();
 	}
-
+    //Used to update the user
 	@Override
 	public Users updateUserDetails(Users user) {
 		Optional<Users> user1 = userRepo.findById(user.getUserId());
@@ -45,17 +45,20 @@ public class UsersServiceImpl implements IUsersService {
 
 		return userRepo.save(users);
 	}
-
+    
+	//Used to store the users 
 	@Override
 	public Users register(Users user) {
 		return userRepo.save(user);
 	}
-
+    
+	//Used to view all the users in the database
 	@Override
 	public List<Users> viewAllUsers() {
 		return userRepo.findAll();
 	}
-
+    
+	//Get a specific user by id
 	@Override
 	public Users findById(int userId) {
 		Optional<Users> user = userRepo.findById(userId);
@@ -65,7 +68,8 @@ public class UsersServiceImpl implements IUsersService {
 
 		return user.get();
 	}
-
+    
+	//Used to update the status
 	@Override
 	public void cancelSubscriptionById(int userId) {
 		userRepo.setSubscriptionStatus(userId);

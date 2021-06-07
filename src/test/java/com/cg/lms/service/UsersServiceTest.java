@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,14 @@ import com.cg.lms.exception.UserNotFoundException;
 @SpringBootTest
 class UsersServiceTest {
 
+	Logger logger = LogManager.getLogger(UsersServiceTest.class);
+
 	@Autowired
 	IUsersService userService;
 
+	// Testing whether the User gets added to the database
 	@Test
-	@Disabled
+
 	void testRegisterUsers() {
 		Users u = new Users();
 
@@ -34,8 +39,9 @@ class UsersServiceTest {
 		u.setSubscriptionStatus("Subscribed");
 
 		Users persistedUser = userService.register(u);
-		System.out.println(u);
-		
+		logger.info(u);
+		logger.info("Added Details Successfully");
+
 		assertAll(
 
 				() -> assertEquals(102, persistedUser.getUserId()),
@@ -45,11 +51,12 @@ class UsersServiceTest {
 				() -> assertEquals("Subscribed", persistedUser.getSubscriptionStatus()));
 	}
 
+	// Testing whether the user gets Updated or not in database
 	@Test
-    
+
 	void testUpdateUserDetails() {
 		Users user = new Users();
-		
+
 		user.setUserId(101);
 		user.setSubscriptionStatus("Unsubscribed");
 		Date dateOfBirth = Date.valueOf("1998-10-16");
@@ -58,68 +65,80 @@ class UsersServiceTest {
 		user.setSubExpireDate(subExpireDate);
 		Date subscriptionDate = Date.valueOf("2021-10-09");
 		user.setSubscriptionDate(subscriptionDate);
-		
+
 		Users user1 = userService.updateUserDetails(user);
-		System.out.println(user1);
-		
+
+		logger.info(user1);
+		logger.info("Updated details successfully:");
+
 		assertEquals("Unsubscribed", user.getSubscriptionStatus());
 	}
 
+	// Testing whether User database has Users or null
 	@Test
-    @Disabled
-	void deleteUser() throws UserNotFoundException{
-		Users user = userService.deleteUser(60);
-		
-		if(user==null) {
+
+	void deleteUser() throws UserNotFoundException {
+		Users user = userService.deleteUser(102);
+
+		if (user == null) {
 			throw new UserNotFoundException("User not found found with given user Id");
 		}
 		System.out.println(user);
-		
-		assertEquals(60, user.getUserId());
+
+		logger.info(user);
+		logger.info("Deleted user successfully:");
+
+		assertEquals(102, user.getUserId());
 	}
 
+	// Testing whether the given id fetches the user or not
 	@Test
-	
+
 	void viewAllUsers() {
 		List<Users> users = userService.viewAllUsers();
-		System.out.println(users);
-		
-		assertEquals(7, users.size());
+		logger.info(users);
+		logger.info("Fetched Details:");
+
+		assertEquals(3, users.size());
 	}
-	
+
+	// Testing whether the particular user removed from the database or not.
 	@Test
-	
+
 	public void viewUserById() {
-		Users user = userService.findById(102);
-		System.out.println(user);
-		
-		if(user==null) {
+		Users user = userService.findById(10);
+		logger.info(user);
+		logger.info("Fetched Details by id:");
+
+		if (user == null) {
 			throw new UserNotFoundException("User not found found with given user Id");
 		}
-		
-		assertEquals("Subscribed", user.getSubscriptionStatus());
+
+		assertEquals("Unsubscribed", user.getSubscriptionStatus());
 	}
-	
+
+	// Testing whether the status is Updated or not
 	@Test
+
 	public void cancelSubscription() {
 		Users user = userService.findById(60);
 		userService.cancelSubscriptionById(60);
-		
-		if(user==null) {
+
+		if (user == null) {
 			throw new UserNotFoundException("User not found found with given user Id");
 		}
-		
-		assertEquals("Cancelled",user.getSubscriptionStatus());
+		logger.info("Updated user:");
+		assertEquals("Cancelled", user.getSubscriptionStatus());
 	}
-	
+
 	@Test
 	public void payThePenalty() {
 		Users user = userService.findById(40);
-		
+
 		double penalty = userService.payThePenalty(user.getUserId(), 25);
-		System.out.println(user);
-		
-		assertEquals(400, penalty);
+		logger.info(user);
+
+		assertEquals(100.0, penalty);
 	}
 
 }

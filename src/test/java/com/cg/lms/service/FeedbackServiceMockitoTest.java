@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 public class FeedbackServiceMockitoTest {
+	org.apache.logging.log4j.Logger logger= LogManager.getLogger(FeedbackServiceMockitoTest.class);
 	
 	@InjectMocks
 	FeedbackServiceImpl feedbackService;
@@ -53,7 +55,7 @@ public class FeedbackServiceMockitoTest {
 		Mockito.when(feedbackRepo.save(feedback)).thenReturn(feedback);
 		
 		Feedback writtenFeedback=feedbackService.writeFeedback(101, feedback);
-		System.out.println(writtenFeedback);
+		logger.info(writtenFeedback);
 		
 		assertEquals("9",writtenFeedback.getRating());
 		assertEquals("good",writtenFeedback.getComments());
@@ -69,7 +71,7 @@ public class FeedbackServiceMockitoTest {
 		Mockito.when(feedbackRepo.save(feedback)).thenReturn(feedback);
 		
 		Feedback updatedFeedback=feedbackService.updateFeedback(feedback);
-		System.out.println(updatedFeedback);
+		logger.info(updatedFeedback);
 		
 		assertEquals("Interesting",updatedFeedback.getComments());
 	}
@@ -82,7 +84,7 @@ public class FeedbackServiceMockitoTest {
 		Mockito.when(feedbackRepo.findById(101)).thenReturn(Optional.of(feedback));
 		
 		Feedback feedbackById=feedbackService.viewFeedbackById(101);
-		System.out.println(feedbackById);
+		logger.info(feedbackById);
 		
 		assertEquals("10", feedbackById.getRating());
 	}
@@ -101,7 +103,7 @@ public class FeedbackServiceMockitoTest {
 		Mockito.when(feedbackRepo.findAll()).thenReturn(feedbackList);
 		
 		List<Feedback> feedback=feedbackService.viewFeedbackList();
-		
+		logger.info(feedback);
 		assertEquals(2,feedback.size());
 	}
 	
@@ -118,7 +120,7 @@ public class FeedbackServiceMockitoTest {
 		Mockito.when(feedbackRepo.viewFeedBackByUser(100)).thenReturn(feedback);
 		
 		Feedback feedbackByUser=feedbackService.viewFeedBackByUser(100);
-		
+		logger.info(feedbackByUser);
 		assertEquals("10",feedbackByUser.getRating());
 	}
 	

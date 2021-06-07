@@ -5,12 +5,23 @@ import java.util.List;
 import com.cg.lms.entity.BooksIssued;
 
 public interface IBooksIssuedService {
-
-	BooksIssued findById(int id);
-	List<BooksIssued>findAll();
-	BooksIssued deleteById(int id);
-	BooksIssued update(BooksIssued issued);
-	BooksIssued save(BooksIssued issued);
-	BooksIssued addBook(BooksIssued issued);
+    
+	//Method to be override by the implementing class
+    BooksIssued findById(int id);
+    
+	//Method to be override by the implementing class
+    List<BooksIssued>findAll();
+    
+	//Method to be override by the implementing class
+    BooksIssued deleteById(int id);
+    
+	//Method to be override by the implementing class
+    BooksIssued update(BooksIssued issued);
+    
+	//Method to be override by the implementing class
+    BooksIssued save(BooksIssued issued);
+    
+	//Method to be override by the implementing class
+    BooksIssued addBook(BooksIssued issued);
 	
 }
