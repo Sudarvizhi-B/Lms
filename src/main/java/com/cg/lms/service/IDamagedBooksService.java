@@ -10,5 +10,6 @@ public interface IDamagedBooksService {
 	public DamagedBooks updateDamagedBookDetails(DamagedBooks damagedbooks);
 	public List<DamagedBooks> viewDamagedBooksList();
 	public DamagedBooks viewDamagedBookById(int id);
+	public DamagedBooks deleteDamagedBook(int id);
 
 }
