@@ -61,4 +61,18 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 				.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return returned;
 	}
-}
+
+	@Override
+	public BooksReturned deleteReturnedBooks(int id) {
+			//method to delete ReturnedBook details
+			Optional<BooksReturned> b2 = booksReturnedRepo.findById(id);
+			if (!b2.isPresent()) {
+				return null;
+			}
+			booksReturnedRepo.deleteById(id);
+			//logger information to be displayed in console
+			logger.info(b2);
+			return b2.get();
+		}
+	}
+

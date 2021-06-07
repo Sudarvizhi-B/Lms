@@ -9,5 +9,6 @@ public interface IBooksReturnedService {
 	public BooksReturned updateReturnedBookDetails(BooksReturned booksReturned);
 	public List<BooksReturned> viewReturnedBooksList();
 	public List<BooksReturned> findByDelayedDaysGreaterThanEqual(int delayedDays);
+	public BooksReturned deleteReturnedBooks(int id);
 	
 }
