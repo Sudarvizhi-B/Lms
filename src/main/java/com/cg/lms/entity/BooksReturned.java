@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,12 +26,18 @@ import lombok.ToString;
 public class BooksReturned {
 
 	@Id
+	@NotEmpty
 	private int id;
 	@NonNull
+	@NotEmpty(message = "should be format yyyy-mm-dd")
 	private LocalDate returnedDate;
+	@NotEmpty(message = "Delayed days should not be empty")
 	private int delayedDays;
+	@NotEmpty
 	private double penalty;
 	@NonNull
+	@NotEmpty
+	@Size(min=3, max=15)
 	private String penalty_Status;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

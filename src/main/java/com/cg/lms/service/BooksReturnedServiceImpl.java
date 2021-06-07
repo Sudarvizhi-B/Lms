@@ -2,6 +2,8 @@ package com.cg.lms.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +15,14 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 
 	@Autowired
 	IBooksReturnedRepository booksReturnedRepo;
+	
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(BooksReturnedServiceImpl.class);
 
 	// Add Returned Books
 	@Override
 	public BooksReturned returnBooks(BooksReturned returned) {
+		//logger information to be displayed in console
+		logger.info(returned);
 		return booksReturnedRepo.save(returned);
 	}
 
@@ -32,6 +38,8 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 		b1.get().setDelayedDays(booksReturned.getDelayedDays());
 		b1.get().setPenalty(booksReturned.getPenalty());
 		b1.get().setPenalty_Status(booksReturned.getPenalty_Status());
+		//logger information to be displayed in console
+		logger.info(b1);
 
 		return booksReturnedRepo.save(b1.get());
 	}
@@ -39,13 +47,16 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 	// View ReturnedBooks List
 	@Override
 	public List<BooksReturned> viewReturnedBooksList() {
-
+		//logger information to be displayed in console
+		logger.info("viewing ReturnedBooks list");
 		return booksReturnedRepo.findAll();
 	}
 
 	// Find by Delayed Days
 	@Transactional
 	public List<BooksReturned> findByDelayedDaysGreaterThanEqual(int delayedDays) {
+		//logger information to be displayed in console
+		logger.info("viewing ReturnedBooks list with delayed days greater than or equal to the parameter passed");
 		List<BooksReturned> returned = (List<BooksReturned>) booksReturnedRepo
 				.findByDelayedDaysGreaterThanEqual(delayedDays);
 		return returned;
