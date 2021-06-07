@@ -14,18 +14,21 @@ public class BooksIssuedServiceImpl implements IBooksIssuedService {
 
 	@Autowired
 	IBooksIssuedRepository issuedRepo;
-
+   
+	//Used to find booksIsuued bu id
 	@Override
 	public BooksIssued findById(int id) {
 		BooksIssued issued = issuedRepo.findById(id).get();
 		return issued;
 	}
-
+    
+	//used to get all the list from the database
 	@Override
 	public List<BooksIssued> findAll() {
 		return issuedRepo.findAll();
 	}
-
+    
+	//Used to delete booksIssuued by id
 	@Override
 	public BooksIssued deleteById(int id) {
 		BooksIssued issued = issuedRepo.findById(id).get();
@@ -33,7 +36,8 @@ public class BooksIssuedServiceImpl implements IBooksIssuedService {
 		issuedRepo.deleteById(id);
 		return issued;
 	}
-
+    
+	//Used to update the booksIssued
 	@Override
 	public BooksIssued update(BooksIssued issued) {
 		BooksIssued issued1 = issuedRepo.findById(issued.getIssueId()).get();
@@ -44,12 +48,14 @@ public class BooksIssuedServiceImpl implements IBooksIssuedService {
 		issuedRepo.save(issued1);
 		return issued1;
 	}
-
+    
+	//Used to add booksIssued into database
 	@Override
 	public BooksIssued addBook(BooksIssued issued) {
 		return issuedRepo.save(issued);
 	}
-
+    
+	//Used to add 
 	@Override
 	public BooksIssued save(BooksIssued issued) {
 		return issuedRepo.save(issued);
