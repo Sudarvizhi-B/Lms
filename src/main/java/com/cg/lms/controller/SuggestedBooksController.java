@@ -30,6 +30,7 @@ public class SuggestedBooksController {
 	@GetMapping("/viewbook/id/{id}")
 	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id) {
 		logger.info("View Suggested Books By Id");
+		// Throw an exception if Book id is not present
 		if (sbService.viewSuggestedBookDetails(id) == null) {
 			throw new BookNotFoundException(EXCEPTION + id);
 		}
@@ -60,6 +61,7 @@ public class SuggestedBooksController {
 	@DeleteMapping("/deletebook/{id}")
 	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id) {
 		logger.info("Deleting Suggested Books By Id");
+		// Throw an exception if Book id is not present
 		if (sbService.deleteSuggestedBooks(id) == null) {
 			throw new BookNotFoundException(EXCEPTION + id);
 		}
