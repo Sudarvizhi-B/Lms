@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,18 +29,26 @@ public class SuggestedBooks {
 	@Id
 	private int id;
 	@NonNull
+	@NotEmpty(message="Title Should not be empty")
 	private String title;
 	@NonNull
+	@NotEmpty
 	private String subject;
 	@NonNull
+	@NotEmpty
 	private String author;
 	@NonNull
+	@NotEmpty
 	private String publications;
 	@NonNull
+	@NotEmpty
 	private String description;
 	@NonNull
+	@NotEmpty
 	private LocalDate suggested_date;
 	@NonNull
+	@NotEmpty
+	@Size(min = 10, max = 20)
 	private String status;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
