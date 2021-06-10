@@ -34,33 +34,33 @@ class BooksIssuedServiceTest {
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 
-		issuedBook.setIssueId(25);
-		Date issueDate = Date.valueOf("2020-11-01");
+		issuedBook.setIssueId(20);
+		Date issueDate = Date.valueOf("2020-10-01");
 		issuedBook.setIssueDate(issueDate);
-		issuedBook.setQuantity(25);
+		issuedBook.setQuantity(20);
 		Date dueDate = Date.valueOf("2020-12-01");
 		issuedBook.setDueDate(dueDate);
 		issuedBook.setBooks(books);
+        
+		Date dateOfBirth = Date.valueOf("1998-08-15");
+		Date subscriptionDate = Date.valueOf("2021-06-09");
+		Date subExpireDate = Date.valueOf("2021-05-09");
 
-		Date dateOfBirth = Date.valueOf("1998-03-02");
-		Date subscriptionDate = Date.valueOf("2021-09-09");
-		Date subExpireDate = Date.valueOf("2021-02-01");
-
-		Users user = new Users(40, dateOfBirth, subscriptionDate, subExpireDate, "Accepted");
+		Users user = new Users(102,"abcdefgh1","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
 		issuedBook.setUsers(user);
 		BooksIssued booksIssued = issueService.addBook(issuedBook);
 
 		logger.info("Added Books Successfully");
 
-		assertAll(() -> assertEquals(25, booksIssued.getIssueId()),
+		assertAll(() -> assertEquals(20, booksIssued.getIssueId()),
 				() -> assertEquals(issueDate, booksIssued.getIssueDate()),
-				() -> assertEquals(25, booksIssued.getQuantity()),
+				() -> assertEquals(20, booksIssued.getQuantity()),
 				() -> assertEquals(dueDate, booksIssued.getDueDate()));
 	}
 
 	// Testing whether issuedBooks Updated
 	@Test
-	@Disabled
+	
 	void testUpdateIssueBookDetails() {
 		BooksIssued issued = new BooksIssued();
 		Books book = new Books(101, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
@@ -79,19 +79,19 @@ class BooksIssuedServiceTest {
 
 	// Testing whether issuedBook is removed from database
 	@Test
-	@Disabled
+	
 	void testDeleteIssuedBookDetails() {
-		BooksIssued deleteBook = issueService.deleteById(25);
+		BooksIssued deleteBook = issueService.deleteById(30);
 		System.out.println(deleteBook);
 		logger.info(deleteBook);
 		logger.info("Deleted issuedBooks Successfully");
 
-		assertEquals(25, deleteBook.getQuantity());
+		assertEquals(20, deleteBook.getQuantity());
 	}
 
 	// Testing whether issuedBook database has issuedBooks or not
 	@Test
-
+    
 	void testViewAllBooksIssued() {
 		List<BooksIssued> issuedList = issueService.findAll();
 		System.out.println(issuedList);
@@ -102,7 +102,7 @@ class BooksIssuedServiceTest {
 
 	// Testing whether the issuedBook is fetched by given id or not
 	@Test
-	@Disabled
+	
 	void testFindById() {
 		BooksIssued issued = new BooksIssued();
 

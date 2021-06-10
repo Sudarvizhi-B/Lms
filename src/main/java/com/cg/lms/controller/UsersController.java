@@ -7,11 +7,12 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,97 +26,100 @@ import com.cg.lms.service.IUsersService;
 
 @CrossOrigin
 @RestController
-@RequestMapping()
+@RequestMapping("/api")
 public class UsersController {
-
+	/**
+	 * Logger
+	 */
 	Logger logger = LogManager.getLogger(UsersController.class);
 
-	// @Autowired can be used to bean on the setter method
-	@Autowired
-	IUsersService userService;
-
-	private static final String EXCEPTION = "User not found with given id:";
-
-	/*
-	 * This below function is used to get the user using userId and redirects to
-	 * usersService
+	/**
+	 * AutoWiring the service class to call down the service
 	 */
 
-	@GetMapping("/user/{id}")
-	public ResponseEntity<Users> findUserById(@PathVariable("id") int userId) {
-		Users user = (userService.findById(userId));
-		if (user == null) {
-			throw new UserNotFoundException(EXCEPTION + userId);
+	@Autowired
+	IUsersService regservice;
+
+	/**
+	 * This below function is used to get a specific user using userid and redirects
+	 * to the user service
+	 */
+
+	@GetMapping("/users/{userid}")
+	public Users findUserByUserId(@PathVariable int userid) {
+		if (regservice.findUserByUserId(userid) == null) {
+			throw new UserNotFoundException("User not found with this userid ");
 		}
-		logger.info("Getting user by id:");
-		return new ResponseEntity<Users>(user, HttpStatus.OK);
+		logger.info("Getting User by UserId:" + userid);
+		return regservice.findUserByUserId(userid);
+
 	}
 
-	/*
-	 * This below function is used to get all the users using and redirects to
-	 * usersService
+	/**
+	 * This below function is used to get all the user and redirects to the user
+	 * service
 	 */
-	@GetMapping("/user")
-	public ResponseEntity<List<Users>> viewAllUsers() {
-		List<Users> userList = userService.viewAllUsers();
-		logger.info("Getting all users:");
-		return new ResponseEntity<>(userList, HttpStatus.OK);
+
+	@GetMapping("/users")
+	public List<Users> findAllusers() {
+		logger.info("Printing all the Users");
+		return regservice.getAllUsers();
+
+	}
+
+	/**
+	 * This below function is used to create a new user and redirects to the user
+	 * service
+	 */
+	@PostMapping("/users/add")
+	public Users save(@Valid @RequestBody Users user) {
+		logger.info("Creating a User");
+		return regservice.createUser(user);
+	}
+
+	/**
+	 * This below function is used to update a specific user based on the give
+	 * userid and redirects to the user service
+	 */
+
+	@PutMapping("/users/update/{userid}")
+	public Users updateUser(@PathVariable int userid, @Valid @RequestBody Users user) {
+		if (regservice.findUserByUserId(userid) == null) {
+			throw new UserNotFoundException("User not found with this Userid");
+		}
+		logger.info("Updating the User" + userid);
+		return regservice.updateUser(user);
+
+	}
+
+	/**
+	 * This below function is used to delete a specific user based on the give
+	 * userid and redirects to the user service
+	 */
+
+	@DeleteMapping("/users/{userid}")
+	public Users deleteUserByUserId(@PathVariable int userid) {
+		if (regservice.findUserByUserId(userid) == null) {
+			throw new UserNotFoundException("User not found with Userid");
+		}
+		logger.info("Deleting the User by Userid" + userid);
+		return regservice.deleteUserByUserId(userid);
 	}
 
 	@GetMapping("/users/penalty/{id}")
 	public double payThePenalty(@PathVariable("id") int userId) {
-		if (userService.findById(userId) == null) {
-			throw new UserNotFoundException(EXCEPTION + userId);
+		if (regservice.findUserByUserId(userId) == null) {
+			throw new UserNotFoundException("User not found with UserId" + userId);
 		}
 		double amount = 25.0;
 		logger.info("Paying penalty by id:");
-		return userService.payThePenalty(userId, amount);
+		return regservice.payThePenalty(userId, amount);
 	}
 
-	/*
-	 * This below function is used to create a new user and redirects to the
-	 * UsersService
-	 */
-	@PostMapping("/user")
-	public ResponseEntity<Users> addUsers(@Valid @RequestBody Users user) {
-		Users user1 = userService.register(user);
-		logger.info(" Adding users:");
-		return new ResponseEntity<>(user1, HttpStatus.OK);
-	}
-
-	/*
-	 * This below function is used to update the user using userId and redirects to
-	 * usersService
-	 */
-	@PutMapping("/user/{id}")
-	public ResponseEntity<Users> updateUser(@PathVariable("id") int userId, @RequestBody Users user) {
-		Users users = userService.updateUserDetails(user);
-		logger.info("Updating user by id:");
-		return new ResponseEntity<>(users, HttpStatus.OK);
-	}
-
-	/*
-	 * This below function is used to update the user and redirects to usersService
-	 */
-	@PutMapping("/user/{userId}")
+	@PatchMapping("/users/{userId}")
 	public void cancelSubscription(@PathVariable("userId") int userId) {
-		userService.cancelSubscriptionById(userId);
+		regservice.cancelSubscriptionById(userId);
 		logger.info("updating subscriptionStatus:");
 
 	}
-
-	/*
-	 * This below function is used to delete the user using userId and redirects to
-	 * usersService
-	 */
-	@DeleteMapping("/user/{id}")
-	public ResponseEntity<Users> deleteUserById(@PathVariable("id") int userId) {
-		if (userService.findById(userId) == null) {
-			throw new UserNotFoundException(EXCEPTION + userId);
-		}
-		Users delete = userService.deleteUser(userId);
-		logger.info("Deleting user by id:");
-		return new ResponseEntity<>(delete, HttpStatus.OK);
-	}
-
 }

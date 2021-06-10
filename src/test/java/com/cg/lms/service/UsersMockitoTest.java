@@ -50,7 +50,7 @@ public class UsersMockitoTest {
 
 		Mockito.when(userRepo.save(user)).thenReturn(user);
 
-		Users persistedUser = userService.register(user);
+		Users persistedUser = userService.createUser(user);
 
 		assertEquals(123, persistedUser.getUserId());
 		assertEquals(dateOfBirth, persistedUser.getDateOfBirth());
@@ -72,7 +72,7 @@ public class UsersMockitoTest {
 		Date subscriptionDate = Date.valueOf("2019-08-01");
 		user.setSubscriptionDate(subscriptionDate);
 
-		Users user1 = userService.updateUserDetails(user);
+		Users user1 = userService.updateUser(user);
 
 		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
 		Mockito.when(userRepo.save(user)).thenReturn(user);
@@ -93,7 +93,7 @@ public class UsersMockitoTest {
 		Date subscriptionDate = Date.valueOf("2019-08-01");
 		user.setSubscriptionDate(subscriptionDate);
 
-		Users persistedUser = userService.deleteUser(40);
+		Users persistedUser = userService.deleteUserByUserId(40);
 
 		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
 		Mockito.when(userRepo.save(user)).thenReturn(user);
@@ -132,7 +132,7 @@ public class UsersMockitoTest {
 
 		Mockito.when(userRepo.findAll()).thenReturn(userList);
 
-		List<Users> users = userService.viewAllUsers();
+		List<Users> users = userService.getAllUsers();
 		assertEquals(2, users.size());
 	}
 

@@ -28,24 +28,29 @@ class AddressServiceTest {
 	@Disabled
 	void testShouldAddAddress() {
 		Address userAdd = new Address();
-		Users user = new Users();
+		Users u = new Users();
 
-		user.setUserId(101);
-		Date dateOfBirth = Date.valueOf("1998-10-16");
-		user.setDateOfBirth(dateOfBirth);
-		Date subscriptionDate = Date.valueOf("2021-09-09");
-		user.setSubscriptionDate(subscriptionDate);
-		Date subExpireDate = Date.valueOf("2021-10-09");
-		user.setSubExpireDate(subExpireDate);
-		user.setSubscriptionStatus("Subscribed");
-
+		u.setUserId(102);
+		u.setPassword("abcdefgh1");
+		u.setFirstname("Noel");
+		u.setLastname("Sigh");
+		u.setMobileNumber("9876543210");
+		u.setEmail("abc@gmail.com");
+		Date dateOfBirth = Date.valueOf("1999-08-15");
+		u.setDateOfBirth(dateOfBirth);
+		Date subscriptionDate = Date.valueOf("2021-06-09");
+		u.setSubscriptionDate(subscriptionDate);
+		Date subExpireDate = Date.valueOf("2021-05-09");
+		u.setSubExpireDate(subExpireDate);
+		u.setSubscriptionStatus("Subscribed");
+		
 		userAdd.setAddressId(2);
 		userAdd.setAddress1("Nacharam");
 		userAdd.setAddress2("SecBad");
 		userAdd.setCity("Dilsuknagar");
 		userAdd.setPincode(500001);
 		userAdd.setState("Telangana");
-		userAdd.setUsers(user);
+		userAdd.setUsers(u);
 
 		Address persistedUser = addService.addAddress(userAdd);
 		logger.info("Added Successfully");
@@ -79,20 +84,20 @@ class AddressServiceTest {
 
 	// Testing whether address gets deleted from database or not
 	@Test
-	@Disabled
+	
 	void testDeleteAddressById() {
-		Address p = addService.deleteAddressById(159);
+		Address p = addService.deleteAddressById(2);
 		logger.info(p);
 		logger.info("Deleted successfully");
 
-		assertEquals("Hyderabad", p.getCity());
+		assertEquals("Dilsukhnagar", p.getCity());
 	}
 
 	// Testing whether address is fetched by the given id
 	@Test
 	@Disabled
 	void testShouldViewAddressByUserId() {
-		Address add = addService.viewAddressByUserId(101);
+		Address add = addService.viewAddressByUserId(102);
 		logger.info(add);
 		logger.info("Fetched address successfully");
 

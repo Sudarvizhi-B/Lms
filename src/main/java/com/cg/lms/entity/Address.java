@@ -1,6 +1,5 @@
 package com.cg.lms.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter
@@ -32,7 +30,7 @@ public class Address {
 	private int pincode;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "userId")
 	private Users users;
 
@@ -44,6 +42,7 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.pincode = pincode;
+		
 	}
 
 	@Override
