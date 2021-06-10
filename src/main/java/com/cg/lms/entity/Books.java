@@ -20,28 +20,19 @@ import lombok.ToString;
 public class Books {
 	
 	@Id
-	@NotBlank
 	private int bookId;
 	@NonNull
-	@NotBlank
 	private String title;
 	@NonNull
-	@NotBlank
 	private String subject;
 	@NonNull
-	@NotBlank
 	private String author;
-	@NotBlank
 	private int publishedYear;
 	@NonNull
-	@NotBlank
 	private String isbnCode;
-	@NotBlank
 	private int quantity;
-	@NotBlank
 	private double bookCost;
 	@NonNull
-	@NotBlank
 	private String shelfDetails;
 	
 }

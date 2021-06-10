@@ -94,26 +94,26 @@ public class BooksServiceImpl implements IBooksService {
 	@Override
 	public List<Books> findAllByTitle(String title) {
 		//Getting list of books from the table by title
-		List<Books> books = booksDao.findAllByTitle(title);
+		List<Books> books = booksDao.findAllByTitleContainingIgnoreCase(title);
 		if(books.isEmpty()) {
 			return null;
 		}
 		
 		logger.info(books);
-		return booksDao.findAllByTitle(title);
+		return booksDao.findAllByTitleContainingIgnoreCase(title);
 	}
 
 	//Method to get books by subject
 	@Override
 	public List<Books> findAllBySubject(String subject) {
 		//getting list of books from the table by subject
-		List<Books> books = booksDao.findAllBySubject(subject);
+		List<Books> books = booksDao.findAllBySubjectContainingIgnoreCase(subject);
 		if(books.isEmpty()) {
 			return null;
 		}
 		
 		logger.info(books);
-		return booksDao.findAllBySubject(subject);
+		return booksDao.findAllBySubjectContainingIgnoreCase(subject);
 	}
 
 }

@@ -124,7 +124,7 @@ class BooksServiceMockitoTest {
 		books.add(book1);
 		books.add(book2);
 		
-		Mockito.when(booksDao.findAllByTitle("Harry Potter")).thenReturn(books);
+		Mockito.when(booksDao.findAllByTitleContainingIgnoreCase("Harry Potter")).thenReturn(books);
 		
 		List<Books> booksListByTitle = booksService.findAllByTitle("Harry Potter");
 		
@@ -142,7 +142,7 @@ class BooksServiceMockitoTest {
 		books.add(book1);
 		books.add(book2);
 		
-		Mockito.when(booksDao.findAllBySubject("Novel")).thenReturn(books);
+		Mockito.when(booksDao.findAllBySubjectContainingIgnoreCase("Novel")).thenReturn(books);
 		
 		List<Books> booksListBySubject = booksService.findAllBySubject("Novel");
 		
