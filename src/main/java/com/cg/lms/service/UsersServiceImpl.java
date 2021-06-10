@@ -1,6 +1,5 @@
 package com.cg.lms.service;
 
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -12,72 +11,96 @@ import org.springframework.stereotype.Service;
 import com.cg.lms.entity.Users;
 import com.cg.lms.repository.IUsersRepository;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 @Service
 public class UsersServiceImpl implements IUsersService {
 
 	@Autowired
-	IUsersRepository userRepo;
-    
-	//Used to delete the user
+	IUsersRepository regRepo;
+
+	/**
+	 * creating a user in database
+	 * 
+	 */
 	@Override
-	public Users deleteUser(int id) {
-		Optional<Users> user = userRepo.findById(id);
-		if (!user.isPresent()) {
+	public Users createUser(Users user) {
+		return regRepo.save(user);
+
+	}
+
+	@Override
+	public Users findUserByUserId(int userId) {
+		Optional<Users> optional = regRepo.findById(userId);
+		if (!optional.isPresent()) {
 			return null;
 		}
 
-		userRepo.deleteById(id);
-		return user.get();
+		return optional.get();
 	}
-    //Used to update the user
+
 	@Override
-	public Users updateUserDetails(Users user) {
-		Optional<Users> user1 = userRepo.findById(user.getUserId());
-		if (!user1.isPresent()) {
+	public List<Users> getAllUsers() {
+		return regRepo.findAll();
+	}
+
+	@Override
+	public Users updateUser(Users user) {
+		Users dbUser = getUser(user);
+		if (isNullOrEmpty(dbUser.getFirstname())) {
+			dbUser.setFirstname(user.getFirstname());
+		}
+		if (isNullOrEmpty(dbUser.getLastname())) {
+			dbUser.setLastname(user.getLastname());
+		}
+		if (isNullOrEmpty(dbUser.getEmail())) {
+			dbUser.setEmail(user.getEmail());
+		}
+		if (isNullOrEmpty(dbUser.getPassword())) {
+			dbUser.setPassword(user.getPassword());
+		}
+		if (isNullOrEmpty(dbUser.getMobileNumber())) {
+			dbUser.setMobileNumber(user.getMobileNumber());
+		}
+		return regRepo.save(dbUser);
+	}
+
+	private boolean isNullOrEmpty(String value) {
+		return value != null && !value.equals("");
+	}
+
+	private Users getUser(Users user) {
+		Optional<Users> userfield = regRepo.findById(user.getUserId());
+		Users dbUser = null;
+		if (userfield.isPresent()) {
+			dbUser = userfield.get();
+		}
+		return dbUser;
+	}
+
+	@Override
+	public Users deleteUserByUserId(int userId) {
+		Optional<Users> optional = regRepo.findById(userId);
+		if (!optional.isPresent()) {
 			return null;
 		}
+		regRepo.deleteById(userId);
+		return optional.get();
+	}
 
-		Users users = user1.get();
-		users.setSubscriptionDate(user.getSubscriptionDate());
-		users.setSubscriptionStatus(user.getSubscriptionStatus());
-		users.setDateOfBirth(user.getDateOfBirth());
-		users.setSubExpireDate(user.getSubExpireDate());
-
-		return userRepo.save(users);
-	}
-    
-	//Used to store the users 
-	@Override
-	public Users register(Users user) {
-		return userRepo.save(user);
-	}
-    
-	//Used to view all the users in the database
-	@Override
-	public List<Users> viewAllUsers() {
-		return userRepo.findAll();
-	}
-    
-	//Get a specific user by id
-	@Override
-	public Users findById(int userId) {
-		Optional<Users> user = userRepo.findById(userId);
-		if (!user.isPresent()) {
-			return null;
-		}
-
-		return user.get();
-	}
-    
-	//Used to update the status
+	// Used to update the status
 	@Override
 	public void cancelSubscriptionById(int userId) {
-		userRepo.setSubscriptionStatus(userId);
+		regRepo.setSubscriptionStatus(userId);
 	}
 
 	@Override
 	public double payThePenalty(int userId, double amount) {
-		Users user = userRepo.findById(userId).get();
+		Users user = regRepo.findByUserId(userId);
 		if (user == null) {
 			return 0.0;
 		}

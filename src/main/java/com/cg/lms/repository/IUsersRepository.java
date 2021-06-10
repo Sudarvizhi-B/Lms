@@ -19,4 +19,8 @@ public interface IUsersRepository extends JpaRepository<Users, Integer> {
 	@Query(value = "update users set subscription_status = 'Cancelled' where user_id = :userId", nativeQuery = true)
 	void setSubscriptionStatus(@Param("userId") int userId);
 
+	Users findUserByEmail(String email);
+
+	Users findByUserId(int userId);
+
 }
