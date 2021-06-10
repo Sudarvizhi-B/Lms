@@ -1,6 +1,7 @@
 package com.cg.lms.controller;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import com.cg.lms.service.ISuggestedBooksService;
 
 @RestController
 public class SuggestedBooksController {
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(SuggestedBooksController.class);
 
 	@Autowired
 	ISuggestedBooksService sbService;
@@ -27,6 +29,8 @@ public class SuggestedBooksController {
 	// READ
 	@GetMapping("/viewbook/id/{id}")
 	public ResponseEntity<SuggestedBooks> viewSuggestedBookDetails(@PathVariable("id") int id) {
+		logger.info("View Suggested Books By Id");
+		// Throw an exception if Book id is not present
 		if (sbService.viewSuggestedBookDetails(id) == null) {
 			throw new BookNotFoundException(EXCEPTION + id);
 		}
@@ -35,24 +39,29 @@ public class SuggestedBooksController {
 
 	@GetMapping("/suggestedbooks")
 	public ResponseEntity<List<SuggestedBooks>> viewSuggestedBooksList() {
+		logger.info("View All Suggested Books ");
 		return new ResponseEntity<>(sbService.viewSuggestedBooksList(), HttpStatus.OK);
 	}
 
 	// WRITE
 	@PostMapping("/suggestedbooks")
 	public ResponseEntity<SuggestedBooks> suggestBooks(@RequestBody SuggestedBooks book) {
+		logger.info("Adding Suggested Books Details");
 		return new ResponseEntity<>(sbService.suggestBooks(book), HttpStatus.CREATED);
 	}
 
 	// UPDATE
 	@PutMapping("/updatebooks")
 	public ResponseEntity<SuggestedBooks> updateSuggestedBookStatus(@RequestBody SuggestedBooks book) {
+		logger.info("Updating Suggested Books Details");
 		return new ResponseEntity<>(sbService.updateSuggestedBookStatus(book), HttpStatus.OK);
 	}
 
 	// DELETE
 	@DeleteMapping("/deletebook/{id}")
 	public ResponseEntity<SuggestedBooks> deleteSuggestedBooks(@PathVariable("id") int id) {
+		logger.info("Deleting Suggested Books By Id");
+		// Throw an exception if Book id is not present
 		if (sbService.deleteSuggestedBooks(id) == null) {
 			throw new BookNotFoundException(EXCEPTION + id);
 		}

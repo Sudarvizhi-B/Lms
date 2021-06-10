@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ import com.cg.lms.entity.Reader;
 
 @SpringBootTest
 class ReaderServiceTest {
+	org.apache.logging.log4j.Logger logger= LogManager.getLogger(ReaderServiceTest.class);
 	
 	@Autowired
 	IReaderService readerService;
@@ -21,6 +23,7 @@ class ReaderServiceTest {
 	void testRegisterReader() {
 		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
 		Reader reader1=readerService.register(reader);
+		logger.info(reader1);
 		
 		assertEquals("Sandhyana",reader1.getFirstName());
 	}
@@ -38,7 +41,7 @@ class ReaderServiceTest {
 		reader.setEmail("san@gmail.com");
 		
 		Reader reader1= readerService.updateReaderDetails(reader);
-		
+		logger.info(reader1);
 		assertEquals("San", reader1.getFirstName());
 	}
 	
@@ -46,7 +49,7 @@ class ReaderServiceTest {
 	@Test
 	void testViewReaderList() {
 		List<Reader> reader= readerService.viewReadersList();
-		
+		logger.info(reader);
 		assertEquals(2, reader.size());
 	}
 	
@@ -54,7 +57,7 @@ class ReaderServiceTest {
 	@Test
 	void testViewReaderById() {
 		Reader reader=readerService.viewReaderById(101);
-		
+		logger.info(reader);
 		assertEquals("San", reader.getFirstName());
 	}
 
@@ -62,7 +65,7 @@ class ReaderServiceTest {
 	@Test
 	void testDeleteReaderById() {
 		Reader reader= readerService.deleteReader(101);
-		
+		logger.info(reader);
 		assertEquals(101, reader.getId() );
 	}
 	

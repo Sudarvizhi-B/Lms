@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +28,19 @@ import lombok.ToString;
 public class Author {
 
 	@Id
+	@NotEmpty
 	private int authorId;
 	@NonNull
+	@NotEmpty(message = "firstName cannot be Empty")
 	private String firstName;
 	@NonNull
+	@NotEmpty(message = "lastName cannot be Empty")
 	private String lastName;
 	@NonNull
+	@Email(message = "Email should be valid")
 	private String email;
 	@NonNull
+	@Size(min=10,max=10)
 	private String contactno;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
