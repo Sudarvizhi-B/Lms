@@ -70,11 +70,20 @@ public class ReaderController {
 	@DeleteMapping("/reader/{id}")
 	public ResponseEntity<Reader> deleteReader(@PathVariable("id") int id) {
 		logger.info("delete reader by Id");
-		if (readerService.deleteReader(id) == null) {
+		Reader reader=readerService.deleteReader(id);
+		if (reader== null) {
 			throw new ReaderNotFoundException(EXCEPTION + id);
 		}
-		Reader reader=readerService.deleteReader(id);
+		
 		return new ResponseEntity<>(reader, HttpStatus.OK);
 	}
-
+	@GetMapping("/reader/view/firstName/{firstName}")
+	public ResponseEntity<List<Reader>> viewReaderByFirstName(@PathVariable("firstName") String firstName)
+	{
+		if(readerService.viewReaderByFirstName(firstName)==null) {
+			throw new ReaderNotFoundException(EXCEPTION + firstName);
+		}
+		List<Reader> readerList=readerService.viewReaderByFirstName(firstName);
+		return new ResponseEntity<>(readerList,HttpStatus.OK);
+	}
 }

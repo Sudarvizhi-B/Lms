@@ -29,16 +29,12 @@ public class Feedback {
 	@Id
 	private int id;
 	@NonNull
-	@NotBlank
 	private Date feedbackDate;
 	@NonNull
-	@NotBlank
 	private String description;
 	@NonNull
-	@NotBlank
 	private String rating;
 	@NonNull
-	@NotBlank
 	private String comments;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

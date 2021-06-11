@@ -49,13 +49,15 @@ public class ReaderServiceImpl implements IReaderService {
 	// Delete reader by id
 	@Override
 	public Reader deleteReader(int id) {
-		logger.info("Delete reader by Id");
+		logger.info("get reader by Id");
 		Optional<Reader> reader=readerRepo.findById(id);
 		if(!reader.isPresent()){
 			return null;
 		}
-		
+		logger.info("Delete reader by Id");
 		readerRepo.deleteById(id);
+		logger.info("return reader");
+		logger.info(reader.get());
 		return reader.get();
 	}
 
@@ -76,6 +78,15 @@ public class ReaderServiceImpl implements IReaderService {
 		}
 		
 		return reader.get();
+	}
+
+	@Override
+	public List<Reader> viewReaderByFirstName(String firstName) {
+		Optional<List<Reader>> readerList=readerRepo.findByfirstNameEquals(firstName);
+		if(!readerList.isPresent()) {
+			return null;
+		}
+		return readerList.get();
 	}
 
 }

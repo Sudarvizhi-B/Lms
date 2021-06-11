@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.lms.entity.Feedback;
+import com.cg.lms.entity.Reader;
 import com.cg.lms.exception.FeedbackNotFoundException;
+import com.cg.lms.exception.ReaderNotFoundException;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.service.IFeedbackService;
 
@@ -80,6 +83,27 @@ public class FeedbackController {
 		}
 		Feedback feedback=feedbackService.viewFeedbackById(id);
 		return new ResponseEntity<>(feedback,HttpStatus.OK);
+	}
+	// delete feedback by Id
+	@DeleteMapping("/feedback/{id}")
+	public ResponseEntity<Feedback> deleteFeedback(@PathVariable("id") int id) {
+		logger.info("delete feedback by Id");
+		Feedback feedback=feedbackService.deleteFeedbackById(id);
+		if (feedback== null) {
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION + id);
+		}
+		
+		return new ResponseEntity<>(feedback, HttpStatus.OK);
+	}
+	
+	@GetMapping("/feedback/view/rating/{rating}")
+	public ResponseEntity<List<Feedback>> viewFeedbackByRating(@PathVariable("rating") String rating)
+	{
+		if(feedbackService.viewFeedbackByRating(rating)==null) {
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +rating);
+		}
+		List<Feedback> feedbackList=feedbackService.viewFeedbackByRating(rating);
+		return new ResponseEntity<>(feedbackList,HttpStatus.OK);
 	}
 	
 
