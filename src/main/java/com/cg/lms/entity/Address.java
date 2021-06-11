@@ -1,6 +1,7 @@
 package com.cg.lms.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,6 +21,7 @@ import lombok.Setter;
 public class Address {
 
 	@Id
+	@GeneratedValue
 	private int addressId;
 	private String address1;
 	private String address2;

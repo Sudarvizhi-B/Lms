@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.lms.entity.Users;
@@ -20,8 +21,9 @@ import com.cg.lms.service.ILoginService;
 import com.cg.lms.service.IUsersService;
 import com.cg.lms.entity.Login;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RestController()
+@RequestMapping("/api")
 public class LoginController {
 	@Autowired
 	IUsersService userService;
@@ -30,7 +32,7 @@ public class LoginController {
 	@Autowired
 	IUsersRepository regRepo;
 
-	@PostMapping("/user/login")
+	@PostMapping("/login")
 	// login service
 	public ResponseEntity<Users> Login(@Valid @RequestBody Login loginentity) {
 		Users user = null;
@@ -50,13 +52,13 @@ public class LoginController {
 	}
 
 	// logout service
-	@PostMapping("user/logout/{email}")
+	@PostMapping("/logout/{email}")
 	public String Logout(@Email @PathVariable("email") String email) {
 		return loginService.logout(email);
 	}
 
 	// get user auth service
-	@GetMapping("user/getuser/{email}")
+	@GetMapping("/user/getuser/{email}")
 	public Users getUser(@Email @PathVariable("email") String email) {
 		return loginService.getUser(email);
 	}

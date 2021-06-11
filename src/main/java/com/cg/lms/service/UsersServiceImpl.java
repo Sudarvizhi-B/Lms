@@ -29,6 +29,10 @@ public class UsersServiceImpl implements IUsersService {
 	 */
 	@Override
 	public Users createUser(Users user) {
+		Optional<Users> opt = Optional.ofNullable(regRepo.findUserByEmail(user.getEmail()));
+		if(opt.isPresent()) {
+			return null;
+		}
 		return regRepo.save(user);
 
 	}
