@@ -11,5 +11,6 @@ public interface IReaderService {
 	public Reader deleteReader(int id) ;
 	public List<Reader> viewReadersList();
 	public Reader viewReaderById(int id);
+	public List<Reader> viewReaderByFirstName(String firstName);
 	
 }

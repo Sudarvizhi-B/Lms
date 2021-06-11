@@ -11,6 +11,7 @@ import com.cg.lms.repository.IFeedbackRepository;
 import com.cg.lms.repository.IUsersRepository;
 import com.cg.lms.controller.ReaderController;
 import com.cg.lms.entity.Feedback;
+import com.cg.lms.entity.Reader;
 import com.cg.lms.entity.Users;
 
 
@@ -83,6 +84,29 @@ public class FeedbackServiceImpl implements IFeedbackService{
 			return null;
 		}
 		
+		return  feedback.get();
+	}
+
+	@Override
+	public Feedback deleteFeedbackById(int id) {
+		logger.info("get feedback by Id");
+		Optional<Feedback> feedback=feedbackRepo.findById(id);
+		if(!feedback.isPresent()){
+			return null;
+		}
+		logger.info("Delete feedback by Id");
+		feedbackRepo.deleteById(id);
+		logger.info("return feedback");
+		logger.info(feedback.get());
+		return feedback.get();
+	}
+
+	@Override
+	public List<Feedback> viewFeedbackByRating(String rating) {
+		Optional<List<Feedback>> feedback=feedbackRepo.findByRating(rating);
+		if(!feedback.isPresent()) {
+			return null;
+		}
 		return feedback.get();
 	}
 
