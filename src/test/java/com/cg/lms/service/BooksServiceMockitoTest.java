@@ -40,7 +40,7 @@ class BooksServiceMockitoTest {
 		Mockito.when(booksDao.save(book)).thenReturn(book);
 		Books persistBook = booksService.addBook(book);
 		
-		assertEquals(105, persistBook.getBookid());
+		assertEquals(105, persistBook.getBookId());
 		assertEquals("Wings of Fire", persistBook.getTitle());
 		assertEquals("India's journey to self-reliance in technology", persistBook.getSubject());
 		assertEquals("A.P.J.Abdul Kalam", persistBook.getAuthor());
@@ -73,7 +73,7 @@ class BooksServiceMockitoTest {
 		
 		Books deleteBook = booksService.removeBook(105);
 		
-		assertEquals(105, deleteBook.getBookid());
+		assertEquals(105, deleteBook.getBookId());
 		assertEquals("Wings of Fire", deleteBook.getTitle());
 		assertEquals("India's journey to self-reliance in technology", deleteBook.getSubject());
 		assertEquals("A.P.J.Abdul Kalam", deleteBook.getAuthor());
@@ -124,7 +124,7 @@ class BooksServiceMockitoTest {
 		books.add(book1);
 		books.add(book2);
 		
-		Mockito.when(booksDao.findAllByTitle("Harry Potter")).thenReturn(books);
+		Mockito.when(booksDao.findAllByTitleContainingIgnoreCase("Harry Potter")).thenReturn(books);
 		
 		List<Books> booksListByTitle = booksService.findAllByTitle("Harry Potter");
 		
@@ -142,7 +142,7 @@ class BooksServiceMockitoTest {
 		books.add(book1);
 		books.add(book2);
 		
-		Mockito.when(booksDao.findAllBySubject("Novel")).thenReturn(books);
+		Mockito.when(booksDao.findAllBySubjectContainingIgnoreCase("Novel")).thenReturn(books);
 		
 		List<Books> booksListBySubject = booksService.findAllBySubject("Novel");
 		

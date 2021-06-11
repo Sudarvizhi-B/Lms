@@ -10,7 +10,7 @@ import com.cg.lms.entity.Books;
 @Repository
 public interface IBooksDao extends JpaRepository<Books, Integer>{
 	
-	List<Books> findAllByTitle(String title);
+	List<Books> findAllByTitleContainingIgnoreCase(String title);
 	
-	List<Books> findAllBySubject(String subject);
+	List<Books> findAllBySubjectContainingIgnoreCase(String subject);
 }

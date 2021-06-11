@@ -62,7 +62,19 @@ class DamagedBooksServiceMockitoTest {
 	}
 	
 	@Test
-	public void testViewDamagedBooksById() {
+	public void testDeleteDamagedBook() {
+		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
+				25, 150, "Shelf C");
+		DamagedBooks damagedBooks = new DamagedBooks(1, 4, "Pages Missing", book);
+		
+		Mockito.when(damagedBooksDao.findById(1)).thenReturn(Optional.of(damagedBooks));
+		
+		DamagedBooks viewDamagedBookById = damagedBooksService.deleteDamagedBook(1);
+		
+		assertEquals(4, viewDamagedBookById.getQuantity());
+	}
+	@Test
+	public void testViewDamagedBookById() {
 		Books book = new Books(105, "Wings of Fire", "India's journey to self-reliance in technology", "A.P.J.Abdul Kalam", 1999, "976-3-181530-2",
 				25, 150, "Shelf C");
 		DamagedBooks damagedBooks = new DamagedBooks(1, 4, "Pages Missing", book);

@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.cg.lms.entity.Author;
 import com.cg.lms.entity.Books;
 import com.cg.lms.entity.BooksReturned;
 import com.cg.lms.entity.Users;
+import com.cg.lms.exception.AuthorNotFoundException;
 import com.cg.lms.exception.BookNotFoundException;
 
 @SpringBootTest
@@ -40,25 +42,25 @@ public class BooksReturnedServiceTest {
 	void testShouldViewReturnedBookList() {
 		List<BooksReturned> booksReturned1 = booksReturnedService.viewReturnedBooksList();
 		System.out.println(booksReturned1);
-		assertEquals(5, booksReturned1.size()); // size() - total no. of rows
+		assertEquals(2, booksReturned1.size()); // size() - total no. of rows
 	}
 
 	// View Delayed BookList
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldViewDelayedBookList() {
 		List<BooksReturned> booksReturned2 = booksReturnedService.findByDelayedDaysGreaterThanEqual(8);
 		System.out.println(booksReturned2);
-		assertEquals(3, booksReturned2.size()); // size() - total no. of rows
+		assertEquals(2, booksReturned2.size()); // size() - total no. of rows
 	}
 
 	// To Update ReturnedBooks Details
 	@Test
-	@Disabled
+	//@Disabled
 	void testShoudlUpdateReturnedBookDetails() throws BookNotFoundException {
 		LocalDate localDate1 = LocalDate.of(2021, 07, 11);
 		BooksReturned returned = new BooksReturned();
-		returned.setId(201);
+		returned.setId(202);
 		returned.setDelayedDays(22);
 		returned.setPenalty(30.0);
 		returned.setPenalty_Status("Paid");
@@ -76,17 +78,26 @@ public class BooksReturnedServiceTest {
 		assertEquals(22, br.getDelayedDays());
 	}
 
-	// To Return BookList
+
+	// Delete Author Details
 	@Test
-	@Disabled
+	//@Disabled
+	void testShouldDeleteReturnedBooks() throws BookNotFoundException {
+		  BooksReturned booksReturned4 = booksReturnedService.deleteReturnedBooks(10);
+		assertEquals(10, booksReturned4.getId());
+	}
+
+	// To Return Book
+	@Test
+	//@Disabled
 	void testShouldReturnBooks() {
 		LocalDate d1 = LocalDate.of(2021, 02, 11);
-		BooksReturned booksReturned3 = new BooksReturned(202, d1, 23, 33.0, "Paid");
+		BooksReturned booksReturned3 = new BooksReturned(203, d1, 23, 33.0, "Paid");
 		Users user = new Users();
 		user.setUserId(22);
 		booksReturned3.setUsers(user);
 
-		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
+		Books book = new Books(102, "Iron Man", "Comics", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		booksReturned3.setBooks(book);
 		BooksReturned booksReturned4 = booksReturnedService.returnBooks(booksReturned3);
 		assertEquals(23, booksReturned4.getDelayedDays());

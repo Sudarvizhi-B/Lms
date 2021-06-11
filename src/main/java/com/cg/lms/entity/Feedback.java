@@ -6,9 +6,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +20,6 @@ import lombok.NonNull;
 
 
 @Entity
-@Inheritance
 @Getter
 @Setter
 @NoArgsConstructor

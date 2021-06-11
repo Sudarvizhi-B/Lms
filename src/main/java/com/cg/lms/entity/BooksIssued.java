@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,10 +30,16 @@ import lombok.ToString;
 public class BooksIssued {
 
 	@Id
+
 	@GeneratedValue
+
+	
 	private int issueId;
+	@NotBlank
 	private Date issueDate;
+	@NotBlank
 	private int quantity;
+	@NotBlank
 	private Date dueDate;
     
 	@JsonIgnore

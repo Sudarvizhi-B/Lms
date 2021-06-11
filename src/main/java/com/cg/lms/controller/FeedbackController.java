@@ -2,9 +2,12 @@ package com.cg.lms.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.lms.entity.Feedback;
+import com.cg.lms.entity.Reader;
 import com.cg.lms.exception.FeedbackNotFoundException;
+import com.cg.lms.exception.ReaderNotFoundException;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.service.IFeedbackService;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class FeedbackController {
+	org.apache.logging.log4j.Logger logger= LogManager.getLogger(FeedbackController.class);
 	
 	@Autowired
 	IFeedbackService feedbackService;
@@ -28,6 +35,7 @@ public class FeedbackController {
 	//Write Feedback by user
 	@PostMapping("/feedback/{userId}")
 	public ResponseEntity<Feedback> writeFeedback(@PathVariable("userId")int userId,@RequestBody Feedback feedback){
+		logger.info("Write feedback");
 		if(feedbackService.writeFeedback(userId, feedback)==null)
 		{
 			throw new UserNotFoundException(EXCEPTION +userId);
@@ -39,6 +47,7 @@ public class FeedbackController {
 	// Update feedback
 	@PutMapping("/feedback/{id}")
 	public ResponseEntity<Feedback> updateFeedback(@PathVariable("id")int id, @RequestBody Feedback feedback){
+		logger.info("Update feedback");
 		if( feedbackService.updateFeedback(feedback)==null){
 			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +id);
 		}
@@ -48,6 +57,7 @@ public class FeedbackController {
 	// view all feedback
 	@GetMapping("/feedback")
 	public ResponseEntity<List<Feedback>> viewAllFeedback(Feedback feedback){
+		logger.info("view all feedback");
 		List<Feedback> feedbackList=feedbackService.viewFeedbackList();
 		return new ResponseEntity<>(feedbackList, HttpStatus.OK);
 	}
@@ -55,6 +65,7 @@ public class FeedbackController {
 	// View feedback by user
 	@GetMapping("/feedback/user/{userId}")
 	public ResponseEntity<Feedback> viewFeedbackByUser(@PathVariable("userId") int userId){
+		logger.info("view feedback by userId");
 		if(feedbackService.viewFeedBackByUser(userId)==null){
 			throw new UserNotFoundException(EXCEPTION +userId);
 		}
@@ -66,11 +77,33 @@ public class FeedbackController {
 	@GetMapping("/feedback/{id}")
 	public ResponseEntity<Feedback> viewFeedbackById(@PathVariable("id") int id)
 	{
+		logger.info("view feedback by id");
 		if(feedbackService.viewFeedbackById(id)==null){
 			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +id);
 		}
 		Feedback feedback=feedbackService.viewFeedbackById(id);
 		return new ResponseEntity<>(feedback,HttpStatus.OK);
+	}
+	// delete feedback by Id
+	@DeleteMapping("/feedback/{id}")
+	public ResponseEntity<Feedback> deleteFeedback(@PathVariable("id") int id) {
+		logger.info("delete feedback by Id");
+		Feedback feedback=feedbackService.deleteFeedbackById(id);
+		if (feedback== null) {
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION + id);
+		}
+		
+		return new ResponseEntity<>(feedback, HttpStatus.OK);
+	}
+	
+	@GetMapping("/feedback/view/rating/{rating}")
+	public ResponseEntity<List<Feedback>> viewFeedbackByRating(@PathVariable("rating") String rating)
+	{
+		if(feedbackService.viewFeedbackByRating(rating)==null) {
+			throw new FeedbackNotFoundException(FEEDBACK_EXCEPTION +rating);
+		}
+		List<Feedback> feedbackList=feedbackService.viewFeedbackByRating(rating);
+		return new ResponseEntity<>(feedbackList,HttpStatus.OK);
 	}
 	
 
