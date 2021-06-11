@@ -3,6 +3,7 @@ package com.cg.lms.entity;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
@@ -25,12 +26,13 @@ import lombok.ToString;
 public class Users {
 
 	@Id
+	@GeneratedValue
 	private int userId;
 
 	/*
 	 * Password Validation
 	 */
-	//@NotEmpty(message = "Please Enter your Password")
+	@NotEmpty(message = "Please Enter your Password")
 	@Pattern(regexp = "[A-Za-z0-9]+", message = "Password is Invalid")
 	@Size(min = 8, max = 15, message = "Password should have atleast 8 characters not less than 15 characters")
 	private String password;
@@ -38,7 +40,7 @@ public class Users {
 	/**
 	 * FirstName Validation
 	 */
-	//@NotEmpty(message = "Please Enter your FirstName")
+	@NotEmpty(message = "Please Enter your FirstName")
 	@Pattern(regexp = "[A-Za-z]+", message = "FirstName is Invalid")
 	@Size(min = 2, max = 10, message = "Firstname should have atleast 7 characters not less than 10 characters")
 	private String firstname;
@@ -46,7 +48,7 @@ public class Users {
 	/**
 	 * LastName Validation
 	 */
-	//@NotEmpty(message = "Please Enter your LastName")
+	@NotEmpty(message = "Please Enter your LastName")
 	@Pattern(regexp = "[A-Za-z]+", message = "LastName is Invalid")
 	@Size(min = 1, max = 10, message = "Lastnmae should have atleast 7 characters not less than 10 characters")
 	private String lastname;
@@ -54,7 +56,7 @@ public class Users {
 	/**
 	 * MobileNumber Validation
 	 */
-	//@NotEmpty(message = "Please Enter Your EmailId")
+	@NotEmpty(message = "Please Enter Your EmailId")
 	@Pattern(regexp = "^[0-9]{10}$", message = "Mobile Number is Invalid")
 	//@Size(min = 10, max = 10, message = "Mobile Number less than 10 is Invalid")
 	private String mobileNumber;
@@ -63,7 +65,7 @@ public class Users {
 	 * Email Validation
 	 */
 	@Email
-	//@NotEmpty(message = "Please Enter Your Email Id")
+	@NotEmpty(message = "Please Enter Your Email Id")
 	private String email;
 	private Date dateOfBirth;
 	private Date subscriptionDate;
