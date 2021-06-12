@@ -73,8 +73,8 @@ public class AddressController {
 	/*
 	 * This below function is used to update the address and redirects to addService
 	 */
-	@PutMapping("/address")
-	public ResponseEntity<Address> update(@RequestBody Address address) {
+	@PutMapping("/address/{id}")
+	public ResponseEntity<Address> update(@PathVariable("id") int addressId,@RequestBody Address address) {
 		if (addService.updateAddressDetails(address) == null) {
 			throw new AddressNotFoundException(EXCEPTION + address);
 		}

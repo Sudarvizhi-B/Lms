@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,7 +70,7 @@ public class BooksIssuedController {
 	 * This below function is used to update the issueBooks using issueId and
 	 * redirects to issueService
 	 */
-	@PatchMapping("/issued/{id}")
+	@PutMapping("/issued/{id}")
 	public ResponseEntity<BooksIssued> updateBook(@PathVariable("id") int issueId, @RequestBody BooksIssued issued) {
 		BooksIssued update = issueService.update(issued);
 		logger.info("Updating the issuedBooks");

@@ -41,6 +41,7 @@ public class BooksIssuedServiceImpl implements IBooksIssuedService {
 	@Override
 	public BooksIssued update(BooksIssued issued) {
 		BooksIssued issued1 = issuedRepo.findById(issued.getIssueId()).get();
+		issued1.setIssueId(issued.getIssueId());
 		issued1.setQuantity(issued.getQuantity());
 		issued1.setDueDate(issued.getDueDate());
 		issued1.setIssueDate(issued.getIssueDate());
