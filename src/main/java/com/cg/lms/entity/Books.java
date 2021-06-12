@@ -34,5 +34,19 @@ public class Books {
 	private double bookCost;
 	@NonNull
 	private String shelfDetails;
+	private String imageName;
+	public Books(int bookId, @NonNull String title, @NonNull String subject, @NonNull String author, int publishedYear,
+			@NonNull String isbnCode, int quantity, double bookCost, @NonNull String shelfDetails) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.subject = subject;
+		this.author = author;
+		this.publishedYear = publishedYear;
+		this.isbnCode = isbnCode;
+		this.quantity = quantity;
+		this.bookCost = bookCost;
+		this.shelfDetails = shelfDetails;
+	}
 	
 }

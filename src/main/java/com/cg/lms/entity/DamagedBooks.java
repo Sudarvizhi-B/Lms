@@ -24,15 +24,12 @@ import lombok.ToString;
 public class DamagedBooks {
 	
 	@Id
-	@NotBlank
 	private int id;
-	@NotBlank
 	private int quantity;
 	@NonNull
-	@NotBlank
 	private String description; 
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name = "book_id")
 	private Books books;
 	
