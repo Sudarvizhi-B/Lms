@@ -24,22 +24,18 @@ import lombok.ToString;
 public class BooksOrder {
 	
 	@Id
-	@NotBlank
 	private int orderId;
-	@NotBlank
 	private int quantity;
 	@NonNull
-	@NotBlank
 	private String orderDate;
 	@NonNull
-	@NotBlank
 	private String orderStatus;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name="bookId")
 	private Books books;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name="publisher_id")
 	public Publishers publisher;
 
