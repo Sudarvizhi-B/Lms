@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.lms.entity.Author;
 import com.cg.lms.entity.BooksReturned;
+import com.cg.lms.exception.AuthorNotFoundException;
 import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.service.IBooksReturnedService;
 
@@ -41,11 +43,13 @@ public class BooksReturnedController {
 	@PutMapping("/booksReturned/update/{id}")
 	public ResponseEntity<BooksReturned> updateReturnedBookDetails(@PathVariable("id")int id, @RequestBody BooksReturned returned) {
 		logger.info("updated the ReturnedBook");
+		logger.info(id);
+		BooksReturned bookReturned = brs.updateReturnedBookDetails(id,returned);
 		// Throw an exception if id is not present
-		if (brs.updateReturnedBookDetails(returned) == null) {
+		if (bookReturned == null) {
 			throw new BookNotFoundException(EXCEPTION + returned);
 		}
-		return new ResponseEntity<>(brs.updateReturnedBookDetails(returned), HttpStatus.OK);
+		return new ResponseEntity<>(bookReturned, HttpStatus.OK);
 	}
 
 	// READ
@@ -63,8 +67,10 @@ public class BooksReturnedController {
 		return new ResponseEntity<>(returned, HttpStatus.OK);
 	}
 	
+
+	
 	// DELETE
-	@DeleteMapping("/returned/{id}")
+	@DeleteMapping("/booksReturned/returned/{id}")
 	public ResponseEntity<BooksReturned> deleteReturnedBooks(@PathVariable("id") int id) {
 		logger.info("deleting Author details");
 		// Throw an exception if id is not present
@@ -73,4 +79,16 @@ public class BooksReturnedController {
 		}
 		return new ResponseEntity<>(brs.deleteReturnedBooks(id), HttpStatus.OK);
 	}
+	
+	// READ
+	@GetMapping("/booksReturned/returned/{id}")
+	public ResponseEntity<BooksReturned> viewById(@PathVariable("id") int id) {
+		logger.info("Viewing ReturnedBook list by id");
+		// Throw an exception if id is not present
+		if (brs.viewById(id) == null) {
+			throw new BookNotFoundException(EXCEPTION + id);
+		}
+		return new ResponseEntity<>(brs.viewById(id), HttpStatus.OK);
+	}
+
 }

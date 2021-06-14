@@ -34,7 +34,7 @@ public class AuthorServiceTest {
 
 	// Test to View AuthorList
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldViewAuthorsList() {
 		List<Author> author1 = authorService.viewAuthorsList();
 		System.out.println(author1);
@@ -43,49 +43,49 @@ public class AuthorServiceTest {
 
 	// To Update Author Details
 	@Test
-	@Disabled
+	//@Disabled
 	void testShoudlUpdateAuthorDetails() throws AuthorNotFoundException {
 		Author author2 = authorService.viewAuthorById(9);
-		author2.setFirstName("Samuel");
-		author2.setLastName("k");
-		author2.setEmail("samk@gmail.com");
-		author2.setContactno("777777777");
+		author2.setFirstName("Vikram");
+		author2.setLastName("kumar");
+		author2.setEmail("vk@gmail.com");
+		author2.setContactno("777777778");
 		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		author2.setBooks(books);
 
-		Author updatedAr = authorService.updateAuthorDetails(author2);
+		Author updatedAr = authorService.updateAuthorDetails(author2,9);
 
-		assertEquals("Samuel", updatedAr.getFirstName());
-		assertEquals("k", updatedAr.getLastName());
-		assertEquals("samk@gmail.com", updatedAr.getEmail());
-		assertEquals("777777777", updatedAr.getContactno());
+		assertEquals("Vikram", updatedAr.getFirstName());
+		assertEquals("kumar", updatedAr.getLastName());
+		assertEquals("vk@gmail.com", updatedAr.getEmail());
+		assertEquals("777777778", updatedAr.getContactno());
 	}
 
 	// Delete Author Details
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldDeleteAuthorDetails() throws AuthorNotFoundException {
 		Author author3 = authorService.deleteAuthorDetails(12);
-		assertEquals(11, author3.getAuthorId());
+		assertEquals(12, author3.getAuthorId());
 	}
 
 	// View Author by Id
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldViewAuthorById() throws AuthorNotFoundException {
-		Author author4 = authorService.viewAuthorById(10);
-		assertEquals("Sudaaaar", author4.getFirstName());
+		Author author4 = authorService.viewAuthorById(9);
+		assertEquals("Vikram", author4.getFirstName());
 	}
 
 	// Add Author Details
 	@Test
-	@Disabled
+	//@Disabled
 	void testShouldAddAuthorDetail() {
 
 		Author author = new Author(12, "sudha", "kumar", "srk@gmail.com", "555555556");
-		Books book = new Books(102, "Harry Potter", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf A");
+		Books book = new Books(25, "AbdulKalam", "Novel", "J.K.Rowling", 1999, "986-7-180715-7", 25, 170, "Shelf Z");
 		List<Books> books = new ArrayList<>();
 		books.add(book);
 		author.setBooks(books);

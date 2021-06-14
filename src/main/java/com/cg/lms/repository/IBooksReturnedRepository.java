@@ -11,5 +11,6 @@ import com.cg.lms.entity.BooksReturned;
 public interface IBooksReturnedRepository extends JpaRepository<BooksReturned, Integer> {
 
 	List<BooksReturned> findByDelayedDaysGreaterThanEqual(int delayedDays);
+	
 
 }

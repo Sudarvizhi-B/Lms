@@ -66,6 +66,14 @@ public class AuthorController {
 		}
 		return new ResponseEntity<>(ar.viewAuthorById(id), HttpStatus.OK);
 	}
+	//READ
+	@GetMapping("/author/name/{name}")
+	public ResponseEntity<List<Author>> findByFirstName(@PathVariable("name") String firstName){
+		logger.info("View by firstName");
+		return new ResponseEntity<>(ar.findByFirstName(firstName), HttpStatus.OK);
+	}
+	
+	
 
 	// UPDATE
 	@PutMapping("/author/update/{id}")

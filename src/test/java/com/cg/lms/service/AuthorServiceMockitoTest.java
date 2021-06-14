@@ -59,7 +59,7 @@ public class AuthorServiceMockitoTest {
 		author.setBooks(books);
 		Mockito.when(authorRepo.findById(9)).thenReturn(Optional.of(author));
 		Mockito.when(authorRepo.save(author)).thenReturn(author);
-		Author a2 = authorService.updateAuthorDetails(author);
+		Author a2 = authorService.updateAuthorDetails(author,9);
 		assertEquals(9, a2.getAuthorId());
 		assertEquals("444444444", a2.getContactno());
 	}
