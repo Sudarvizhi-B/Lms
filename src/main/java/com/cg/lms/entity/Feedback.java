@@ -27,6 +27,7 @@ import lombok.NonNull;
 public class Feedback {
 
 	@Id
+	@GeneratedValue
 	private int id;
 	@NonNull
 	private Date feedbackDate;
@@ -36,20 +37,21 @@ public class Feedback {
 	private String rating;
 	@NonNull
 	private String comments;
+	@NonNull
+	private String userId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	/*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
-	private Users users;
+	private Users users;*/
 
 
 
-	public Feedback(int id, Date feedbackDate, String description, String rating, String comments) {
-
-		this.id = id;
+	public Feedback(Date feedbackDate, String description, String rating, String comments ,String userId ) {
 		this.feedbackDate = feedbackDate;
 		this.description = description;
 		this.rating = rating;
 		this.comments = comments;
+		this.userId=userId;
 	}
 
 }
