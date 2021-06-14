@@ -39,7 +39,7 @@ public class ReaderServiceMockitoTest {
 	// To register reader
 	@Test
 	void testRegisterReader(){
-		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
+		Reader reader= new Reader("abc","Sandhyana","N","9739450654","san@gmail.com");
 		
 		Mockito.when(readerRepo.save(reader)).thenReturn(reader);
 		
@@ -52,7 +52,7 @@ public class ReaderServiceMockitoTest {
 	// To update reader
 	@Test
 	void testUpdateReaderDetails(){
-		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
+		Reader reader= new Reader("xyz","Sandhya","N","9739450567","sandy@gmail.com");
 		
 		Mockito.when(readerRepo.findById(101)).thenReturn(Optional.of(reader));
 		Mockito.when(readerRepo.save(reader)).thenReturn(reader);
@@ -67,7 +67,7 @@ public class ReaderServiceMockitoTest {
 	// To Delete reader
 	@Test
 	void testDeleteReader(){
-		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
+		Reader reader= new Reader("xyz","Sandhya","N","9739450567","sandy@gmail.com");
 		
 		Mockito.when(readerRepo.findById(101)).thenReturn(Optional.of(reader));
 		
@@ -83,8 +83,8 @@ public class ReaderServiceMockitoTest {
 	// To View all the readers
 	@Test
 	void testViewReaderList(){
-		Reader reader1= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
-		Reader reader2= new Reader(102,"abc","Sandhyana","N","9739450654","san@gmail.com");
+		Reader reader1= new Reader("xyz","Sandhya","N","9739450567","sandy@gmail.com");
+		Reader reader2= new Reader("abc","Sandhyana","N","9739450654","san@gmail.com");
 		
 		List<Reader> readerList=new ArrayList<>();
 		readerList.add(reader1);
@@ -100,7 +100,7 @@ public class ReaderServiceMockitoTest {
 	//To view reader by id
 	@Test
 	void testViewReaderById(){
-		Reader reader= new Reader(101,"xyz","Sandhya","N","9739450567","sandy@gmail.com");
+		Reader reader= new Reader("xyz","Sandhya","N","9739450567","sandy@gmail.com");
 		
 		Mockito.when(readerRepo.findById(101)).thenReturn(Optional.of(reader));
 		

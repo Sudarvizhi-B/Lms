@@ -21,7 +21,7 @@ class ReaderServiceTest {
 	//To register Reader
 	@Test
 	void testRegisterReader() {
-		Reader reader= new Reader(101,"abc","Sandhyana","N","9739450654","san@gmail.com");
+		Reader reader= new Reader("abc","Sandhyana","N","9739450654","san@gmail.com");
 		Reader reader1=readerService.register(reader);
 		logger.info(reader1);
 		

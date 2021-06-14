@@ -11,16 +11,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Reader {
 	
 	@Id
+	@GeneratedValue
 	private int id;
 	@NonNull
 	private String password;
