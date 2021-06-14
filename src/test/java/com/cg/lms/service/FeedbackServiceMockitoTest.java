@@ -38,7 +38,81 @@ public class FeedbackServiceMockitoTest {
 	void init(){
 		MockitoAnnotations.openMocks(this);
 	}
+	//write Feedback
+	@Test
+	void testWriteFeedback(){
+		Date date=Date.valueOf("2021-02-24");
+		Feedback feedback= new Feedback(date,"Serviving the death", "9", "good", "100");
+	Mockito.when(feedbackRepo.save(feedback)).thenReturn(feedback);
+		
+		Feedback writtenFeedback=feedbackService.writeFeedbackByUser(feedback);
+		logger.info(writtenFeedback);
+		
+		assertEquals("9",writtenFeedback.getRating());
+		assertEquals("good",writtenFeedback.getComments());
+	}
+	// To update Feedback
+	@Test
+	void testUpdateFeedback(){
+		Date date=Date.valueOf("2021-02-24");
+		Feedback feedback= new Feedback(date,"Serviving the death", "10", "Interesting","100");
+		
+		Mockito.when(feedbackRepo.findById(101)).thenReturn(Optional.of(feedback));
+		Mockito.when(feedbackRepo.save(feedback)).thenReturn(feedback);
+		
+		Feedback updatedFeedback=feedbackService.updateFeedback(feedback);
+		logger.info(updatedFeedback);
+		
+		assertEquals("Interesting",updatedFeedback.getComments());
+	}
 	
+	// To view feedback by id
+	@Test
+	void testViewFeedbackById(){
+		Date date=Date.valueOf("2021-02-24");
+		Feedback feedback= new Feedback(date,"Serviving the death", "10", "Interesting","100");
+		Mockito.when(feedbackRepo.findById(101)).thenReturn(Optional.of(feedback));
+		
+		Feedback feedbackById=feedbackService.viewFeedbackById(101);
+		logger.info(feedbackById);
+		
+		assertEquals("10", feedbackById.getRating());
+	}
+	
+	// To view all feedbacks
+	@Test
+	void testViewFeedbackList(){
+		Date date=Date.valueOf("2021-02-24");
+		Feedback feedback1= new Feedback(date,"Serviving the death", "10", "Interesting","100");
+		Feedback feedback2= new Feedback(date,"FICTION", "10", "Good","101");
+		
+		List<Feedback> feedbackList=new ArrayList<>();
+		feedbackList.add(feedback1);
+		feedbackList.add(feedback2);
+		
+		Mockito.when(feedbackRepo.findAll()).thenReturn(feedbackList);
+		
+		List<Feedback> feedback=feedbackService.viewFeedbackList();
+		logger.info(feedback);
+		assertEquals(2,feedback.size());
+	}
+	
+	/*// To view feedback by user
+	@Test
+	void testViewFeedbackByUser(){
+		Date date=Date.valueOf("2021-02-24");
+		Feedback feedback= new Feedback(101,date,"Serviving the death", "10", "Interesting");
+		Users users=new Users();
+		
+		users.setUserId(100);
+		feedback.setUsers(users);
+		
+		Mockito.when(feedbackRepo.viewFeedBackByUser(100)).thenReturn(feedback);
+		
+		Feedback feedbackByUser=feedbackService.viewFeedBackByUser(100);
+		logger.info(feedbackByUser);
+		assertEquals("10",feedbackByUser.getRating());
+	}
 	// To write Feedback
 	@Test
 	void testWriteFeedback(){
@@ -59,69 +133,6 @@ public class FeedbackServiceMockitoTest {
 		
 		assertEquals("9",writtenFeedback.getRating());
 		assertEquals("good",writtenFeedback.getComments());
-	}
-	
-	// To update Feedback
-	@Test
-	void testUpdateFeedback(){
-		Date date=Date.valueOf("2021-02-24");
-		Feedback feedback= new Feedback(101,date,"Serviving the death", "10", "Interesting");
-		
-		Mockito.when(feedbackRepo.findById(101)).thenReturn(Optional.of(feedback));
-		Mockito.when(feedbackRepo.save(feedback)).thenReturn(feedback);
-		
-		Feedback updatedFeedback=feedbackService.updateFeedback(feedback);
-		logger.info(updatedFeedback);
-		
-		assertEquals("Interesting",updatedFeedback.getComments());
-	}
-	
-	// To view feedback by id
-	@Test
-	void testViewFeedbackById(){
-		Date date=Date.valueOf("2021-02-24");
-		Feedback feedback= new Feedback(101,date,"Serviving the death", "10", "Interesting");
-		Mockito.when(feedbackRepo.findById(101)).thenReturn(Optional.of(feedback));
-		
-		Feedback feedbackById=feedbackService.viewFeedbackById(101);
-		logger.info(feedbackById);
-		
-		assertEquals("10", feedbackById.getRating());
-	}
-	
-	// To view all feedbacks
-	@Test
-	void testViewFeedbackList(){
-		Date date=Date.valueOf("2021-02-24");
-		Feedback feedback1= new Feedback(101,date,"Serviving the death", "10", "Interesting");
-		Feedback feedback2= new Feedback(102,date,"FICTION", "10", "Good");
-		
-		List<Feedback> feedbackList=new ArrayList<>();
-		feedbackList.add(feedback1);
-		feedbackList.add(feedback2);
-		
-		Mockito.when(feedbackRepo.findAll()).thenReturn(feedbackList);
-		
-		List<Feedback> feedback=feedbackService.viewFeedbackList();
-		logger.info(feedback);
-		assertEquals(2,feedback.size());
-	}
-	
-	// To view feedback by user
-	@Test
-	void testViewFeedbackByUser(){
-		Date date=Date.valueOf("2021-02-24");
-		Feedback feedback= new Feedback(101,date,"Serviving the death", "10", "Interesting");
-		Users users=new Users();
-		
-		users.setUserId(100);
-		feedback.setUsers(users);
-		
-		Mockito.when(feedbackRepo.viewFeedBackByUser(100)).thenReturn(feedback);
-		
-		Feedback feedbackByUser=feedbackService.viewFeedBackByUser(100);
-		logger.info(feedbackByUser);
-		assertEquals("10",feedbackByUser.getRating());
-	}
+	}*/
 	
 }

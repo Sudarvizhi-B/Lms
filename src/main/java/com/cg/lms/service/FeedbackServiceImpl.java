@@ -24,7 +24,7 @@ public class FeedbackServiceImpl implements IFeedbackService{
 	@Autowired
 	IUsersRepository usersRepo;
 
-	// Write Feedback
+	/*// Write Feedback
 	@Override
 	public Feedback writeFeedback(int userId,Feedback feedback) {
 		logger.info("Write feedback");
@@ -36,7 +36,7 @@ public class FeedbackServiceImpl implements IFeedbackService{
 		Users user=users.get();
 		feedback.setUsers(user);
 		return feedbackRepo.save(feedback);
-	}
+	}*/
 
 	// Update Feedback
 	@Override
@@ -108,6 +108,13 @@ public class FeedbackServiceImpl implements IFeedbackService{
 			return null;
 		}
 		return feedback.get();
+	}
+
+	@Override
+	public Feedback writeFeedbackByUser(Feedback feedback) {
+		logger.info("write feedback");
+		return feedbackRepo.save(feedback);
+		
 	}
 
 }

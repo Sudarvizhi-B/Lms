@@ -32,7 +32,7 @@ public class FeedbackController {
 	
 	private static final String EXCEPTION="user not found with the id ";
 	private static final String FEEDBACK_EXCEPTION="Feedback not found with the id ";
-	//Write Feedback by user
+	/*//Write Feedback by user
 	@PostMapping("/feedback/{userId}")
 	public ResponseEntity<Feedback> writeFeedback(@PathVariable("userId")int userId,@RequestBody Feedback feedback){
 		logger.info("Write feedback");
@@ -42,7 +42,8 @@ public class FeedbackController {
 		}
 		Feedback feed= feedbackService.writeFeedback(userId, feedback);
 		return new ResponseEntity<>(feed, HttpStatus.OK);
-	}
+	}*/
+	
 	
 	// Update feedback
 	@PutMapping("/feedback/{id}")
@@ -95,7 +96,7 @@ public class FeedbackController {
 		
 		return new ResponseEntity<>(feedback, HttpStatus.OK);
 	}
-	
+	// view feedback by rating
 	@GetMapping("/feedback/view/rating/{rating}")
 	public ResponseEntity<List<Feedback>> viewFeedbackByRating(@PathVariable("rating") String rating)
 	{
@@ -105,6 +106,15 @@ public class FeedbackController {
 		List<Feedback> feedbackList=feedbackService.viewFeedbackByRating(rating);
 		return new ResponseEntity<>(feedbackList,HttpStatus.OK);
 	}
+	
+	// write feedback by user
+	@PostMapping("/feedback")
+	public ResponseEntity<Feedback> writeFeedbackByUser(@RequestBody Feedback feedback) {
+		logger.info("feedback");
+		Feedback writefeedback=feedbackService. writeFeedbackByUser(feedback);
+		return new ResponseEntity<>(writefeedback, HttpStatus.OK);
+	}
+
 	
 
 		
