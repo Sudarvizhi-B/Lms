@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -26,20 +28,20 @@ import lombok.ToString;
 public class BooksReturned {
 
 	@Id
-	@NotEmpty
+	//@NotEmpty
 	private int id;
 	@NonNull
-	@NotEmpty(message = "should be format yyyy-mm-dd")
+	//@NotEmpty(message = "should be format yyyy-mm-dd")
 	private LocalDate returnedDate;
-	@NotEmpty(message = "Delayed days should not be empty")
+	//@NotEmpty(message = "Delayed days should not be empty")
 	private int delayedDays;
-	@NotEmpty
+	//@NotEmpty
 	private double penalty;
 	@NonNull
-	@NotEmpty
-	@Size(min=3, max=15)
+	//@NotEmpty
+	//@Size(min=3, max=15)
 	private String penalty_Status;
-
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private Users users;

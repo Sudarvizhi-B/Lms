@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cg.lms.repository.IBooksReturnedRepository;
+import com.cg.lms.entity.Author;
 import com.cg.lms.entity.BooksReturned;
 
 @Service
@@ -28,16 +29,16 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 
 	// Update Details of ReturnedBooks
 	@Override
-	public BooksReturned updateReturnedBookDetails(BooksReturned booksReturned) {
+	public BooksReturned updateReturnedBookDetails(int id,BooksReturned booksReturned ) {
 		Optional<BooksReturned> b1 = booksReturnedRepo.findById(booksReturned.getId());
 		if (!b1.isPresent()) {
 			return null;
 		}
-
-		b1.get().setReturnedDate(booksReturned.getReturnedDate());
-		b1.get().setDelayedDays(booksReturned.getDelayedDays());
-		b1.get().setPenalty(booksReturned.getPenalty());
-		b1.get().setPenalty_Status(booksReturned.getPenalty_Status());
+		BooksReturned br = b1.get(); 
+		br.setReturnedDate(booksReturned.getReturnedDate());
+		br.setDelayedDays(booksReturned.getDelayedDays());
+		br.setPenalty(booksReturned.getPenalty());
+		br.setPenalty_Status(booksReturned.getPenalty_Status());
 		//logger information to be displayed in console
 		logger.info(b1);
 
@@ -74,5 +75,23 @@ public class BooksReturnedServiceImpl implements IBooksReturnedService {
 			logger.info(b2);
 			return b2.get();
 		}
+
+	// View ReturnedBook By Id
+	@Override
+	public BooksReturned viewById(int id) {
+			//method to get ReturnedBook ById
+			Optional<BooksReturned> b3 = booksReturnedRepo.findById(id);
+			if (!b3.isPresent()) {
+				return null;
+			}
+			//logger information to be displayed in console
+			logger.info(b3);
+			return b3.get();
+
+		}
+
+
+
 	}
+	
 

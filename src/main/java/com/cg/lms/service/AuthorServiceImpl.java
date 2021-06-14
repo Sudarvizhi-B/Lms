@@ -55,7 +55,7 @@ public class AuthorServiceImpl implements IAuthorService {
 		}
 		authorRepo.deleteById(authorId);
 		//logger information to be displayed in console
-		logger.info(a2);
+		//logger.info(a2);
 		return a2.get();
 	}
 
@@ -96,5 +96,10 @@ public class AuthorServiceImpl implements IAuthorService {
 		logger.info(a1);   //logger information to be displayed in console
 		return authorRepo.save(a1.get());
 		
+	}
+
+	@Override
+	public List<Author> findByFirstName(String firstName) {
+		return authorRepo.findAllByFirstNameContainingIgnoreCase(firstName);
 	}
 }

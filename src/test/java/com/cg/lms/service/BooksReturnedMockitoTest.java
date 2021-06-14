@@ -76,7 +76,7 @@ class BooksReturnedMockitoTest {
 		booksReturned.setUsers(users);
 		Mockito.when(booksReturnedRepo.findById(11)).thenReturn(Optional.of(booksReturned));
 		Mockito.when(booksReturnedRepo.save(booksReturned)).thenReturn(booksReturned);
-		BooksReturned br2 = booksReturnedService.updateReturnedBookDetails(booksReturned);
+		BooksReturned br2 = booksReturnedService.updateReturnedBookDetails( 11,booksReturned);
 		assertEquals("Pending", br2.getPenalty_Status());
 		assertEquals(11, br2.getId());
 	}
@@ -130,6 +130,17 @@ class BooksReturnedMockitoTest {
 		for (BooksReturned book : booksList) {
 			System.out.println(book);
 		}
+
+	}
+	
+	// View ReturnedBook by Id
+	@Test
+	void testViewReturnedBookById() {
+		BooksReturned br5 =  new BooksReturned(24, localDate3, 21, 15.0, "Paid");
+		Mockito.when(booksReturnedRepo.findById(24)).thenReturn(Optional.of(br5));
+		BooksReturned br = booksReturnedService.viewById(24);
+		assertEquals(24, br.getId());
+		assertEquals("Paid", br.getPenalty_Status());
 
 	}
 

@@ -47,7 +47,7 @@ public class BooksReturnedServiceTest {
 
 	// View Delayed BookList
 	@Test
-	//@Disabled
+	@Disabled
 	void testShouldViewDelayedBookList() {
 		List<BooksReturned> booksReturned2 = booksReturnedService.findByDelayedDaysGreaterThanEqual(8);
 		System.out.println(booksReturned2);
@@ -56,7 +56,7 @@ public class BooksReturnedServiceTest {
 
 	// To Update ReturnedBooks Details
 	@Test
-	//@Disabled
+	@Disabled
 	void testShoudlUpdateReturnedBookDetails() throws BookNotFoundException {
 		LocalDate localDate1 = LocalDate.of(2021, 07, 11);
 		BooksReturned returned = new BooksReturned();
@@ -74,22 +74,30 @@ public class BooksReturnedServiceTest {
 		Date dob3 = Date.valueOf("1998-12-15");
 		Users users = new Users(101, dob1, dob2, dob3, "Active");
 		returned.setUsers(users);
-		BooksReturned br = booksReturnedService.updateReturnedBookDetails(returned);
+		BooksReturned br = booksReturnedService.updateReturnedBookDetails( 202,returned);
 		assertEquals(22, br.getDelayedDays());
 	}
 
 
 	// Delete Author Details
 	@Test
-	//@Disabled
+	@Disabled
 	void testShouldDeleteReturnedBooks() throws BookNotFoundException {
 		  BooksReturned booksReturned4 = booksReturnedService.deleteReturnedBooks(10);
 		assertEquals(10, booksReturned4.getId());
 	}
 
-	// To Return Book
+	// View ReturnedBook by Id
 	@Test
 	//@Disabled
+	void testShouldViewReturnedBookById() throws BookNotFoundException {
+		BooksReturned booksReturned5 = booksReturnedService.viewById(202);
+		assertEquals(30.0, booksReturned5.getPenalty());
+	}
+	
+	// To Return Book
+	@Test
+	@Disabled
 	void testShouldReturnBooks() {
 		LocalDate d1 = LocalDate.of(2021, 02, 11);
 		BooksReturned booksReturned3 = new BooksReturned(203, d1, 23, 33.0, "Paid");
