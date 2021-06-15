@@ -43,10 +43,7 @@ public class UsersMockitoTest {
 		Date dateOfBirth = Date.valueOf("1998-02-01");
 		user.setDateOfBirth(dateOfBirth);
 		Date subscriptionDate = Date.valueOf("1999-02-01");
-		user.setSubscriptionDate(subscriptionDate);
-		Date subExpireDate = Date.valueOf("1997-02-01");
-		user.setSubExpireDate(subExpireDate);
-		user.setSubscriptionStatus("Accepted");
+		
 
 		Mockito.when(userRepo.save(user)).thenReturn(user);
 
@@ -54,9 +51,7 @@ public class UsersMockitoTest {
 
 		assertEquals(123, persistedUser.getUserId());
 		assertEquals(dateOfBirth, persistedUser.getDateOfBirth());
-		assertEquals(subscriptionDate, persistedUser.getSubscriptionDate());
-		assertEquals(subExpireDate, persistedUser.getSubExpireDate());
-		assertEquals("Accepted", persistedUser.getSubscriptionStatus());
+		
 	}
 
 	@Test
@@ -64,20 +59,17 @@ public class UsersMockitoTest {
 		Users user = new Users();
 
 		user.setUserId(40);
-		user.setSubscriptionStatus("Accepted");
+		
 		Date dateOfBirth = Date.valueOf("1999-12-08");
 		user.setDateOfBirth(dateOfBirth);
-		Date subExpireDate = Date.valueOf("2019-10-01");
-		user.setSubExpireDate(subExpireDate);
-		Date subscriptionDate = Date.valueOf("2019-08-01");
-		user.setSubscriptionDate(subscriptionDate);
+		
 
 		Users user1 = userService.updateUser(user);
 
 		Mockito.when(userRepo.findById(40)).thenReturn(Optional.of(user));
 		Mockito.when(userRepo.save(user)).thenReturn(user);
 
-		assertEquals("Accepted", user.getSubscriptionStatus());
+		assertEquals("1999-12-08", user.getDateOfBirth());
 	}
 
 	@Test
@@ -85,13 +77,11 @@ public class UsersMockitoTest {
 		Users user = new Users();
 
 		user.setUserId(40);
-		user.setSubscriptionStatus("Accepted");
+		
 		Date dateOfBirth = Date.valueOf("1999-12-08");
 		user.setDateOfBirth(dateOfBirth);
 		Date subExpireDate = Date.valueOf("2019-10-01");
-		user.setSubExpireDate(subExpireDate);
-		Date subscriptionDate = Date.valueOf("2019-08-01");
-		user.setSubscriptionDate(subscriptionDate);
+		
 
 		Users persistedUser = userService.deleteUserByUserId(40);
 
@@ -109,24 +99,17 @@ public class UsersMockitoTest {
 		List<Users> userList = new ArrayList<>();
 
 		user1.setUserId(40);
-		user1.setSubscriptionStatus("Accepted");
+		
 		Date dateOfBirth = Date.valueOf("1999-12-08");
 		user1.setDateOfBirth(dateOfBirth);
-		Date subExpireDate = Date.valueOf("2019-10-01");
-		user1.setSubExpireDate(subExpireDate);
-		Date subscriptionDate = Date.valueOf("2019-08-01");
-		user1.setSubscriptionDate(subscriptionDate);
+		
 
 		Users user2 = new Users();
 		user2.setUserId(40);
-		user2.setSubscriptionStatus("Accepted");
+		
 		Date dateOfBirth1 = Date.valueOf("1999-12-08");
 		user2.setDateOfBirth(dateOfBirth1);
-		Date subExpireDate1 = Date.valueOf("2019-10-01");
-		user2.setSubExpireDate(subExpireDate1);
-		Date subscriptionDate1 = Date.valueOf("2019-08-01");
-		user2.setSubscriptionDate(subscriptionDate1);
-
+		
 		userList.add(user1);
 		userList.add(user2);
 
