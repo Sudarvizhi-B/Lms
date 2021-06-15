@@ -83,4 +83,9 @@ public class BooksOrderServiceImpl implements IBooksOrderService {
 	public BooksOrder viewOrderByBookId(int bookId) {
 		return booksOrderDao.findBooksOrderByBookId(bookId);
 	}
+
+	@Override
+	public List<BooksOrder> findOrderByQuantityGreaterThan(int quantity) {
+		return booksOrderDao.findAllBooksOrderByQuantityGreaterThan(quantity);
+	}
 }

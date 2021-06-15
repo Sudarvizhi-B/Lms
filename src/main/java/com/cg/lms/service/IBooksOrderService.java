@@ -12,4 +12,5 @@ public interface IBooksOrderService {
 	public List<BooksOrder> viewOrdersList();
 	public BooksOrder viewOrderById(int orderId);
 	public BooksOrder viewOrderByBookId(int bookId);
+	public List<BooksOrder> findOrderByQuantityGreaterThan(int quantity);
 }

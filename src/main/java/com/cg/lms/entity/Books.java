@@ -35,6 +35,7 @@ public class Books {
 	@NonNull
 	private String shelfDetails;
 	private String imageName;
+	
 	public Books(int bookId, @NonNull String title, @NonNull String subject, @NonNull String author, int publishedYear,
 			@NonNull String isbnCode, int quantity, double bookCost, @NonNull String shelfDetails) {
 		super();

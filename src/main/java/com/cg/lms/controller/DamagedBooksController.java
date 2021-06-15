@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.lms.entity.BooksOrder;
 import com.cg.lms.entity.DamagedBooks;
 import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.service.IDamagedBooksService;
@@ -50,6 +51,11 @@ public class DamagedBooksController {
 		return new ResponseEntity<>(viewList, HttpStatus.OK);
 	}
 
+	@GetMapping("/damagedbooks/quantity/{quantity}")
+	public List<DamagedBooks> getBookByQuantity(@PathVariable("quantity") int quantity) {
+		return damagedBooksService.viewDamagedBookByQuantity(quantity);
+	}
+	
 	// Add a new damaged book in the table
 	@PostMapping("/damagedbooks")
 	public ResponseEntity<DamagedBooks> addDamagedBooks(@RequestBody DamagedBooks damagedBooks) {
