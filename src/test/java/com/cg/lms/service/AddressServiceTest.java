@@ -37,12 +37,6 @@ class AddressServiceTest {
 		u.setMobileNumber("9876543210");
 		u.setEmail("abc@gmail.com");
 		Date dateOfBirth = Date.valueOf("1999-08-15");
-		u.setDateOfBirth(dateOfBirth);
-		Date subscriptionDate = Date.valueOf("2021-06-09");
-		u.setSubscriptionDate(subscriptionDate);
-		Date subExpireDate = Date.valueOf("2021-05-09");
-		u.setSubExpireDate(subExpireDate);
-		u.setSubscriptionStatus("Subscribed");
 		
 		userAdd.setAddressId(2);
 		userAdd.setAddress1("Nacharam");

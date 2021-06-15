@@ -46,7 +46,7 @@ class BooksIssuedServiceTest {
 		Date subscriptionDate = Date.valueOf("2021-06-09");
 		Date subExpireDate = Date.valueOf("2021-05-09");
 
-		Users user = new Users(102,"abcdefgh1","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
+		Users user = new Users(102,"abcdefgh1","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth);
 		issuedBook.setUsers(user);
 		BooksIssued booksIssued = issueService.addBook(issuedBook);
 

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cg.lms.entity.Address;
+import com.cg.lms.entity.Subscription;
 
 @Repository
 public interface IAddressRepository extends JpaRepository<Address, Integer> {

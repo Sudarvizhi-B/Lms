@@ -46,7 +46,7 @@ class BooksIssuedMockitoTest {
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
-		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
+		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth);
 
 		issued.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");
@@ -75,7 +75,7 @@ class BooksIssuedMockitoTest {
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
-		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
+		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth);
 
 		issued.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");
@@ -105,7 +105,7 @@ class BooksIssuedMockitoTest {
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
-		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
+		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth);
 
 		issued.setIssueId(25);
 		Date issueDate = Date.valueOf("2020-10-02");
@@ -134,7 +134,7 @@ class BooksIssuedMockitoTest {
 		Date dateOfBirth = Date.valueOf("1998-03-02");
 		Date subscriptionDate = Date.valueOf("2021-09-09");
 		Date subExpireDate = Date.valueOf("2021-02-01");
-		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth, subscriptionDate, subExpireDate);
+		Users user = new Users(40,"abc","Noel","Sigh","9876543210","abc@gmail.com",dateOfBirth);
 
 		issued1.setIssueId(16);
 		Date issueDate = Date.valueOf("2021-05-01");

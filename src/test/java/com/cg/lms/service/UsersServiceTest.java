@@ -37,12 +37,8 @@ class UsersServiceTest {
 		u.setEmail("abc@gmail.com");
 		Date dateOfBirth = Date.valueOf("1999-08-15");
 		u.setDateOfBirth(dateOfBirth);
-		Date subscriptionDate = Date.valueOf("2021-06-09");
-		u.setSubscriptionDate(subscriptionDate);
-		Date subExpireDate = Date.valueOf("2021-05-09");
-		u.setSubExpireDate(subExpireDate);
-		u.setSubscriptionStatus("Subscribed");
-
+		
+		
 		Users persistedUser = userService.createUser(u);
 		logger.info(u);
 		logger.info("Added Details Successfully");
@@ -55,11 +51,10 @@ class UsersServiceTest {
 				() -> assertEquals("Sigh", persistedUser.getLastname()),
 				() -> assertEquals("abc@gmail.com", persistedUser.getEmail()),
 				() -> assertEquals("9876543210", persistedUser.getMobileNumber()),
-				() -> assertEquals(dateOfBirth, persistedUser.getDateOfBirth()),
-				() -> assertEquals(subscriptionDate, persistedUser.getSubscriptionDate()),
-				() -> assertEquals(subExpireDate, persistedUser.getSubExpireDate()),
-				() -> assertEquals("Subscribed", persistedUser.getSubscriptionStatus()));
+				() -> assertEquals(dateOfBirth, persistedUser.getDateOfBirth()));
+		
 	}
+				
 
 	// Testing whether the user gets Updated or not in database
 	@Test
@@ -73,20 +68,13 @@ class UsersServiceTest {
 		user.setLastname("Singh");
 		user.setMobileNumber("9876543210");
 		user.setEmail("abc@gmail.com");
-		user.setSubscriptionStatus("subscribed");
-		Date dateOfBirth = Date.valueOf("1999-08-15");
-		user.setDateOfBirth(dateOfBirth);
-		Date subExpireDate = Date.valueOf("2021-06-09");
-		user.setSubExpireDate(subExpireDate);
-		Date subscriptionDate = Date.valueOf("2021-05-09");
-		user.setSubscriptionDate(subscriptionDate);
 
 		Users user1 = userService.updateUser(user);
 
 		logger.info(user1);
 		logger.info("Updated details successfully:");
 
-		assertEquals("subscribed", user.getSubscriptionStatus());
+		assertEquals("Noel", user.getFirstname());
 	}
 
 	// Testing whether User database has Users or null
@@ -129,31 +117,17 @@ class UsersServiceTest {
 			throw new UserNotFoundException("User not found found with given user Id");
 		}
 
-		assertEquals("Unsubscribed", user.getSubscriptionStatus());
+		assertEquals("Noel", user.getFirstname());
 	}
 
-	// Testing whether the status is Updated or not
-	@Test
-	@Disabled
-	public void cancelSubscription() {
-		Users user = userService.findUserByUserId(60);
-		userService.cancelSubscriptionById(60);
-
-		if (user == null) {
-			throw new UserNotFoundException("User not found found with given user Id");
-		}
-		logger.info("Updated user:");
-		assertEquals("Cancelled", user.getSubscriptionStatus());
-	}
-
-	@Test
-	public void payThePenalty() {
-		Users user = userService.findUserByUserId(40);
-
-		double penalty = userService.payThePenalty(user.getUserId(), 25);
-		logger.info(user);
-
-		assertEquals(150.0, penalty);
-	}
+	/*
+	 * @Test public void payThePenalty() { Users user =
+	 * userService.findUserByUserId(40);
+	 * 
+	 * double penalty = userService.payThePenalty(user.getUserId(), 25);
+	 * logger.info(user);
+	 * 
+	 * assertEquals(150.0, penalty); }
+	 */
 
 }

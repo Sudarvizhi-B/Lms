@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.lms.entity.Subscription;
 import com.cg.lms.entity.Users;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.service.IUsersService;
@@ -39,7 +40,7 @@ public class UsersController {
 
 	@Autowired
 	IUsersService regservice;
-
+	
 	/**
 	 * This below function is used to get a specific user using userid and redirects
 	 * to the user service
@@ -82,8 +83,8 @@ public class UsersController {
 	 * userid and redirects to the user service
 	 */
 
-	@PutMapping("/users/update/{userid}")
-	public Users updateUser(@PathVariable int userid, @Valid @RequestBody Users user) {
+	@PutMapping("/users/update/{id}")
+	public Users updateUser(@PathVariable("id") int userid, @Valid @RequestBody Users user) {
 		if (regservice.findUserByUserId(userid) == null) {
 			throw new UserNotFoundException("User not found with this Userid");
 		}
@@ -106,7 +107,7 @@ public class UsersController {
 		return regservice.deleteUserByUserId(userid);
 	}
 
-	@GetMapping("/users/penalty/{id}")
+	/*@GetMapping("/users/penalty/{id}")
 	public double payThePenalty(@PathVariable("id") int userId) {
 		if (regservice.findUserByUserId(userId) == null) {
 			throw new UserNotFoundException("User not found with UserId" + userId);
@@ -121,5 +122,5 @@ public class UsersController {
 		regservice.cancelSubscriptionById(userId);
 		logger.info("updating subscriptionStatus:");
 
-	}
+	}*/
 }

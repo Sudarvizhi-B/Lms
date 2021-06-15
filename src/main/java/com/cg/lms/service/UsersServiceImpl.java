@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.lms.entity.Subscription;
 import com.cg.lms.entity.Users;
 import com.cg.lms.repository.IUsersRepository;
 
@@ -30,7 +31,7 @@ public class UsersServiceImpl implements IUsersService {
 	@Override
 	public Users createUser(Users user) {
 		Optional<Users> opt = Optional.ofNullable(regRepo.findUserByEmail(user.getEmail()));
-		if(opt.isPresent()) {
+		if (opt.isPresent()) {
 			return null;
 		}
 		return regRepo.save(user);
@@ -96,30 +97,18 @@ public class UsersServiceImpl implements IUsersService {
 		return optional.get();
 	}
 
-	// Used to update the status
-	@Override
-	public void cancelSubscriptionById(int userId) {
-		regRepo.setSubscriptionStatus(userId);
-	}
-
-	@Override
-	public double payThePenalty(int userId, double amount) {
-		Users user = regRepo.findByUserId(userId);
-		if (user == null) {
-			return 0.0;
-		}
-
-		LocalDate date = LocalDate.now();
-		LocalDate expireDate = user.getSubExpireDate().toLocalDate();
-
-		Period period = Period.between(expireDate, date);
-		int days = period.getDays();
-
-		if (days >= 1) {
-			double penalty = days * amount;
-			return penalty;
-		}
-		return 0.0;
-	}
+	/*
+	 * @Override public double payThePenalty(int userId, double amount) { Users user
+	 * = regRepo.findByUserId(userId); if (user == null) { return 0.0; }
+	 * 
+	 * LocalDate date = LocalDate.now(); LocalDate expireDate =
+	 * user.getSubExpireDate().toLocalDate();
+	 * 
+	 * Period period = Period.between(expireDate, date); int days =
+	 * period.getDays();
+	 * 
+	 * if (days >= 1) { double penalty = days * amount; return penalty; } return
+	 * 0.0; }
+	 */
 
 }

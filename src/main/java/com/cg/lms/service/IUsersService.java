@@ -3,15 +3,10 @@ package com.cg.lms.service;
 
 import java.util.List;
 
+import com.cg.lms.entity.Subscription;
 import com.cg.lms.entity.Users;
 
 public interface IUsersService {
-
-	// Method to be override by the implementing class
-	public void cancelSubscriptionById(int userId);
-
-	// Method to be override by the implementing class
-	public double payThePenalty(int userId, double amount);
 
 	/**
 	 * Retrieves user records with userid
