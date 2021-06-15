@@ -74,10 +74,6 @@ public class Users {
 	@OneToOne(mappedBy = "users")
 	private Address address;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "users")
-	private Subscription subscription;
-
 	public Users(int userId,
 			@NotEmpty(message = "Please Enter your Password") @Pattern(regexp = "[A-Za-z0-9]+", message = "Password is Invalid") @Size(min = 8, max = 15, message = "Password should have atleast 8 characters not less than 15 characters") String password,
 			@NotEmpty(message = "Please Enter your FirstName") @Pattern(regexp = "[A-Za-z]+", message = "FirstName is Invalid") @Size(min = 2, max = 10, message = "Firstname should have atleast 7 characters not less than 10 characters") String firstname,

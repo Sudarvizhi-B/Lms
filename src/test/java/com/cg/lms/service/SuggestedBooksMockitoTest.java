@@ -58,7 +58,7 @@ class SuggestedBooksMockitoTest {
 		Date dob = Date.valueOf("1998-12-17");
 		Date d3 = Date.valueOf("1998-10-1");
 		Date d4 = Date.valueOf("1998-09-12");
-		Users users = new Users(101, dob, d3, d4, "Active");
+		Users users = new Users();
 		s.setUser(users);
 
 		Mockito.when(suggestedBookRepo.save(s)).thenReturn(s);
@@ -98,7 +98,7 @@ class SuggestedBooksMockitoTest {
 		Users user = new Users();
 		user.setUserId(10);
 		s1.setUser(user);
-		SuggestedBooks sugbk = suggestedBookImpl.updateSuggestedBookStatus(s1);
+		SuggestedBooks sugbk = suggestedBookImpl.updateSuggestedBookStatus(500,s1);
 
 		assertEquals("Not Available", sugbk.getStatus());
 	}

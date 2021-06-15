@@ -55,7 +55,7 @@ class BooksReturnedMockitoTest {
 		Date dob1 = Date.valueOf("1998-12-17");
 		Date dob2 = Date.valueOf("1998-12-16");
 		Date dob3 = Date.valueOf("1998-12-15");
-		Users users = new Users(101, dob1, dob2, dob3, "Active");
+		Users users = new Users();
 		booksReturned.setUsers(users);
 		Mockito.when(booksReturnedRepo.save(booksReturned)).thenReturn(booksReturned);
 		BooksReturned br1 = booksReturnedService.returnBooks(booksReturned);
@@ -72,7 +72,7 @@ class BooksReturnedMockitoTest {
 		Date dob1 = Date.valueOf("1998-12-17");
 		Date dob2 = Date.valueOf("1998-12-16");
 		Date dob3 = Date.valueOf("1998-12-15");
-		Users users = new Users(101, dob1, dob2, dob3, "Active");
+		Users users = new Users();
 		booksReturned.setUsers(users);
 		Mockito.when(booksReturnedRepo.findById(11)).thenReturn(Optional.of(booksReturned));
 		Mockito.when(booksReturnedRepo.save(booksReturned)).thenReturn(booksReturned);
