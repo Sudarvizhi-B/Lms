@@ -29,26 +29,26 @@ public class SuggestedBooks {
 	@Id
 	private int id;
 	@NonNull
-	@NotEmpty(message="Title Should not be empty")
+	//@NotEmpty(message="Title Should not be empty")
 	private String title;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String subject;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String author;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String publications;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String description;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private LocalDate suggested_date;
 	@NonNull
-	@NotEmpty
-	@Size(min = 10, max = 20)
+	//@NotEmpty
+	//@Size(min = 10, max = 20)
 	private String status;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

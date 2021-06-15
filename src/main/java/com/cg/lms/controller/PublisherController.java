@@ -52,8 +52,8 @@ public class PublisherController {
 	}
 
 	// UPDATE
-	@PutMapping("/publisher")
-	public ResponseEntity<Publishers> updatePublisherDetails(@RequestBody Publishers publisher) {
+	@PutMapping("/publisher/update/{id}")
+	public ResponseEntity<Publishers> updatePublisherDetails(@PathVariable("id") int publisherId, @RequestBody Publishers publisher) {
 		logger.info("Updating Publisher Details");
 		// Throw an exception if publisher id is not present
 		if (pService.updatePublisherDetails(publisher) == null) {

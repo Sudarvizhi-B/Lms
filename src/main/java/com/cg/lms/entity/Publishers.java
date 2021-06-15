@@ -27,28 +27,28 @@ public class Publishers {
 	@Id
 	private int publisherId;
 	@NonNull
-	@NotEmpty(message = "Name cannot be Empty")
+	//@NotEmpty(message = "Name cannot be Empty")
 	private String publisherName;
 	@NonNull
-	@Size(min=5,max=10)
+	//@Size(min=5,max=10)
 	private String contactno;
 	@NonNull
-	@Email(message = "Email should be valid")
+	//@Email(message = "Email should be valid")
 	private String email;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String address1;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String address2;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String city;
 	@NonNull
-	@NotEmpty
+	//@NotEmpty
 	private String state;
-	@NotEmpty
-	@Max(6)
+	//@NotEmpty
+	//@Max(6)
 	private int pincode;
 
 }

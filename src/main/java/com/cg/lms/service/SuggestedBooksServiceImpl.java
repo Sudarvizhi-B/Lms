@@ -25,7 +25,7 @@ public class SuggestedBooksServiceImpl implements ISuggestedBooksService {
 
 	// Update Suggested Books
 	@Override
-	public SuggestedBooks updateSuggestedBookStatus(SuggestedBooks book) {
+	public SuggestedBooks updateSuggestedBookStatus(int id,SuggestedBooks book) {
 		// Getting Books By Id
 		Optional<SuggestedBooks> sb2 = sbrepo.findById(book.getId());
 		if (!sb2.isPresent()) {
@@ -71,6 +71,12 @@ public class SuggestedBooksServiceImpl implements ISuggestedBooksService {
 	@Override
 	public List<SuggestedBooks> viewSuggestedBooksList() {
 		return sbrepo.findAll();
+	}
+
+	@Override
+	public List<SuggestedBooks> findAllByTitle(String title) {
+		
+		return sbrepo.findAllByTitleContainingIgnoreCase(title);
 	}
 
 }
