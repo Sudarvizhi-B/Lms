@@ -52,10 +52,15 @@ public class BooksOrderController {
 
 	//Get books order by book id
 	@GetMapping("/booksorder/order/{id}")
-	public ResponseEntity<BooksOrder> viewBooksOrderByBookId(int bookId) {
+	public ResponseEntity<BooksOrder> viewBooksOrderByBookId(@PathVariable("id") int bookId) {
 		BooksOrder orderByBookId = booksOrderService.viewOrderByBookId(bookId);
 		logger.info(orderByBookId);
 		return new ResponseEntity<>(orderByBookId, HttpStatus.OK);
+	}
+	
+	@GetMapping("/booksorder/quantity/{quantity}")
+	public List<BooksOrder> getBookByQuantity(@PathVariable("quantity") int quantity) {
+		return booksOrderService.findOrderByQuantityGreaterThan(quantity);
 	}
 
 	// Add new order in the table

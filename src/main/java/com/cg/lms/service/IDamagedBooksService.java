@@ -11,5 +11,5 @@ public interface IDamagedBooksService {
 	public List<DamagedBooks> viewDamagedBooksList();
 	public DamagedBooks viewDamagedBookById(int id);
 	public DamagedBooks deleteDamagedBook(int id);
-
+	public List<DamagedBooks> viewDamagedBookByQuantity(int quantity);
 }

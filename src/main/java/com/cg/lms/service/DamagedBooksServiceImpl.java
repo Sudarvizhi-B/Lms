@@ -78,4 +78,9 @@ public class DamagedBooksServiceImpl implements IDamagedBooksService {
 		return booksDamaged.get();
 	}
 
+	@Override
+	public List<DamagedBooks> viewDamagedBookByQuantity(int quantity) {
+		return damagedBooksDao.findAllDamagedBooksByQuantityGreaterThan(quantity);
+	}
+
 }
